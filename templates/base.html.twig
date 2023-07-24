@@ -5,10 +5,10 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=yes, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>{% block title %}Series !{% endblock %}</title>
-    <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+    <title>{% block title %}Sortir !{% endblock %}</title>
+    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
     <link rel="stylesheet" href="{{ asset('css/normalize.css') }}">
-    <link rel="icon" href="{{ asset('img/icon.png') }}">
+    <link rel="icon" href="{{ asset('img/Plan-B.gif') }}">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Agdasima&family=Nabla&family=Tektur&display=swap" rel="stylesheet">
@@ -18,7 +18,8 @@
 <body>
 <div class="container">
     <header>
-        <h1><a href="{{ path('app_main') }}"><img src="{{ asset('img/Plan-B.gif') }}" alt="Logo"></a></h1>
+        <h1><a href="{{ path('app_main') }}"><img src="{{ asset('img/Plan-B.gif') }}" alt="Logo">Sortir !</a></h1>
+        <h2>Pour aller ou ? 🤷</h2>
         {% include('inc/nav.html.twig') %}
     </header>
 
@@ -44,7 +45,10 @@
 
 {% block javascripts %}
     <script src="https://kit.fontawesome.com/bd77a4e8ae.js" crossorigin="anonymous"></script>
-    <script src="{{ asset('js/zoom.js') }}"></script>
+    <script src="{{ asset('js/script.js') }}"></script>
 {% endblock %}
+
+<div class="loader"></div>
+
 </body>
 </html>

@@ -19,6 +19,7 @@ Custom Properties
     --Gray-Lavender: #e0e0e0;
     --Red-Flash: #dc2f2f;
     --Yellow-Flash: #f0d43a;
+    --gray-peach : #ececec;
 
     /*
     GRADIENT
@@ -33,4 +34,98 @@ Custom Properties
     --Gradient-8 : radial-gradient(circle, #f8fcfb, #c4d7d5, #91b4b2, #5d9194, #1f6f78);
     --Gradient-9 : linear-gradient(to left bottom, #5585b5, #549bbe, #64afc1, #7fc2c3, #9fd3c7);
     --Gradient-10 : radial-gradient(circle, #1f6f78, #207b81, #238689, #289291, #2f9e98, #40a7a8, #52b1b8, #65bac6, #8dc2d6, #b2c9de, #ced3df, #e0e0e0);
+
+
+
+
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background-image: var(--Gradient-1), url("Img/home-image.jpg");
+    background-size: cover;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+}
+header {
+
+    background-color: var(--Blue-Green-Chill);
+    color: var(--white);
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+header h1 {
+    margin: 0;
+}
+
+nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+}
+
+nav li {
+    margin-right: 20px;
+}
+
+nav a {
+    color: var(--white);
+    text-decoration: none;
+}
+main {padding: 40px;}
+
+footer {
+    background-color: var(--Blue-Green-Chill);
+    color: var(--white);
+    text-align: center;
+    padding: 10px;
+}
+img {
+    max-width: 100%;
+    display: block;
+    margin-top: 20px;
+}
+
+.loader{
+    position: fixed;
+    top : 0;
+    left: 0;
+    height: 100vh;
+    width : 100wh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--Gradient-10);
+
+}
+
+
+
+.loader::after{
+    content : "";
+    width: 75px;
+    height: 75px;
+    border: 15px solid var(--gray-peach) ;
+    border-top-color: var(--Verdigris);
+    border-radius : 50%;
+    animation: loading 0.75s ease infinite;
+}
+
+@keyframes loading {
+    0%{transform : rotate(0);}
+    100%{transform: rotate(1turn);}
+}
+
+.slide-up-animation{
+    animation: slideUp 2.5s ease forwards;
+}
+@keyframes slideUp {
+    0% {transform: translateY(0);}
+    100% {transform: translateY(-100%);}
 }
