@@ -1,0 +1,36 @@
+/*
+Custom Properties
+*/
+:root {
+    /* COLORS */
+
+    --Dusty-Blue: #5585b5;
+    --Verdigris: #53a8b6;
+    --Blue-Hosta: #79c2d0;
+    --Turquoise-Green: #9fd3c7;
+    --Jagged-Ice: #bbe4e9;
+    --Light-Teal: #93e4c1;
+    --Light-Sea-Green: #3baea0;
+    --Blue-Green-Chill: #118a7e;
+    --Surfie-Green: #1f6f78;
+    --Green-Flash: #a2c11c;
+    --Black: #283739;
+    --white: #f8fcfb;
+    --Gray-Lavender: #e0e0e0;
+    --Red-Flash: #dc2f2f;
+    --Yellow-Flash: #f0d43a;
+
+    /*
+    GRADIENT
+     */
+    --Gradient-1 : radial-gradient(328px at 2.9% 15%, rgb(191, 224, 251) 0%, rgb(232, 233, 251) 25.8%, rgb(252, 239, 250) 50.8%, rgb(234, 251, 251) 77.6%, rgb(240, 251, 244) 100.7%);
+    --Gradient-2 : linear-gradient(109.6deg, rgb(245, 239, 249) 30.1%, rgb(207, 211, 236) 100.2%);
+    --Gradient-3 : linear-gradient(109.6deg, rgb(204, 228, 247) 11.2%, rgb(237, 246, 250) 100.2%);
+    --Gradient-4 : linear-gradient(89.2deg, rgb(191, 241, 236) 22.3%, rgb(109, 192, 236) 84.1%);
+    --Gradient-5 : linear-gradient(to right top, #5585b5, #659ec3, #7db6cf, #9acddb, #bbe4e9);
+    --Gradient-6 : linear-gradient(109.6deg, rgb(44, 83, 131) 18.9%, rgb(95, 175, 201) 91.1%);
+    --Gradient-7:  linear-gradient(to right top, #283739, #3b5f5f, #518983, #6eb6a4, #93e4c1);
+    --Gradient-8 : radial-gradient(circle, #f8fcfb, #c4d7d5, #91b4b2, #5d9194, #1f6f78);
+    --Gradient-9 : linear-gradient(to left bottom, #5585b5, #549bbe, #64afc1, #7fc2c3, #9fd3c7);
+    --Gradient-10 : radial-gradient(circle, #1f6f78, #207b81, #238689, #289291, #2f9e98, #40a7a8, #52b1b8, #65bac6, #8dc2d6, #b2c9de, #ced3df, #e0e0e0);
+}
