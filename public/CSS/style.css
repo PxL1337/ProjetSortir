@@ -46,14 +46,16 @@ body {
     margin: 0;
     padding: 0;
     font-family: Arial, sans-serif;
-    background-image: var(--Gradient-11), url("https://images.pexels.com/photos/4881679/pexels-photo-4881679.jpeg");
+    background-image: url("https://images.pexels.com/photos/4881679/pexels-photo-4881679.jpeg");
+    background-color: var(--Gradient-10) ;
+
     background-size: cover;
     background-attachment: fixed;
     background-repeat: no-repeat;
 }
 header {
 
-    background-color: var(--Yellow-Flash);
+    background-color: var(--Jagged-Ice);
     color: var(--white);
     padding: 20px;
     display: flex;
@@ -61,7 +63,7 @@ header {
     align-items: center;
 }
 footer {
-    background-color: var(--Yellow-Flash);
+    background-color: var(--Jagged-Ice);
     color: var(--white);
     text-align: center;
     padding: 10px;
@@ -89,22 +91,22 @@ nav a {
 main {padding: 40px;}
 
 
-img {
-    max-width: 100%;
-    display: block;
-    margin-top: 20px;
-}
+
 
 .loader{
     position: fixed;
     top : 0;
     left: 0;
+    bottom: 0;
+    right: 0;
     height: 100vh;
     width : 100wh;
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: var(--Gradient-10);
+    background-color: var(--gray-peach);
+    transition 500ms ease;
+    z-index: 10;
 
 }
 
@@ -126,7 +128,7 @@ img {
 }
 
 .slide-up-animation{
-    animation: slideUp 2.5s ease forwards;
+    animation: slideUp 0.5s ease forwards;
 }
 @keyframes slideUp {
     0% {transform: translateY(0);}
