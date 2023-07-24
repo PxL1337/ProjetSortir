@@ -45,18 +45,28 @@ Custom Properties
 body {
     margin: 0;
     padding: 0;
-    font-family: Arial, sans-serif;
-    background-image:linear-gradient(rgba(83, 168, 182, 0.5), rgba(187, 228, 233, 0.5)),url("https://images.pexels.com/photos/4881670/pexels-photo-4881670.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1");
+    font-family: 'Edu SA Beginner', cursive, Serif;
+    background-image:linear-gradient(rgba(31, 111, 120, 0.8), rgba(40, 55, 57, 0.8)),url("https://images.pexels.com/photos/4881670/pexels-photo-4881670.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1");
     min-height : 100vh;
-
     background-size: cover;
     background-attachment: fixed;
     background-repeat: no-repeat;
+    color: var(--gray-peach);
+    font-size: 1.25em;
+
 }
 body > .container {
     display: flex;
     flex-direction: column;
     min-height: 100vh;
+}
+h1{
+    text-align: center;
+
+}
+a{
+    text-decoration: none;
+    color: var(--gray-peach);
 }
 header {
 
@@ -107,13 +117,13 @@ flex: 1;
     left: 0;
     bottom: 0;
     right: 0;
-    height: 100vh;
-    width : 100wh;
+    height: 100vh ;
+    width : 100wh ;
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: var(--gray-peach);
-    transition 500ms ease;
+    background-color: var(--Black);
+    transition : 1s ease;
     z-index: 10;
 
 }
@@ -136,7 +146,7 @@ flex: 1;
 }
 
 .slide-up-animation{
-    animation: slideUp 0.5s ease forwards;
+    animation: slideUp 1s ease forwards;
 }
 @keyframes slideUp {
     0% {transform: translateY(0);}
@@ -145,4 +155,64 @@ flex: 1;
 header a img{
     width: 60px;
     height: 60px;
+}
+.form-block{
+    margin: 2em 0;
+    padding : 1em 2em;
+    border: solid 1px var(--Light-Sea-Green);
+    border-radius: 6px;
+    min-width: 200px;
+}
+.form-title{
+    font-size: 2.25em;
+    padding: 0 .25em;
+    color: var(--gray-peach)
+}
+
+label{
+    display: block;
+    margin-top: 1em;
+}
+label:first-of-type{
+    margin-top: 0;
+}
+
+input{
+    padding : 0.3em;
+    border: solid 1.5px var(--Light-Sea-Green);
+    width : 15em
+}
+
+input[type="submit"] {
+    padding: 0.5em 1em;
+    border-radius: 6px;
+    background-color: var(--gray-peach);
+    color : var(--Light-Sea-Green);
+    font-family: 'Edu SA Beginner', cursive, Serif;
+    font-size: 0.8em;
+    margin-top: 1.75em;
+
+}
+
+@media screen and (min-width: 430px) {
+    .form-title{
+        font-size: 1.75em;
+    }
+
+    .form-block{
+        width: 40%;
+        min-width: 320px;
+        margin: auto;
+        text-align: center;
+        background-color: rgba(40, 55, 57, 0.3) ;
+    }
+    label{
+        display: inline-block;
+        padding-top: 5em;
+        margin-top: 0;
+        margin-right: 0.5em;
+
+
+    }
+
 }
