@@ -1,19 +1,50 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
-        {# Run `composer require symfony/webpack-encore-bundle` to start using Symfony UX #}
-        {% block stylesheets %}
-            {{ encore_entry_link_tags('app') }}
-        {% endblock %}
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=yes, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>{% block title %}Series !{% endblock %}</title>
+    <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/normalize.css') }}">
+    <link rel="icon" href="{{ asset('img/icon.png') }}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Agdasima&family=Nabla&family=Tektur&display=swap" rel="stylesheet">
 
-        {% block javascripts %}
-            {{ encore_entry_script_tags('app') }}
-        {% endblock %}
-    </head>
-    <body>
-        {% block body %}{% endblock %}
-    </body>
+    {% block extrastyles %}{% endblock %}
+</head>
+<body>
+<div class="container">
+    <header>
+        <h1><a href="{{ path('app_main') }}"><img src="{{ asset('img/Plan-B.gif') }}" alt="Logo"></a></h1>
+        {% include('inc/nav.html.twig') %}
+    </header>
+
+    {# read and display all flash messages #}
+    {% for label, messages in app.flashes %}
+        {% for message in messages %}
+            <div class="flash flash-{{ label }}">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endfor %}
+
+
+    <main>
+        {%  block body %}{% endblock %}
+    </main>
+
+    <footer class="footer">
+        <div class="copyright">&copy; {{ "now"|date("Y") }} PixDev | <a href="https://www.eni-ecole.fr/">@ENI-Ecole Informatique</a> |
+            <a href="https://github.com/PxL1337/series" target="_blank"><i class="fa-brands fa-github"></i></a></div>
+    </footer>
+</div>
+
+{% block javascripts %}
+    <script src="https://kit.fontawesome.com/bd77a4e8ae.js" crossorigin="anonymous"></script>
+    <script src="{{ asset('js/zoom.js') }}"></script>
+{% endblock %}
+</body>
 </html>
