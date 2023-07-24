@@ -24,6 +24,15 @@
         {% include('inc/nav.html.twig') %}
     </header>
 
+    {# Flash messages section #}
+    <section class="flash-messages">
+        {% for message in app.flashes('success') %}
+            <div class="alert-success" style="background-color: #2f9e98">
+                {{ message }}
+            </div>
+        {% endfor %}
+    </section>
+
     {# read and display all flash messages #}
     {% for label, messages in app.flashes %}
         {% for message in messages %}
