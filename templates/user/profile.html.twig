@@ -4,7 +4,13 @@
 
 {% block body %}
 
-        <h1>Hello</h1>
 
+
+    <h2>Prénom :{{ app.user.firstName }}</h2>
+    <h2>Nom :{{ app.user.lastName }}</h2>
+    <h2>Téléphone :{{ app.user.telephone }}</h2>
+    <h2>Email : {{ app.user.email }}</h2>
+    <h2>Campus : </h2>
+    <h2>Ma photo</h2><img src="{{ asset('uploads/profile/photos/' ~ app.user.photo) }}" alt="{{ app.user.firstName }}">
 
 {% endblock %}
