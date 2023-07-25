@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\Repository\UserRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -44,6 +45,11 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\Column(length: 255)]
     private ?string $telephone = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $photo = null;
+
+    private ?UploadedFile $photoFile = null;
 
     public function getId(): ?int
     {
@@ -161,5 +167,27 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         $this->telephone = $telephone;
 
         return $this;
+    }
+
+    public function getPhoto(): ?string
+    {
+        return $this->photo;
+    }
+
+    public function setPhoto(?string $photo): static
+    {
+        $this->photo = $photo;
+
+        return $this;
+    }
+
+    public function setPhotoFile(?UploadedFile $posterFile = null): void
+    {
+        $this->photoFile = $posterFile;
+    }
+
+    public function getPhotoFile(): ?UploadedFile
+    {
+        return $this->photoFile;
     }
 }
