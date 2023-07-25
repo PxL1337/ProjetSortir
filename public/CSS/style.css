@@ -171,6 +171,113 @@ header a img {
     height: 60px;
 }
 
+/*DEBUG*/
+* {
+    outline: solid .1px;
+}
+
+/*LOGIN START*/
+.login {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.login .content {
+    border: solid 1px var(--Light-Sea-Green);
+    border-radius: 6px;
+    padding: .65em;
+    width: 50vw;
+}
+
+.login .header {
+    height: 30px;
+    font-size: 1.25em;
+    margin: 0em 0em .25em 0em;
+}
+
+.header .title {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    margin: auto;
+    height: 100%;
+    font-size: .85em;
+}
+
+.login .content form {
+    display: flex;
+    justify-content: center;
+    align-content: flex-start;
+}
+
+.content form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+form .row {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
+}
+
+.row label {
+    font-weight: lighter;
+    font-size: 1em;
+
+    margin-bottom: .25em;
+    width: 100%;
+}
+
+.row input {
+    border-radius: 10px;
+    width: auto;
+}
+
+.row input {
+    font-size: 1em;
+}
+
+form .submit-btn {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+.submit-btn input[type="submit"] {
+    width: 100%;
+    border-radius: 10px;
+    margin-top: 0.65em;
+    cursor: pointer;
+}
+
+form .signUp-redirection {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+
+    margin: 0;
+    width: 100%;
+
+    font-size: .8em;
+}
+
+.signUp-redirection p {
+    margin-right: .5em;
+}
+
+.signUp-redirection a {
+    color: #4deafc;
+}
+/*LOGIN END*/
+
 .form-block {
     margin: 2em 0;
     padding: 1em 2em;
