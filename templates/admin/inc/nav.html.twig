@@ -1,0 +1,12 @@
+{% block navbar %}
+    <nav>
+        <ul>
+            <li><a href="{{ path('app_main') }}">Homepage</a></li>
+            <li><a href="{{ path('admin_dashboard') }}">Admin</a></li>
+            <li><a href="{{ path('admin_list_user') }}">Users</a></li>
+            <li><a href="#">Cities</a></li>
+            <li><a href="#">Campus</a></li>
+            <li><a href="{{ path('app_logout') }}">Logout</a></li>
+        </ul>
+    </nav>
+{% endblock %}

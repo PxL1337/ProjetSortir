@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\User;
+use App\Form\AdminUserType;
 use App\Form\UserType;
 use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -22,12 +23,24 @@ class AdminController extends AbstractController
         $this->entityManager = $entityManager;
     }
 
+    #[Route('/', name: 'dashboard')]
+    public function dashboard(): Response
+    {
+        return $this->render('admin/dashboard.html.twig');
+    }
+
     #[Route('/list-user', name: 'list_user')]
     #[IsGranted('ROLE_ADMIN')]
-    public function index(UserRepository $userRepository): Response
+    public function list(UserRepository $userRepository): Response
     {
+        $users = $userRepository->createQueryBuilder('u')
+            ->leftJoin('u.role', 'r') // suppose que 'roles' est la propriété de la relation dans l'entité User
+            ->addSelect('r')
+            ->getQuery()
+            ->getResult();
+
         return $this->render('admin/list_user.html.twig', [
-            'users' => $userRepository->findAll(),
+            'users' => $users,
         ]);
     }
 
@@ -35,7 +48,7 @@ class AdminController extends AbstractController
     #[IsGranted('ROLE_ADMIN')]
     public function edit(Request $request, User $user): Response
     {
-        $form = $this->createForm(UserType::class, $user);
+        $form = $this->createForm(AdminUserType::class, $user);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {

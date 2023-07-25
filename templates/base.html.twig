@@ -21,7 +21,9 @@
     <header>
         <h1><a href="{{ path('app_main') }}"><img src="{{ asset('img/Plan-B.gif') }}" alt="Logo">Sortir !</a></h1>
         <h2>Pour aller ou ? 🤷</h2>
-        {% include('inc/nav.html.twig') %}
+        {% block navbar %}
+            {% include('inc/nav.html.twig') %}
+        {% endblock %}
     </header>
 
     {# Flash messages section #}

@@ -1,0 +1,15 @@
+{% extends 'admin/dashboard.html.twig' %}
+
+{% block title %}Suppression d'utilisateur{% endblock %}
+
+{% block body %}
+    <h1>Suppression d'utilisateur</h1>
+
+    <p>Êtes-vous sûr de vouloir supprimer l'utilisateur {{ user.email }} ?</p>
+
+    <form method="post">
+        <a href="{{ path('admin_list_user') }}" class="btn btn-default">Annuler</a>
+        <input type="submit" value="Supprimer" class="btn btn-danger">
+    </form>
+{% endblock %}
+

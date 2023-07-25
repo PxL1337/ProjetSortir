@@ -172,9 +172,9 @@ header a img {
 }
 
 /*DEBUG*/
-* {
+/** {
     outline: solid .1px;
-}
+}*/
 
 /*LOGIN START*/
 .login {
