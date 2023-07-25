@@ -44,7 +44,7 @@ Custom Properties
 body {
     margin: 0;
     padding: 0;
-    font-family: 'Edu SA Beginner', cursive, Serif;
+    font-family: 'Handlee', cursive;
     background-image: linear-gradient(rgba(31, 111, 120, 0.8), rgba(40, 55, 57, 0.8)), url("https://images.pexels.com/photos/4881670/pexels-photo-4881670.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1");
     min-height: 100vh;
     background-size: cover;
@@ -53,7 +53,9 @@ body {
     color: var(--gray-peach);
     font-size: 1.25em;
 }
-
+li{
+    list-style-type: none;
+}
 body > .container {
     display: flex;
     flex-direction: column;
@@ -90,7 +92,9 @@ footer {
 header h1 {
     margin: 0;
 }
-
+nav{
+    font-style: italic;
+}
 nav ul {
     list-style: none;
     margin: 0;
@@ -234,4 +238,24 @@ input[type="submit"] {
         margin-right: 0.5em;
     }
 
+}
+
+.profile{
+
+    padding: 1em 2em;
+    border: solid 1px var(--Light-Sea-Green);
+    border-radius: 6px;
+    width: 500px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    color: var(--gray-peach);
+    margin: auto;
+
+}
+
+.profile li {
+    display: block;
+    margin-top: 1em;
 }
