@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\User;
+use App\Entity\Role;
 use App\Form\RegistrationFormType;
 use App\Security\AppAuthenticator;
 use Doctrine\ORM\EntityManagerInterface;
@@ -46,7 +47,6 @@ class RegistrationController extends AbstractController
                 $user->setPhoto('default-photo.jpg');
             }
 
-
             // Encode the plain password
             $user->setPassword(
                 $userPasswordHasher->hashPassword(
@@ -54,6 +54,17 @@ class RegistrationController extends AbstractController
                     $form->get('plainPassword')->getData()
                 )
             );
+
+            // Get the default role
+            $defaultRole = $entityManager->getRepository(Role::class)->findOneBy(['name' => 'ROLE_USER']);
+
+            // Make sure the default role exists
+            if (!$defaultRole) {
+                throw new \Exception('Default role not found');
+            }
+
+            // Assign the default role to the user
+            $user->addRole($defaultRole);
 
             $entityManager->persist($user);
             $entityManager->flush();
