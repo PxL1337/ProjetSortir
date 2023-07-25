@@ -21,6 +21,19 @@ class RegistrationController extends AbstractController
     public function register(Request $request, UserPasswordHasherInterface $userPasswordHasher, UserAuthenticatorInterface $userAuthenticator, AppAuthenticator $authenticator, EntityManagerInterface $entityManager): Response
     {
         $user = new User();
+
+        // Get the default role
+        $defaultRole = $entityManager->getRepository(Role::class)->findOneBy(['name' => 'ROLE_USER']);
+
+        // Make sure the default role exists
+        if (!$defaultRole) {
+            throw new \Exception('Default role not found');
+        }
+
+        // Assign the default role to the user
+        $user->setRole($defaultRole);
+
+        // Create and handle the form
         $form = $this->createForm(RegistrationFormType::class, $user);
         $form->handleRequest($request);
 
@@ -55,16 +68,6 @@ class RegistrationController extends AbstractController
                 )
             );
 
-            // Get the default role
-            $defaultRole = $entityManager->getRepository(Role::class)->findOneBy(['name' => 'ROLE_USER']);
-
-            // Make sure the default role exists
-            if (!$defaultRole) {
-                throw new \Exception('Default role not found');
-            }
-
-            // Assign the default role to the user
-            $user->addRole($defaultRole);
 
             $entityManager->persist($user);
             $entityManager->flush();

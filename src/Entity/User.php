@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\Repository\UserRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
@@ -48,15 +49,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $photo = null;
 
-    #[ORM\ManyToMany(targetEntity: Role::class)]
-    private Collection $roles;
+    #[ORM\ManyToOne(targetEntity: Role::class, inversedBy: 'users')]
+    #[ORM\JoinColumn(name: "role_id", referencedColumnName: "id")]
+    private ?Role $role = null;
 
     private ?UploadedFile $photoFile = null;
 
-    public function __construct()
-    {
-        $this->roles = new ArrayCollection();
-    }
 
     public function getId(): ?int
     {
@@ -181,9 +179,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     public function getRoles(): array
     {
-        return $this->roles->map(function(Role $role) {
-            return $role->getName();
-        })->toArray();
+        return [$this->role ? $this->role->getName() : 'ROLE_USER'];
     }
     public function setRoles(Collection $roles): self
     {
@@ -191,19 +187,14 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
         return $this;
     }
-
-    public function addRole(Role $role): self
+    public function getRole(): ?Role
     {
-        if (!$this->roles->contains($role)) {
-            $this->roles[] = $role;
-        }
-
-        return $this;
+        return $this->role;
     }
 
-    public function removeRole(Role $role): self
+    public function setRole(Role $role): self
     {
-        $this->roles->removeElement($role);
+        $this->role = $role;
 
         return $this;
     }
