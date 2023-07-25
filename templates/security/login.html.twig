@@ -3,8 +3,9 @@
 {% block title %}Log in!{% endblock %}
 
 {% block body %}
-    <div class="form-block">
+    <div class="login-form">
         <form method="post">
+            {# ERROR MESSAGE(S) #}
             {% if error %}
                 <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
                 <div>{{ error.message() }}</div>
@@ -16,20 +17,30 @@
                 </div>
             {% endif %}
 
-            <h2 class="form-title">Please sign in</h2>
-            <label for="inputEmailOrPseudo">Email or Pseudo</label>
-            <input type="text" value="{{ last_username }}" name="emailOrPseudo" id="inputEmailOrPseudo" class="form-control" autocomplete="inputEmailOrPseudo" required autofocus>
-            <br>
-            <label for="inputPassword">Password</label>
-            <input type="password" name="password" id="inputPassword" class="form-control" autocomplete="current-password" required>
-            <br>
+            {# TITLE #}
+            <h2 class="login-form-title">Please sign in</h2>
+
+            {# FORM FIELDS #}
+            <section class="login-fields">
+                {# EMAIL FIELD #}
+                <label for="inputUsername" class="login-fields-title">Username</label>
+                <input type="text" value="{{ last_username }}" name="username" id="inputUsername"
+                       class="form-control" placeholder="Type your username" autocomplete="inputUsername" required autofocus>
+
+            {# PASSWORD FIELD #}
+                <label for="inputPassword" class="login-fields-title">Password</label>
+                <input type="password" name="password" id="inputPassword" class="form-control" placeholder="Type your password"
+                       autocomplete="current-password" required>
+            </section>
+
+            {# CSRF TOKEN #}
             <input type="hidden" name="_csrf_token"
                    value="{{ csrf_token('authenticate') }}"
             >
-            <input  type="submit" class="btn" value="Sign in">
 
+            {# SUBMIT BUTTON #}
+            <input type="submit" class="btn" value="Sign in">
         </form>
-
     </div>
 
 {% endblock %}
