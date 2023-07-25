@@ -38,6 +38,12 @@
                    value="{{ csrf_token('authenticate') }}"
             >
 
+            <div class="checkbox mb-3">
+                <label>
+                    <input type="checkbox" name="_remember_me"> Remember me
+                </label>
+            </div>
+
             {# SUBMIT BUTTON #}
             <input type="submit" class="btn" value="Sign in">
         </form>
