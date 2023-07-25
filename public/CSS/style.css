@@ -194,7 +194,7 @@ header a img {
 .login .header {
     height: 30px;
     font-size: 1.25em;
-    margin: 0em 0em .25em 0em;
+    margin: 0 0 .25em 0;
 }
 
 .header .title {
@@ -311,7 +311,7 @@ label:first-of-type {
 
 input {
     padding: 0.3em;
-    border: solid 1.5px var(--Light-Sea-Green);
+    border: solid 2px var(--Light-Sea-Green);
     width: 100%;
 }
 

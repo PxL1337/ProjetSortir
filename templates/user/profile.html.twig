@@ -14,7 +14,7 @@
         <li><strong>Nom :</strong> {{ app.user.lastName }}</li>
         <li><strong>Téléphone :</strong> {{ app.user.telephone }}</li>
         <li><strong>Email :</strong> {{ app.user.email }}</li>
-        <li><strong>Campus :</strong></li>
+        <li><strong>Campus :</strong> {% if app.user.campus %}{{ app.user.campus.nom }}{% else %}Aucun{% endif %}</li>
     </ul>
 
     <input type="submit" class="btn" value="Modify">
