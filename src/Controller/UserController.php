@@ -9,14 +9,10 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class UserController extends AbstractController
 {
-    #[Route('/user', name: 'user_profile')]
+    #[Route('/profile', name: 'user_profile')]
     public function profile(): Response
     {
-
-
         return $this->render('user/profile.html.twig', [
-
-
         ]);
     }
 }

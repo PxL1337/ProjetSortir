@@ -1,7 +1,17 @@
 <nav>
     <ul>
         <li><a href="{{ path('app_main') }}" title="home">Home</a></li>
-        <li><a href="{{ path('app_register') }}" title="Register">Register</a></li>
-        <li><a href="{{ path('app_login') }}" title="Login">Login</a></li>
+        {% if app.user %}
+            <li><a href="{{ path('user_profile') }}" title="Profile">Profile</a></li>
+            <li><a href="{{ path('app_logout') }}" title="Logout">Logout</a></li>
+
+            {% if is_granted("ROLE_ADMIN") %}
+                <li><a href="" title="Villes">Villes</a></li>
+                <li><a href="" title="Campus">Campus</a></li>
+            {% endif %}
+        {% else %}
+            <li><a href="{{ path('app_register') }}" title="Register">Register</a></li>
+            <li><a href="{{ path('app_login') }}" title="Login">Login</a></li>
+        {% endif %}
     </ul>
 </nav>
