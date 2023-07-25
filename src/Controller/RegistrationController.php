@@ -24,7 +24,7 @@ class RegistrationController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            // Handle the photo upload
+            // Photo upload
             $photoFile = $form->get('photoFile')->getData();
             if ($photoFile) {
                 $originalFilename = pathinfo($photoFile->getClientOriginalName(), PATHINFO_FILENAME);
@@ -42,7 +42,10 @@ class RegistrationController extends AbstractController
                     ]);
                 }
                 $user->setPhoto($newFilename);
+            } else {
+                $user->setPhoto('default-photo.jpg');
             }
+
 
             // Encode the plain password
             $user->setPassword(
