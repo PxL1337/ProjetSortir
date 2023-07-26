@@ -276,11 +276,6 @@ form .row {
     width: 100%;
 }
 
-.icon {
-    position: absolute;
-    outline: solid 2px magenta;
-}
-
 .row input {
     border-radius: 10px;
     width: auto;
