@@ -2,9 +2,12 @@
 
 namespace App\Controller;
 
+use App\Entity\City;
 use App\Entity\User;
 use App\Form\AdminUserType;
+use App\Form\CityType;
 use App\Form\UserFilterType;
+use App\Repository\CityRepository;
 use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -54,12 +57,12 @@ class AdminController extends AbstractController
         }
 
         if ($request->isXmlHttpRequest()) {
-            return $this->render('admin/_list_user_table.html.twig', [
+            return $this->render('admin/user/_list_user_table.html.twig', [
                 'users' => $users,
             ]);
         }
 
-        return $this->render('admin/list_user.html.twig', [
+        return $this->render('admin/user/list_user.html.twig', [
             'users' => $users,
             'filter_form' => $filterForm->createView(),
         ]);
@@ -80,7 +83,7 @@ class AdminController extends AbstractController
             return $this->redirectToRoute('admin_list_user');
         }
 
-        return $this->render('admin/modify_user.html.twig', [
+        return $this->render('admin/user/modify_user.html.twig', [
             'user' => $user,
             'form' => $form->createView(),
         ]);
@@ -92,7 +95,7 @@ class AdminController extends AbstractController
     {
         $this->ensureUserIsNoAdmin($user);
 
-        return $this->render('admin/delete_user.html.twig', [
+        return $this->render('admin/user/delete_user.html.twig', [
             'user' => $user
         ]);
     }
@@ -112,10 +115,81 @@ class AdminController extends AbstractController
         return $this->redirectToRoute('admin_list_user');
     }
 
+
     #[Route('/city/list', name: 'city_list')]
     #[IsGranted('ROLE_ADMIN')]
-    public function listCity(): Response
+    public function listCity(CityRepository $cityRepository): Response
     {
-        return $this->render('admin/city_list.html.twig');
+        $cities = $cityRepository->findAll();
+
+        return $this->render('admin/city/city_list.html.twig', [
+            'cities' => $cities,
+        ]);
     }
+
+    #[Route('/city/add', name: 'city_add')]
+    #[IsGranted('ROLE_ADMIN')]
+    public function addCity(Request $request): Response
+    {
+        $city = new City();
+        $form = $this->createForm(CityType::class, $city);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $this->entityManager->persist($city);
+            $this->entityManager->flush();
+
+            $this->addFlash('success', 'City added successfully.');
+
+            return $this->redirectToRoute('admin_city_list');
+        }
+
+        return $this->render('admin/city/city_add.html.twig', [
+            'form' => $form->createView(),
+        ]);
+    }
+
+    #[Route('/city/edit/{id}', name: 'city_edit')]
+    #[IsGranted('ROLE_ADMIN')]
+    public function editCity(City $city, Request $request): Response
+    {
+        $form = $this->createForm(CityType::class, $city);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $this->entityManager->flush();
+
+            $this->addFlash('success', 'City updated successfully.');
+
+            return $this->redirectToRoute('admin_city_list');
+        }
+
+        return $this->render('admin/city/city_edit.html.twig', [
+            'city' => $city,
+            'form' => $form->createView(),
+        ]);
+    }
+
+    #[Route('/city/delete/{id}', name: 'city_delete')]
+    #[IsGranted('ROLE_ADMIN')]
+    public function deleteCity(City $city): Response
+    {
+        return $this->render('admin/city/city_delete.html.twig', [
+            'city' => $city
+        ]);
+    }
+
+    #[Route('/city/confirm-delete/{id}', name: 'city_confirm_delete', methods: ['POST'])]
+    #[IsGranted('ROLE_ADMIN')]
+    public function confirmDeleteCity(Request $request, City $city): Response
+    {
+        if ($this->isCsrfTokenValid('delete'.$city->getId(), $request->request->get('_token'))) {
+            $this->entityManager->remove($city);
+            $this->entityManager->flush();
+            $this->addFlash('success', 'City deleted successfully.');
+        }
+
+        return $this->redirectToRoute('admin_city_list');
+    }
+
 }

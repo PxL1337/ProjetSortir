@@ -1,0 +1,16 @@
+{% extends 'admin/dashboard.html.twig' %}
+
+{% block body %}
+    <h1>Delete City</h1>
+
+    <p>Are you sure you want to delete the city "{{ city.nom }}"?</p>
+
+    <form method="post" action="{{ path('admin_city_confirm_delete', { id: city.id }) }}">
+        <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ city.id) }}">
+
+        <button type="submit">Yes, delete it</button>
+    </form>
+
+    <a href="{{ path('admin_city_list') }}">Cancel</a>
+{% endblock %}
+

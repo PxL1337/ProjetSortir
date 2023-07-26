@@ -1,0 +1,31 @@
+{% extends 'admin/dashboard.html.twig' %}
+
+{% block body %}
+    <h1>List of Cities</h1>
+
+    <table>
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Code Postal</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for city in cities %}
+            <tr>
+                <td>{{ city.id }}</td>
+                <td>{{ city.nom }}</td>
+                <td>{{ city.codePostal }}</td>
+                <td>
+                    <a href="{{ path('admin_city_edit', { id: city.id }) }}">Edit</a>
+                    <a href="{{ path('admin_city_delete', { id: city.id }) }}">Delete</a>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('admin_city_add') }}">Add a new City</a>
+{% endblock %}

@@ -1,0 +1,12 @@
+{% extends 'admin/dashboard.html.twig' %}
+
+{% block body %}
+    <h1>Edit City</h1>
+
+    {{ form_start(form) }}
+    {{ form_widget(form) }}
+
+    <button type="submit">Save</button>
+    {{ form_end(form) }}
+{% endblock %}
+
