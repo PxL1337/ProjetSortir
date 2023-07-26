@@ -313,6 +313,8 @@ input {
     padding: 0.3em;
     border: solid 1.5px var(--Light-Sea-Green);
     width: 100%;
+    border-radius: 10px;
+
 }
 
 input[type="submit"] {
