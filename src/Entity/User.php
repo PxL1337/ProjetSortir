@@ -59,6 +59,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\JoinColumn(nullable: false)]
     private ?Campus $campus = null;
 
+    #[ORM\OneToMany(mappedBy: 'Organizer', targetEntity: Outing::class)]
+    private Collection $outingsOrganized;
+
+    #[ORM\ManyToMany(targetEntity: Outing::class, mappedBy: 'attendees')]
+    private Collection $outingsPlanned;
+
+    public function __construct()
+    {
+        $this->outingsOrganized = new ArrayCollection();
+        $this->outingsPlanned = new ArrayCollection();
+    }
+
 
     public function getId(): ?int
     {
@@ -211,6 +223,63 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setCampus(?Campus $campus): static
     {
         $this->campus = $campus;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Outing>
+     */
+    public function getOutingsOrganized(): Collection
+    {
+        return $this->outingsOrganized;
+    }
+
+    public function addOutingsOrganized(Outing $outingsOrganized): static
+    {
+        if (!$this->outingsOrganized->contains($outingsOrganized)) {
+            $this->outingsOrganized->add($outingsOrganized);
+            $outingsOrganized->setOrganizer($this);
+        }
+
+        return $this;
+    }
+
+    public function removeOutingsOrganized(Outing $outingsOrganized): static
+    {
+        if ($this->outingsOrganized->removeElement($outingsOrganized)) {
+            // set the owning side to null (unless already changed)
+            if ($outingsOrganized->getOrganizer() === $this) {
+                $outingsOrganized->setOrganizer(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Outing>
+     */
+    public function getOutingsPlanned(): Collection
+    {
+        return $this->outingsPlanned;
+    }
+
+    public function addOutingsPlanned(Outing $outingsPlanned): static
+    {
+        if (!$this->outingsPlanned->contains($outingsPlanned)) {
+            $this->outingsPlanned->add($outingsPlanned);
+            $outingsPlanned->addAttendee($this);
+        }
+
+        return $this;
+    }
+
+    public function removeOutingsPlanned(Outing $outingsPlanned): static
+    {
+        if ($this->outingsPlanned->removeElement($outingsPlanned)) {
+            $outingsPlanned->removeAttendee($this);
+        }
 
         return $this;
     }
