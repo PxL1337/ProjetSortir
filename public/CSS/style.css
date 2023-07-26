@@ -374,7 +374,7 @@ input:not([type="submit"]):not([value=""]){
     font-size: 80%;
     padding-left: 2%;
     padding-top: .5em;
-    padding-right: 0em;
+    padding-right: 0;
     height: 25px;
 
     /* include the padding-left to reposition the input value starting point
@@ -434,4 +434,32 @@ input[type="submit"] {
 .profile li {
     display: block;
     margin-top: 1em;
+}
+
+.table-container {
+
+
+    padding: 5px;
+}
+.table-list-container {
+    max-height: 500px;
+    overflow-y: auto;
+    width: 100%;
+    box-shadow: rgba(0, 0, 0, 0.35) 0 5px 15px;
+    border-radius: 10px;
+}
+
+.table thead th {
+    background: rgba(40, 55, 57, 1);
+}
+
+.table td {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.table {
+    width: 100%;
+    table-layout: fixed;
 }

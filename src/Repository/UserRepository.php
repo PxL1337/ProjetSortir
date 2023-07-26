@@ -74,6 +74,29 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
             ->getResult();
     }
 
+    public function findAllWithRolesAndFilters(array $filters): array
+    {
+        $qb = $this->createQueryBuilder('u')
+            ->leftJoin('u.role', 'r')
+            ->addSelect('r');
+
+        if (!empty($filters['campus'])) {
+            $qb->andWhere('u.campus = :campus')
+                ->setParameter('campus', $filters['campus']);
+        }
+
+        if (!empty($filters['role'])) {
+            $qb->andWhere('u.role = :role')
+                ->setParameter('role', $filters['role']);
+        }
+
+        if (!empty($filters['sort'])) {
+            $qb->orderBy('u.'.$filters['sort']);
+        }
+
+        return $qb->getQuery()->getResult();
+    }
+
 //    /**
 //     * @return User[] Returns an array of User objects
 //     */

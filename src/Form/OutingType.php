@@ -21,7 +21,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class OutingType extends AbstractType
 {
-    public function buildForm(FormBuilderInterface $builder, array $options, CampusRepository $campusRepository, CityRepository $cityRepository): void
+    /*public function buildForm(FormBuilderInterface $builder, array $options, CampusRepository $campusRepository, CityRepository $cityRepository): void
     {
 
         $campusList = $campusRepository->findAll();
@@ -84,7 +84,7 @@ class OutingType extends AbstractType
                 'placeholder' => 'Choisir une ville',
             ])
         ;
-    }
+    }*/
 
     public function configureOptions(OptionsResolver $resolver): void
     {

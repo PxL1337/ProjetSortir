@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\User;
 use App\Form\AdminUserType;
+use App\Form\UserFilterType;
 use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -40,12 +41,21 @@ class AdminController extends AbstractController
 
     #[Route('/list-user', name: 'list_user')]
     #[IsGranted('ROLE_ADMIN')]
-    public function list(UserRepository $userRepository): Response
+    public function list(UserRepository $userRepository, Request $request): Response
     {
-        $users = $userRepository->findAllWithRoles();
+        $filterForm = $this->createForm(UserFilterType::class);
+        $filterForm->handleRequest($request);
+
+        if ($filterForm->isSubmitted() && $filterForm->isValid()) {
+            $filters = $filterForm->getData();
+            $users = $userRepository->findAllWithRolesAndFilters($filters);
+        } else {
+            $users = $userRepository->findAllWithRoles();
+        }
 
         return $this->render('admin/list_user.html.twig', [
             'users' => $users,
+            'filter_form' => $filterForm->createView(),
         ]);
     }
 

@@ -1,6 +1,6 @@
 {% extends 'bundles/TwigBundle/Exception/error.html.twig' %}
 
-{% block title %}403 Access Denied{% endblock %}
+{% block title %}500 Server Error{% endblock %}
 
 {% block body %}
 
@@ -27,8 +27,12 @@
     <div class="forbidden-container">
         <h1 class="forbidden-message">
             {# Utilisez la fonction twig "default" pour afficher un message par défaut si aucun message flash n'est défini #}
-            {{ app.flashes('error')|first|default('You do not have permission to access this page.') }}
+            {{ app.flashes('error')|first|default('Internal server Error') }}
         </h1>
     </div>
+
     {{ parent() }}
 {% endblock %}
+
+
+
