@@ -49,11 +49,15 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $photo = null;
 
-    #[ORM\ManyToOne(targetEntity: Role::class, inversedBy: 'users')]
+    #[ORM\ManyToOne(targetEntity: Role::class, fetch: "EAGER", inversedBy: 'users')]
     #[ORM\JoinColumn(name: "role_id", referencedColumnName: "id")]
     private ?Role $role = null;
 
     private ?UploadedFile $photoFile = null;
+
+    #[ORM\ManyToOne(targetEntity: Campus::class, fetch: "EAGER", inversedBy: 'users')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Campus $campus = null;
 
 
     public function getId(): ?int
@@ -195,6 +199,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setRole(Role $role): self
     {
         $this->role = $role;
+
+        return $this;
+    }
+
+    public function getCampus(): ?Campus
+    {
+        return $this->campus;
+    }
+
+    public function setCampus(?Campus $campus): static
+    {
+        $this->campus = $campus;
 
         return $this;
     }

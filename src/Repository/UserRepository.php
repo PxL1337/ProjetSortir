@@ -51,6 +51,21 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
             ->getOneOrNullResult();
     }
 
+    /**
+     * @throws NonUniqueResultException
+     */
+    public function findByUsernameWithCampus(string $username)
+    {
+        return $this->createQueryBuilder('u')
+            ->leftJoin('u.campus', 'c') // Joindre la table campus
+            ->addSelect('c') // Sélectionner aussi les informations du campus
+            ->where('u.email = :emailOrPseudo')
+            ->orWhere('u.pseudo = :emailOrPseudo')
+            ->setParameter('emailOrPseudo', $username)
+            ->getQuery()
+            ->getOneOrNullResult();
+    }
+
 //    /**
 //     * @return User[] Returns an array of User objects
 //     */

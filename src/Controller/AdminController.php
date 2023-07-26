@@ -64,7 +64,7 @@ class AdminController extends AbstractController
 
     #[Route('/delete_user/{id}', name: 'delete_user')]
     #[IsGranted('ROLE_ADMIN')]
-    public function delete(Request $request, User $user): Response
+    public function delete(User $user): Response
     {
         return $this->render('admin/delete_user.html.twig', [
             'user' => $user
