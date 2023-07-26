@@ -32,8 +32,11 @@ class Outing
     #[ORM\Column(type: Types::TEXT)]
     private ?string $infosSortie = null;
 
-    #[ORM\Column(length: 255)]
-    private ?string $etat = null;
+
+
+    #[ORM\ManyToOne(inversedBy: 'outings')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Status $status = null;
 
     public function getId(): ?int
     {
@@ -112,14 +115,16 @@ class Outing
         return $this;
     }
 
-    public function getEtat(): ?string
+
+
+    public function getStatus(): ?Status
     {
-        return $this->etat;
+        return $this->status;
     }
 
-    public function setEtat(string $etat): static
+    public function setStatus(?Status $status): static
     {
-        $this->etat = $etat;
+        $this->status = $status;
 
         return $this;
     }
