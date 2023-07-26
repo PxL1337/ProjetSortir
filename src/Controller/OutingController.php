@@ -3,8 +3,10 @@
 namespace App\Controller;
 
 use App\Entity\Outing;
+use App\Form\OutingType;
 use App\Repository\OutingRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Validator\Constraints\Date;
@@ -22,4 +24,17 @@ class OutingController extends AbstractController
             "outings" => $outings
         ]);
     }
+
+    #[Route('/create-sortie', name: 'app_outing')]
+    public function create(Request $request): Response
+    {
+
+        $outing = new Outing();
+        $outingForm = $this->createForm(OutingType::class, $outing);
+
+        return $this->render('outing/create.html.twig', [
+            "outingForm" => $outingForm->createView()
+        ]);
+    }
+
 }
