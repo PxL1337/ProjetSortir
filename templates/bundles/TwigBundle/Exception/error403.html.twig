@@ -1,0 +1,34 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}403 Forbidden{% endblock %}
+
+{% block body %}
+
+    <style>
+        /* Placez ici votre CSS personnalisé */
+        .forbidden-container {
+            text-align: center;
+            padding: 2em;
+        }
+
+        .forbidden-message {
+            font-size: 2em;
+            color: #ff0000;
+            animation: flash linear 1s infinite;
+        }
+
+        @keyframes flash {
+            0% {opacity: 1;}
+            50% {opacity: .1;}
+            100% {opacity: 1;}
+        }
+    </style>
+
+    <div class="forbidden-container">
+        <h1 class="forbidden-message">
+            {# Utilisez la fonction twig "default" pour afficher un message par défaut si aucun message flash n'est défini #}
+            {{ app.flashes('error')|first|default('You do not have permission to access this page.') }}
+        </h1>
+    </div>
+
+{% endblock %}

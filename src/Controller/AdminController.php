@@ -23,6 +23,14 @@ class AdminController extends AbstractController
         $this->entityManager = $entityManager;
     }
 
+    private function ensureUserIsNoAdmin(User $user): void
+    {
+        if (in_array('ROLE_ADMIN', $user->getRoles())) {
+            $this->addFlash('error', 'You cannot delete an admin user.');
+            throw new AccessDeniedException('You cannot delete an admin user.');
+        }
+    }
+
     #[Route('/', name: 'dashboard')]
     #[IsGranted('ROLE_ADMIN')]
     public function dashboard(): Response
@@ -34,11 +42,7 @@ class AdminController extends AbstractController
     #[IsGranted('ROLE_ADMIN')]
     public function list(UserRepository $userRepository): Response
     {
-        $users = $userRepository->createQueryBuilder('u')
-            ->leftJoin('u.role', 'r') // suppose que 'roles' est la propriété de la relation dans l'entité User
-            ->addSelect('r')
-            ->getQuery()
-            ->getResult();
+        $users = $userRepository->findAllWithRoles();
 
         return $this->render('admin/list_user.html.twig', [
             'users' => $users,
@@ -60,8 +64,6 @@ class AdminController extends AbstractController
             return $this->redirectToRoute('admin_list_user');
         }
 
-
-
         return $this->render('admin/modify_user.html.twig', [
             'user' => $user,
             'form' => $form->createView(),
@@ -72,11 +74,7 @@ class AdminController extends AbstractController
     #[IsGranted('ROLE_ADMIN')]
     public function delete(User $user): Response
     {
-        // Check if the user has the ROLE_ADMIN, if yes throw an AccessDeniedException
-        if (in_array('ROLE_ADMIN', $user->getRoles())) {
-            $this->addFlash('error', 'You cannot delete an admin user.');
-            throw new AccessDeniedException('You cannot delete an admin user.');
-        }
+        $this->ensureUserIsNoAdmin($user);
 
         return $this->render('admin/delete_user.html.twig', [
             'user' => $user
@@ -87,11 +85,7 @@ class AdminController extends AbstractController
     #[IsGranted('ROLE_ADMIN')]
     public function confirmDelete(Request $request, User $user): Response
     {
-        // Check if the user has the ROLE_ADMIN, if yes throw an AccessDeniedException
-        if (in_array('ROLE_ADMIN', $user->getRoles())) {
-            $this->addFlash('error', 'You cannot delete an admin user.');
-            throw new AccessDeniedException('You cannot delete an admin user.');
-        }
+        $this->ensureUserIsNoAdmin($user);
 
         if ($this->isCsrfTokenValid('delete'.$user->getId(), $request->request->get('_token'))) {
             $this->entityManager->remove($user);
@@ -100,5 +94,12 @@ class AdminController extends AbstractController
         }
 
         return $this->redirectToRoute('admin_list_user');
+    }
+
+    #[Route('/city/list', name: 'city_list')]
+    #[IsGranted('ROLE_ADMIN')]
+    public function listCity(): Response
+    {
+        return $this->render('admin/city_list.html.twig');
     }
 }
