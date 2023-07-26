@@ -236,7 +236,6 @@ header a img {
 .content .header {
     height: 30px;
     font-size: 1.25em;
-    /*margin: 0 0 .25em 0;*/
 }
 
 .header .title {
@@ -277,12 +276,14 @@ form .row {
     width: 100%;
 }
 
-.row input {
-    border-radius: 10px;
-    width: auto;
+.icon {
+    position: absolute;
+    outline: solid 2px magenta;
 }
 
 .row input {
+    border-radius: 10px;
+    width: auto;
     font-size: 1em;
 }
 
@@ -296,7 +297,17 @@ form .submit-btn {
     width: 100%;
     border-radius: 10px;
     margin-top: 0.65em;
+
+    color: var(--white);
+    background: var(--Light-Sea-Green);
+}
+
+.submit-btn input[type="submit"]:hover {
+    display: inline-block;
     cursor: pointer;
+
+    color: var(--Light-Sea-Green);
+    background: var(--white);
 }
 
 form .signUp-redirection {
@@ -317,6 +328,11 @@ form .signUp-redirection {
 
 .signUp-redirection a {
     color: #4deafc;
+    text-decoration: none;
+}
+
+.signUp-redirection a:hover {
+    text-decoration: underline;
 }
 /*LOGIN END*/
 
