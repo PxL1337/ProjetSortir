@@ -16,16 +16,29 @@ class SecurityController extends AbstractController
         //     return $this->redirectToRoute('target_path');
         // }
 
+        #region Variables declaration for login.html.twig
         // get the login error if there is one
         $error = $authenticationUtils->getLastAuthenticationError();
 
         // last username entered by the user
         $lastUsername = $authenticationUtils->getLastUsername();
+        #endregion
 
+        #region Custom messages declaration for login.html.twig
         // Remember me message
         $rememberMe_Message = "Remember Me";
 
-        return $this->render('security/login.html.twig', ['last_username' => $lastUsername, 'error' => $error, 'rememberMeMessage' => $rememberMe_Message]);
+        // Login error message
+        $loginError_Message = "Incorrect username or password.";
+        #endregion
+
+        return $this->render('security/login.html.twig',
+            [
+                'last_username' => $lastUsername,
+                'error' => $error,
+                'rememberMeMessage' => $rememberMe_Message,
+                'loginError_Message' => $loginError_Message
+            ]);
     }
 
     #[Route(path: '/logout', name: 'app_logout')]

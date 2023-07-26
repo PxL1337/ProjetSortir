@@ -13,8 +13,10 @@
             <form method="post">
                 {# ERROR MESSAGE(S) #}
                 {% if error %}
-                    <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
-                    <div>{{ error.message() }}</div>
+                    <section class="error-container">
+                        {# <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div> #}
+                        <p id="error-message">{{ loginError_Message }}</p>
+                    </section>
                 {% endif %}
 
                 {% if app.user %}
