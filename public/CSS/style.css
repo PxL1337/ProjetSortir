@@ -41,6 +41,14 @@ Custom Properties
 
 }
 
+/*SECTION DEBUG CSS - START*/
+
+/** {*/
+/*    outline: solid .1px;*/
+/*}*/
+
+/*SECTION DEBUG CSS - END*/
+
 body {
     margin: 0;
     padding: 0;
@@ -171,10 +179,27 @@ header a img {
     height: 60px;
 }
 
-/*DEBUG*/
-/** {*/
-/*    outline: solid .1px;*/
-/*}*/
+/*ERROR IN REGISTRATION FORM - START*/
+/* Parent - padding a 0 pour reset la position au centre*/
+#registration_form ul {
+    background: rgba(220, 47, 47, .35);
+    color: var(--white);
+
+    font-size: 1em;
+    padding: 0;
+}
+
+/* Child with text */
+#registration_form ul li {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    font-size: .85em;
+    padding: .5em;
+}
+
+/*ERROR IN REGISTRATION FORM - END*/
 
 /*LOGIN START*/
 .error-container {
@@ -331,7 +356,21 @@ input {
     border: solid 2px var(--Light-Sea-Green);
     width: 100%;
     border-radius: 10px;
+}
 
+/* Each input that are not of type SUBMIT and HAVE a value */
+input:not([type="submit"]):not([value=""]){
+    font-size: 80%;
+    padding-left: 2%;
+    padding-top: .5em;
+    padding-right: 0em;
+    height: 25px;
+
+    /* include the padding-left to reposition the input value starting point
+    * width = 100 - ( padding-left + offset = 1 )
+    * The reason ? : Align these input to error messages
+    */
+    width: 97%;
 }
 
 input[type="submit"] {
