@@ -2,13 +2,13 @@
 
 namespace App\Entity;
 
-use App\Repository\SortieRepository;
+use App\Repository\OutingRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
-#[ORM\Entity(repositoryClass: SortieRepository::class)]
+#[ORM\Entity(repositoryClass: OutingRepository::class)]
 class Outing
 {
     #[ORM\Id]
