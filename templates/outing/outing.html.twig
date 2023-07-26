@@ -10,7 +10,7 @@
             <h3>{{ outing.nom }}</h3>
             <div>le {{ outing.dateHeureDebut | date('d/m/y') }} à {{ outing.dateHeureDebut | date('H:i') }}</div>
             <div>limite d'inscription : {{ outing.nbInscriptionMax }}</div>
-            <div>{{ outing.etat }}</div>
+            <div>{{ outing.duree | date }}</div>
         </article>
         {% endfor %}
     </section>
