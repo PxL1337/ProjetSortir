@@ -1,0 +1,17 @@
+{% extends 'admin/dashboard.html.twig' %}
+
+{% block title %}
+    Supprimer Campus
+{% endblock %}
+
+{% block body %}
+    <h1>Supprimer le campus</h1>
+
+    <p>Êtes-vous sûr de vouloir supprimer le campus "{{ campus.nom }}" ?</p>
+
+    <form method="post" action="{{ path('admin_campus_confirm_delete', {'id': campus.id}) }}">
+        <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ campus.id) }}">
+        <button class="btn btn-danger">Supprimer</button>
+        <a href="{{ path('admin_campus_index') }}" class="btn btn-secondary">Annuler</a>
+    </form>
+{% endblock %}
