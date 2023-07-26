@@ -17,50 +17,56 @@
 </head>
 
 <body>
-<div class="container">
-    <header>
-        <h1><a href="{{ path('app_main') }}"><img src="{{ asset('img/Plan-B.gif') }}" alt="Logo">Sortir !</a></h1>
-        <h2>Pour aller ou ? 🤷</h2>
-        {% block navbar %}
-            {% include('inc/nav.html.twig') %}
-        {% endblock %}
-    </header>
 
-    {# Flash messages section #}
-    <section class="flash-messages">
-        {% for message in app.flashes('success') %}
-            <div class="alert-success" style="background-color: #2f9e98">
-                {{ message }}
-            </div>
+    <div class="preload" data-preload>
+        <div class="circle"></div>
+        <p class="text">Sortir.com</p>
+    </div>
+
+    <div class="container">
+        <header>
+            <h1><a href="{{ path('app_main') }}"><img src="{{ asset('img/Plan-B.gif') }}" alt="Logo">Sortir !</a></h1>
+            <h2>Pour aller ou ? 🤷</h2>
+            {% block navbar %}
+                {% include('inc/nav.html.twig') %}
+            {% endblock %}
+        </header>
+
+        {# Flash messages section #}
+        <section class="flash-messages">
+            {% for message in app.flashes('success') %}
+                <div class="alert-success" style="background-color: #2f9e98">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        </section>
+
+        {# read and display all flash messages #}
+        {% for label, messages in app.flashes %}
+            {% for message in messages %}
+                <div class="flash flash-{{ label }}">
+                    {{ message }}
+                </div>
+            {% endfor %}
         {% endfor %}
-    </section>
-
-    {# read and display all flash messages #}
-    {% for label, messages in app.flashes %}
-        {% for message in messages %}
-            <div class="flash flash-{{ label }}">
-                {{ message }}
-            </div>
-        {% endfor %}
-    {% endfor %}
 
 
-    <main>
-        {%  block body %}{% endblock %}
-    </main>
+        <main>
+            {%  block body %}{% endblock %}
+        </main>
 
-    <footer class="footer">
-        <div class="copyright">&copy; {{ "now"|date("Y") }} PLANB | <a href="https://www.eni-ecole.fr/" target="_blank">@ENI-Ecole Informatique</a> |
-            <a href="https://github.com/PxL1337/ProjetSortir" target="_blank"><i class="fa-brands fa-github"></i></a></div>
-    </footer>
+        <footer class="footer">
+            <div class="copyright">&copy; {{ "now"|date("Y") }} PLANB | <a href="https://www.eni-ecole.fr/" target="_blank">@ENI-Ecole Informatique</a> |
+                <a href="https://github.com/PxL1337/ProjetSortir" target="_blank"><i class="fa-brands fa-github"></i></a></div>
+        </footer>
 
-</div>
+    </div>
 
-{#<div class="loader"></div>#}
-{% block javascripts %}
-    <script src="https://kit.fontawesome.com/bd77a4e8ae.js" crossorigin="anonymous"></script>
-    <script src="{{ asset('js/script.js') }}"></script>
-{% endblock %}
+    {#<div class="loader"></div>#}
+    {% block javascripts %}
+        <script src="https://kit.fontawesome.com/bd77a4e8ae.js" crossorigin="anonymous"></script>
+        <script src="{{ asset('js/script.js') }}"></script>
+    {% endblock %}
 
 </body>
 </html>
