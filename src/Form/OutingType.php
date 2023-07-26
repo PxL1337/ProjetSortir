@@ -21,16 +21,25 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class OutingType extends AbstractType
 {
-    /*public function buildForm(FormBuilderInterface $builder, array $options, CampusRepository $campusRepository, CityRepository $cityRepository): void
+    public CampusRepository $campusRepository;
+    public CityRepository $cityRepository;
+
+    public function __construct(CampusRepository $campusRepository, CityRepository $cityRepository)
+    {
+        $this->campusRepository = $campusRepository;
+        $this->cityRepository = $cityRepository;
+    }
+
+    public function buildForm(FormBuilderInterface $builder, array $options): void
     {
 
-        $campusList = $campusRepository->findAll();
+        $campusList = $this->campusRepository->findAll();
         $campusChoices = [];
         foreach ($campusList as $campus) {
             $campusChoices[$campus->getId()] = $campus->getNom();
         }
 
-        $cityList = $cityRepository->findAll();
+        $cityList = $this->cityRepository->findAll();
         $cityChoices = [];
         foreach ($cityList as $city) {
             $cityChoices[$city->getId()] = $city->getNom();
@@ -40,14 +49,14 @@ class OutingType extends AbstractType
         $builder
             ->add('nom', TextType::class)
             ->add('dateHeureDebut', DateTimeType::class,[
-                'input'=>'date',
+                'input'=>'datetime',
             ])
             ->add('duree', TimeType::class,[
-                'input'=>'interval',
+
                 'with_seconds' => false,
             ])
             ->add('dateLimiteInscription', DateTimeType::class,[
-                'input'=>'date',
+                'input'=>'datetime',
             ])
             ->add('nbInscriptionMax', IntegerType::class)
             ->add('infosSortie',TextareaType::class)
@@ -61,16 +70,18 @@ class OutingType extends AbstractType
                     'Annulée' => 'Annulée',
                 ],
             ])
+           /*
             ->add('Organizer')
-            ->add('attendees')
+            ->add('attendees')*/
             ->add('campus', EntityType::class,[
                 'class' => Campus::class,
-                'choices' => $campusChoices,
+                'choices' => $campusList,
                 'choice_label' => 'nom',
                 'placeholder' => 'Choisir un campus',
             ])
-            ->add('place', TextType::class)
-            ->add('rue', TextType::class,)
+            /*
+            ->add('place')
+            ->add('rue')
             ->add('longitude', NumberType::class, [
                 'scale' => 8,
             ])
@@ -79,12 +90,12 @@ class OutingType extends AbstractType
             ])
             ->add('city', EntityType::class, [
                 'class' => City::class,
-                'choices' => $cityChoices,
+                'choices' => $cityList,
                 'choice_label' => 'nom',
                 'placeholder' => 'Choisir une ville',
-            ])
+            ])*/
         ;
-    }*/
+    }
 
     public function configureOptions(OptionsResolver $resolver): void
     {

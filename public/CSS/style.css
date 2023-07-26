@@ -362,7 +362,7 @@ label:first-of-type {
     margin-top: 0;
 }
 
-input {
+input, textarea {
     padding: 0.3em;
     border: solid 2px var(--Light-Sea-Green);
     width: 100%;

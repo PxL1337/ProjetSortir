@@ -14,7 +14,7 @@ use Symfony\Component\Validator\Constraints\DateTime;
 
 class OutingController extends AbstractController
 {
-    #[Route('/list-sorties', name: 'app_outing')]
+    #[Route('/list-sorties', name: 'outing_list')]
     public function list(OutingRepository $sortieRepository): Response
     {
 
@@ -25,7 +25,7 @@ class OutingController extends AbstractController
         ]);
     }
 
-    #[Route('/create-sortie', name: 'app_outing')]
+    #[Route('/create-sortie', name: 'outing_create')]
     public function create(Request $request): Response
     {
 
