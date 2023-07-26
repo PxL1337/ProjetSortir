@@ -436,11 +436,12 @@ input[type="submit"] {
     margin-top: 1em;
 }
 
+/* Admin User Table */
+
 .table-container {
-
-
     padding: 5px;
 }
+
 .table-list-container {
     max-height: 500px;
     overflow-y: auto;
@@ -462,4 +463,22 @@ input[type="submit"] {
 .table {
     width: 100%;
     table-layout: fixed;
+}
+
+/* Admin User Filters */
+.d-none {
+    display: none;
+}
+
+#filter-form {
+    transition: all 1s ease-in-out;
+    transform: translateY(-20px);
+    opacity: 0;
+    display: none;
+}
+
+#filter-form.visible {
+    transform: translateY(0);
+    opacity: 1;
+    display: block;
 }

@@ -36,7 +36,6 @@ class UserFilterType extends AbstractType
                 ],
                 'required' => false,
             ])
-            ->add('submit', SubmitType::class, ['label' => 'Filtrer'])
         ;
     }
 

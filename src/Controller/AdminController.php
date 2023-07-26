@@ -53,6 +53,12 @@ class AdminController extends AbstractController
             $users = $userRepository->findAllWithRoles();
         }
 
+        if ($request->isXmlHttpRequest()) {
+            return $this->render('admin/_list_user_table.html.twig', [
+                'users' => $users,
+            ]);
+        }
+
         return $this->render('admin/list_user.html.twig', [
             'users' => $users,
             'filter_form' => $filterForm->createView(),

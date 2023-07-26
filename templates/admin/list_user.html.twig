@@ -5,11 +5,20 @@
 {% block body %}
     <h1>Users list</h1>
 
-    {{ form_start(filter_form) }}
-    {{ form_row(filter_form.role) }}
-    {{ form_row(filter_form.campus) }}
-    {{ form_row(filter_form.sort) }}
-    {{ form_end(filter_form) }}
+    <button id="filter-button" class="btn btn-primary">Filter</button>
+    <button id="sort-button" class="btn btn-primary">Sort</button>
+
+    <form id="filter-form" class="d-none">
+        {{ form_start(filter_form) }}
+        <div class="filter-field">
+            {{ form_row(filter_form.role) }}
+            {{ form_row(filter_form.campus) }}
+        </div>
+        <div class="sort-field d-none">
+            {{ form_row(filter_form.sort) }}
+        </div>
+        {{ form_end(filter_form) }}
+    </form>
 
     <div class="table-container">
         <table class="table">
@@ -26,29 +35,11 @@
             </thead>
         </table>
         <div class="table-list-container">
-            <table class="table">
-                <tbody>
-                {% for user in users %}
-                    <tr>
-                        <td>{{ user.firstname }}</td>
-                        <td>{{ user.lastname }}</td>
-                        <td>{{ user.email }}</td>
-                        <td>{{ user.telephone }}</td>
-                        <td>{{ user.campus.nom }}</td>
-                        <td>{{ user.role.name }}</td>
-                        <td>
-                            <a href="{{ path('admin_modify_user', {'id': user.id}) }}" class="btn btn-primary">Modifier</a>
-                            {% if user.role.name != 'ROLE_ADMIN' %}
-                                <a href="{{ path('admin_delete_user', {'id': user.id}) }}" class="btn btn-danger">Supprimer</a>
-                            {% else %}
-                                {#<span class="btn btn-danger disabled">Supprimer</span>#}
-                            {% endif %}
-                        </td>
-                    </tr>
-                {% endfor %}
-                </tbody>
-            </table>
+            {% include 'admin/_list_user_table.html.twig' with {'users': users} %}
         </div>
     </div>
 {% endblock %}
 
+{% block javascripts %}
+    <script src="{{ asset('JS/adminUserListLoadingTest.js') }}"></script>
+{% endblock %}
