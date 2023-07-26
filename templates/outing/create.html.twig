@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Create outing{% endblock %}
+
+{% block body %}
+    <div class="form-block">
+        <h2 class="form-title">Create outing</h2>
+
+        {{ form_errors(outingForm) }}
+
+        {{ form_start(outingForm) }}
+        {{ form_widget(outingForm) }}
+
+
+        <input type="submit" class="btn" value="Create">
+        {{ form_end(outingForm) }}
+
+    </div>
+
+{% endblock %}
