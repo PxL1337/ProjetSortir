@@ -11,6 +11,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 #[Route('/admin', name: 'admin_')]
 class AdminController extends AbstractController
@@ -54,8 +55,12 @@ class AdminController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $this->entityManager->flush();
 
+            $this->addFlash('success', 'User updated successfully.');
+
             return $this->redirectToRoute('admin_list_user');
         }
+
+
 
         return $this->render('admin/modify_user.html.twig', [
             'user' => $user,
@@ -67,6 +72,12 @@ class AdminController extends AbstractController
     #[IsGranted('ROLE_ADMIN')]
     public function delete(User $user): Response
     {
+        // Check if the user has the ROLE_ADMIN, if yes throw an AccessDeniedException
+        if (in_array('ROLE_ADMIN', $user->getRoles())) {
+            $this->addFlash('error', 'You cannot delete an admin user.');
+            throw new AccessDeniedException('You cannot delete an admin user.');
+        }
+
         return $this->render('admin/delete_user.html.twig', [
             'user' => $user
         ]);
@@ -76,9 +87,16 @@ class AdminController extends AbstractController
     #[IsGranted('ROLE_ADMIN')]
     public function confirmDelete(Request $request, User $user): Response
     {
+        // Check if the user has the ROLE_ADMIN, if yes throw an AccessDeniedException
+        if (in_array('ROLE_ADMIN', $user->getRoles())) {
+            $this->addFlash('error', 'You cannot delete an admin user.');
+            throw new AccessDeniedException('You cannot delete an admin user.');
+        }
+
         if ($this->isCsrfTokenValid('delete'.$user->getId(), $request->request->get('_token'))) {
             $this->entityManager->remove($user);
             $this->entityManager->flush();
+            $this->addFlash('success', 'User deleted successfully.');
         }
 
         return $this->redirectToRoute('admin_list_user');

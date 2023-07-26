@@ -2,12 +2,12 @@
 
 namespace App\Entity;
 
-use App\Repository\EtatRepository;
+use App\Repository\StateRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
-#[ORM\Entity(repositoryClass: EtatRepository::class)]
+#[ORM\Entity(repositoryClass: StateRepository::class)]
 class Status
 {
     #[ORM\Id]

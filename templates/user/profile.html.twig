@@ -17,6 +17,6 @@
         <li><strong>Campus :</strong> {% if app.user.campus %}{{ app.user.campus.nom }}{% else %}Aucun{% endif %}</li>
     </ul>
 
-    <input type="submit" class="btn" value="Modify">
+    <input type="submit" class="btn" value="Modify" onclick="location.href='{{ path('user.edit', {id: app.user.id}) }}'">
 </section>
 {% endblock %}
