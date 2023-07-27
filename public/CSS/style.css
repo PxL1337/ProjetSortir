@@ -61,9 +61,11 @@ body {
     color: var(--gray-peach);
     font-size: 1.25em;
 }
-li{
+
+li {
     list-style-type: none;
 }
+
 body > .container {
     display: flex;
     flex-direction: column;
@@ -100,24 +102,6 @@ footer {
 header h1 {
     margin: 0;
 }
-nav{
-    font-style: italic;
-}
-nav ul {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    display: flex;
-}
-
-nav li {
-    margin-right: 20px;
-}
-
-nav a {
-    color: var(--white);
-    text-decoration: none;
-}
 
 main {
     padding: 40px;
@@ -125,7 +109,7 @@ main {
 }
 
 /*preload*/
-.preload{
+.preload {
     position: fixed;
     top: 0;
     left: 0;
@@ -135,19 +119,24 @@ main {
     z-index: 10;
     display: grid;
     place-content: center;
-    justify-items:center ;
+    justify-items: center;
     transition: 500ms ease;
 }
 
-.preload > * {transition: 250ms ease;}
+.preload > * {
+    transition: 250ms ease;
+}
 
-.preload.loaded > * {opacity: 0;}
+.preload.loaded > * {
+    opacity: 0;
+}
 
-.preload.loaded{
+.preload.loaded {
     transition-delay: 250ms;
     transform: translateY(100%);
 }
-.circle{
+
+.circle {
     width: 112px;
     height: 112px;
     border-radius: 50%;
@@ -159,11 +148,15 @@ main {
 }
 
 @keyframes rotate360 {
-    0% {transform: rotate(0);}
-    100%{transform: rotate(1turn);}
+    0% {
+        transform: rotate(0);
+    }
+    100% {
+        transform: rotate(1turn);
+    }
 }
 
-.preload .text{
+.preload .text {
 
 
     background-size: 500%;
@@ -182,63 +175,17 @@ main {
 }
 
 @keyframes loadingText {
-    0% {opacity: 100%;}
-    50% {opacity: 0%;}
-    100% {opacity: 100%;}
-}
-
-
-
-/*
-.loader {
-    position: fixed;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    right: 0;
-    height: 100vh;
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: var(--Surfie-Green);
-    transition: 1s ease;
-    z-index: 10;
-
-}
-
-.loader::after {
-    content: "";
-    width: 75px;
-    height: 75px;
-    border: 15px solid var(--gray-peach);
-    border-top-color: var(--Verdigris);
-    border-radius: 50%;
-    animation: loading 0.75s ease infinite;
-}
-
-@keyframes loading {
     0% {
-        transform: rotate(0);
+        opacity: 100%;
+    }
+    50% {
+        opacity: 0%;
     }
     100% {
-        transform: rotate(1turn);
+        opacity: 100%;
     }
 }
 
-.slide-up-animation {
-    animation: slideUp 0.5s ease forwards;
-}
-
-@keyframes slideUp {
-    0% {
-        transform: translateY(0);
-    }
-    100% {
-        transform: translateY(-100%);
-    }
-}
-*/
 header a img {
     width: 60px;
     height: 60px;
@@ -267,7 +214,9 @@ header a img {
 /*ERROR IN REGISTRATION FORM - END*/
 
 /* Removes the black outline */
-input { outline: none; }
+input {
+    outline: none;
+}
 
 input:focus {
     border: solid 2px var(--Dusty-Blue);
@@ -318,7 +267,6 @@ input[type="submit"]:hover {
     color: var(--gray-peach);
 }
 
-
 .form-title {
     font-size: 2.25em;
     padding: 0 .25em;
@@ -328,8 +276,6 @@ input[type="submit"]:hover {
 label {
     display: block;
     margin-top: 1em;
-
-
 }
 
 label:first-of-type {
@@ -344,7 +290,7 @@ input, textarea {
 }
 
 /* Each input that are not of type SUBMIT and HAVE a value */
-input:not([type="submit"]):not([value=""]){
+input:not([type="submit"]):not([value=""]) {
     font-size: 80%;
     padding-left: 2%;
     padding-top: .5em;
@@ -356,6 +302,10 @@ input:not([type="submit"]):not([value=""]){
     * The reason ? : Align these input to error messages
     */
     width: 97%;
+}
+
+.form-text-area {
+    resize: none;
 }
 
 @media screen and (min-width: 430px) {
@@ -377,10 +327,9 @@ input:not([type="submit"]):not([value=""]){
         margin-top: 0;
         margin-right: 0.5em;
     }
-
 }
 
-.profile{
+.profile {
 
     padding: 1em 2em;
     border: solid 1px var(--Light-Sea-Green);

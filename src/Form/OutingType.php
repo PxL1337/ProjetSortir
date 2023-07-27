@@ -48,19 +48,27 @@ class OutingType extends AbstractType
 
         $builder
             ->add('nom', TextType::class)
-            ->add('dateHeureDebut', DateTimeType::class,[
-                'input'=>'datetime',
+            ->add('dateHeureDebut', DateTimeType::class, [
+                'input' => 'datetime',
             ])
-            ->add('duree', TimeType::class,[
+            ->add('duree', TimeType::class, [
 
                 'with_seconds' => false,
             ])
-            ->add('dateLimiteInscription', DateTimeType::class,[
-                'input'=>'datetime',
+            ->add('dateLimiteInscription', DateTimeType::class, [
+                'input' => 'datetime',
             ])
             ->add('nbInscriptionMax', IntegerType::class)
-            ->add('infosSortie',TextareaType::class)
-            ->add('status',ChoiceType::class,[
+            ->add(
+                'infosSortie',
+                TextareaType::class,
+                array('attr' => array(
+                    'class' => 'form-text-area',
+                    'rows' => '4',
+                    'maxlength' => '150',
+                    'overflow' => 'hidden'))
+            )
+            ->add('status', ChoiceType::class, [
                 'choices' => [
                     'Créée' => 'Créée',
                     'Ouverte' => 'Ouverte',
@@ -70,16 +78,15 @@ class OutingType extends AbstractType
                     'Annulée' => 'Annulée',
                 ],
             ])
-           /*
-            ->add('Organizer')
-            ->add('attendees')*/
-            ->add('campus', EntityType::class,[
+            /*
+             ->add('Organizer')
+             ->add('attendees')*/
+            ->add('campus', EntityType::class, [
                 'class' => Campus::class,
                 'choices' => $campusList,
                 'choice_label' => 'nom',
                 'placeholder' => 'Choisir un campus',
-            ])
-            /*
+            ])/*
             ->add('place')
             ->add('rue')
             ->add('longitude', NumberType::class, [
