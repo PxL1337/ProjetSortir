@@ -54,4 +54,12 @@ class PlaceController extends AbstractController
             'form' => $form->createView(),
         ]);
     }
+
+    #[Route('/detail/{id}', name: 'detail')]
+    public function detail(Place $place): Response
+    {
+        return $this->render('place/detail.html.twig', [
+            'place' => $place,
+        ]);
+    }
 }

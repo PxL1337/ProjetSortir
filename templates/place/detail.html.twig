@@ -1,0 +1,27 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>{{ place.nom }}</h1>
+    <p>Adresse : {{ place.rue }} {{ place.city.codePostal }} {{ place.city.nom }}</p>
+    <p>GPS : Latitude: {{ place.latitude }} / Longitude: {{ place.longitude }}</p>
+
+    <div id="mapid" style="height: 400px; width: 50%"></div>
+
+    <script>
+        var map = L.map('mapid').setView([{{ place.latitude }}, {{ place.longitude }}], 17);
+
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 19,
+        }).addTo(map);
+
+        L.marker([{{ place.latitude }}, {{ place.longitude }}]).addTo(map)
+            .bindPopup("<b>{{ place.nom }}</b><br/>{{ place.rue }}").openPopup();
+    </script>
+
+    <a href="{{ path('place_list') }}">Retour à la liste</a>
+{% endblock %}
+
+{% block title %}
+
+{% endblock %}
+

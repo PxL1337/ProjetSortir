@@ -6,14 +6,25 @@
           content="width=device-width, user-scalable=yes, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>{% block title %}Sortir.com{% endblock %}</title>
+
+    {#  Stylesheets  #}
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
     <link rel="stylesheet" href="{{ asset('css/normalize.css') }}">
     <link rel="stylesheet" href="{{ asset('css/nav.css') }}">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+
+    {#  Favicon  #}
     <link rel="icon" href="{{ asset('img/Plan-B.gif') }}">
+
+    {#  Fonts  #}
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Handlee&display=swap" rel="stylesheet">
+
+    {#  Scripts  #}
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+
     {% block extrastyles %}{% endblock %}
 </head>
 

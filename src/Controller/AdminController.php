@@ -276,6 +276,14 @@ class AdminController extends AbstractController
         ]);
     }
 
+    #[Route('/detail/{id}', name: 'place_detail')]
+    public function detail(Place $place): Response
+    {
+        return $this->render('admin/place/detail.html.twig', [
+            'place' => $place,
+        ]);
+    }
+
     #[Route('/place/add', name: 'place_add')]
     #[IsGranted('ROLE_ADMIN')]
     public function add(Request $request, EntityManagerInterface $entityManager): Response

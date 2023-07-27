@@ -10,8 +10,6 @@
         <tr>
             <th>Nom</th>
             <th>Rue</th>
-            <th>Latitude</th>
-            <th>Longitude</th>
             <th>Actions</th> <!-- Colonne pour les boutons d'action -->
         </tr>
         </thead>
@@ -20,11 +18,10 @@
             <tr>
                 <td>{{ place.nom }}</td>
                 <td>{{ place.rue }}</td>
-                <td>{{ place.latitude }}</td>
-                <td>{{ place.longitude }}</td>
                 <td>
-                    <a href="{{ path('admin_place_edit', { 'id': place.id }) }}">Modifier</a> <!-- Changer 'place_edit' par le nom de la route de modification -->
-                    <a href="{{ path('admin_place_delete', { 'id': place.id }) }}" onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce lieu ?');">Supprimer</a> <!-- Changer 'place_delete' par le nom de la route de suppression -->
+                    <a href="{{ path('admin_place_detail', { 'id': place.id }) }}">Details</a>
+                    <a href="{{ path('admin_place_edit', { 'id': place.id }) }}">Modifier</a>
+                    <a href="{{ path('admin_place_delete', { 'id': place.id }) }}">Supprimer</a>
                 </td>
             </tr>
         {% endfor %}
