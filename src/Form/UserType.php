@@ -23,11 +23,7 @@ class UserType extends AbstractType
             ->add('firstname')
             ->add('lastname')
             ->add('telephone')
-            ->add('submit', SubmitType::class, [
-                'attr' =>[
-                    'class' => 'btn btn-primary mt-4'
-                ]
-            ]);
+            ;
     }
 
     public function configureOptions(OptionsResolver $resolver): void

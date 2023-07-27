@@ -4,14 +4,17 @@
 
 {% block body %}
     <div class="container">
-        <h1>Formulaire de modif</h1>
+       <div class="form-block">
+           <h1>Formulaire de modif</h1>
 
-        {{ form_errors(form) }}
+           {{ form_errors(form) }}
 
-        {{ form_start(form) }}
-        {{ form_widget(form) }}
+           {{ form_start(form) }}
+           {{ form_widget(form) }}
+           <input type="submit" class="btn" value="Register">
+           {{ form_end(form) }}
+       </div>
 
-        {{ form_end(form) }}
 
 
     </div>

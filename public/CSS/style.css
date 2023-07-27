@@ -216,6 +216,7 @@ header a img {
 /* Removes the black outline */
 input {
     outline: none;
+
 }
 
 input:focus {
@@ -250,11 +251,6 @@ input[type="submit"]:hover {
     background: var(--white);
 
 }
-
-
-
-
-
 
 
 ::placeholder {
