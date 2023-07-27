@@ -18,8 +18,8 @@ class City
     #[ORM\Column(length: 255)]
     private ?string $nom = null;
 
-    #[ORM\Column(length: 255)]
-    private ?string $codePostal = null;
+    #[ORM\Column(type: "integer")]
+    private ?int $codePostal = null;
 
 
 
