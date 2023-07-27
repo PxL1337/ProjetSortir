@@ -32,6 +32,8 @@ class UserFilterType extends AbstractType
                     'Prénom' => 'firstname',
                     'Nom' => 'lastname',
                     'Email' => 'email',
+                    'Campus' => 'campus',
+                    'Rôle' => 'role',
                 ],
                 'required' => false,
             ])

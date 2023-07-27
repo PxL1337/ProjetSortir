@@ -21,7 +21,8 @@ class City
     #[ORM\Column(type: "integer")]
     private ?int $codePostal = null;
 
-
+    #[ORM\OneToMany(mappedBy: 'city', targetEntity: Place::class, orphanRemoval: true)]
+    private Collection $places;
 
     public function __construct()
     {
@@ -53,6 +54,36 @@ class City
     public function setCodePostal(string $codePostal): static
     {
         $this->codePostal = $codePostal;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Place>
+     */
+    public function getPlaces(): Collection
+    {
+        return $this->places;
+    }
+
+    public function addPlace(Place $place): static
+    {
+        if (!$this->places->contains($place)) {
+            $this->places->add($place);
+            $place->setCity($this);
+        }
+
+        return $this;
+    }
+
+    public function removePlace(Place $place): static
+    {
+        if ($this->places->removeElement($place)) {
+            // set the owning side to null (unless already changed)
+            if ($place->getCity() === $this) {
+                $place->setCity(null);
+            }
+        }
 
         return $this;
     }

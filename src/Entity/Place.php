@@ -27,10 +27,12 @@ class Place
     #[ORM\Column(nullable: true)]
     private ?float $longitude = null;
 
-
-
     #[ORM\OneToMany(mappedBy: 'place', targetEntity: outing::class)]
     private Collection $outings;
+
+    #[ORM\ManyToOne(inversedBy: 'places')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?City $city = null;
 
     public function __construct()
     {
@@ -118,6 +120,18 @@ class Place
                 $outing->setPlace(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getCity(): ?City
+    {
+        return $this->city;
+    }
+
+    public function setCity(?City $city): static
+    {
+        $this->city = $city;
 
         return $this;
     }

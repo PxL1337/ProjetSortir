@@ -2,11 +2,14 @@
 
 namespace App\Controller;
 
+use App\Entity\Campus;
 use App\Entity\City;
 use App\Entity\User;
 use App\Form\AdminUserType;
+use App\Form\CampusType;
 use App\Form\CityType;
 use App\Form\UserFilterType;
+use App\Repository\CampusRepository;
 use App\Repository\CityRepository;
 use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -42,7 +45,7 @@ class AdminController extends AbstractController
         return $this->render('admin/dashboard.html.twig');
     }
 
-    #[Route('/list-user', name: 'list_user')]
+    #[Route('/user/list', name: 'list_user')]
     #[IsGranted('ROLE_ADMIN')]
     public function list(UserRepository $userRepository, Request $request): Response
     {
@@ -68,7 +71,7 @@ class AdminController extends AbstractController
         ]);
     }
 
-    #[Route('/modify_user/{id}', name: 'modify_user')]
+    #[Route('/user/modify/{id}', name: 'modify_user')]
     #[IsGranted('ROLE_ADMIN')]
     public function edit(Request $request, User $user): Response
     {
@@ -89,7 +92,7 @@ class AdminController extends AbstractController
         ]);
     }
 
-    #[Route('/delete_user/{id}', name: 'delete_user')]
+    #[Route('/user/delete/{id}', name: 'delete_user')]
     #[IsGranted('ROLE_ADMIN')]
     public function delete(User $user): Response
     {
@@ -100,7 +103,7 @@ class AdminController extends AbstractController
         ]);
     }
 
-    #[Route('/confirm_delete/{id}', name: 'confirm_delete', methods: ['POST'])]
+    #[Route('/user/confirm_delete/{id}', name: 'confirm_delete', methods: ['POST'])]
     #[IsGranted('ROLE_ADMIN')]
     public function confirmDelete(Request $request, User $user): Response
     {
@@ -115,6 +118,73 @@ class AdminController extends AbstractController
         return $this->redirectToRoute('admin_list_user');
     }
 
+
+    #[Route('/campus/list', name: 'campus_index', methods: ['GET'])]
+    public function listCampus(CampusRepository $campusRepository): Response
+    {
+        return $this->render('admin/campus/index.html.twig', [
+            'campuses' => $campusRepository->findAll(),
+        ]);
+    }
+
+    #[Route('/campus/add', name: 'campus_new', methods: ['GET','POST'])]
+    public function addCampus(Request $request, EntityManagerInterface $entityManager): Response
+    {
+        $campus = new Campus();
+        $form = $this->createForm(CampusType::class, $campus);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager->persist($campus);
+            $entityManager->flush();
+
+            return $this->redirectToRoute('admin_campus_index');
+        }
+
+        return $this->render('admin/campus/new.html.twig', [
+            'campus' => $campus,
+            'form' => $form->createView(),
+        ]);
+    }
+
+    #[Route('/campus/edit/{id}', name: 'campus_edit', methods: ['GET','POST'])]
+    public function editCampus(Request $request, Campus $campus, EntityManagerInterface $entityManager): Response
+    {
+        $form = $this->createForm(CampusType::class, $campus);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager->flush();
+
+            return $this->redirectToRoute('admin_campus_index');
+        }
+
+        return $this->render('admin/campus/edit.html.twig', [
+            'campus' => $campus,
+            'form' => $form->createView(),
+        ]);
+    }
+
+    #[Route('/campus/delete/{id}', name: 'campus_delete')]
+    #[IsGranted('ROLE_ADMIN')]
+    public function deleteCampus(Campus $campus): Response
+    {
+        return $this->render('admin/campus/delete.html.twig', [
+            'campus' => $campus,
+        ]);
+    }
+
+    #[Route('/campus/confirm_delete/{id}', name: 'campus_confirm_delete', methods: ['POST'])]
+    #[IsGranted('ROLE_ADMIN')]
+    public function confirmDeleteCampus(Request $request, Campus $campus, EntityManagerInterface $entityManager): Response
+    {
+        if ($this->isCsrfTokenValid('delete'.$campus->getId(), $request->request->get('_token'))) {
+            $entityManager->remove($campus);
+            $entityManager->flush();
+        }
+
+        return $this->redirectToRoute('admin_campus_index');
+    }
 
     #[Route('/city/list', name: 'city_list')]
     #[IsGranted('ROLE_ADMIN')]
@@ -191,4 +261,13 @@ class AdminController extends AbstractController
 
         return $this->redirectToRoute('admin_city_list');
     }
+
+    #[Route('/place/list', name: 'place_list')]
+    #[IsGranted('ROLE_ADMIN')]
+    public function listPlace(): Response
+    {
+        return $this->render('admin/place/place_list.html.twig');
+    }
+
+
 }
