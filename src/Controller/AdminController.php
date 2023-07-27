@@ -191,5 +191,4 @@ class AdminController extends AbstractController
 
         return $this->redirectToRoute('admin_city_list');
     }
-
 }

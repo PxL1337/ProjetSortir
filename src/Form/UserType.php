@@ -28,7 +28,6 @@ class UserType extends AbstractType
                     'class' => 'btn btn-primary mt-4'
                 ]
             ]);
-
     }
 
     public function configureOptions(OptionsResolver $resolver): void
