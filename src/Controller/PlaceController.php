@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Place;
 use App\Form\PlaceType;
+use App\Repository\PlaceRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -22,10 +23,12 @@ class PlaceController extends AbstractController
     }
 
     #[Route('/list', name: 'list')]
-    public function list(): Response
+    public function listPlace(PlaceRepository $placeRepository): Response
     {
-        return $this->render('place/place.html.twig', [
-            'controller_name' => 'PlaceController',
+        $places = $placeRepository->findAll();
+
+        return $this->render('admin/place/list.html.twig', [
+            'places' => $places,
         ]);
     }
 
@@ -43,7 +46,7 @@ class PlaceController extends AbstractController
 
             $this->addFlash('success', 'Le lieu a bien été ajouté');
 
-            return $this->redirectToRoute('place_add');
+            return $this->redirectToRoute('place_list');
         }
 
         return $this->render('place/add.html.twig', [

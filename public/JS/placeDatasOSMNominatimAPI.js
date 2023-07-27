@@ -6,17 +6,17 @@ $(document).ready(function () {
         $('#suggestions').empty();
 
         let city = $('#place_city option:selected').text();
-        let query = $('#place_nom').val() + ' ' + $('#place_rue').val();
+        let query = $('#place_nom').val();
 
         // Only perform the search if there are at least 3 characters in the query
         if (query.length > 2) {
-            let url = `https://nominatim.openstreetmap.org/search?format=json&limit=5&q=${city} ${query}`;
+            let url = `https://nominatim.openstreetmap.org/search?format=json&limit=5&q=${city}+${query}`;
 
             console.log( 'url appelée : ' + url);  // Print the request URL
 
             $.getJSON(url, function (data) {
 
-                console.log(data);  // Print the response data
+                console.log('datas :' + data);  // Print the response data
 
                 // Use each item in the response to form a list of suggestions
                 $.each(data, function (key, val) {
@@ -31,11 +31,6 @@ $(document).ready(function () {
 
     // Trigger the search when the 'nom' field changes
     $('#place_nom').keyup(function () {
-        search();
-    });
-
-    // Trigger the search when the 'rue' field changes
-    $('#place_rue').keyup(function () {
         search();
     });
 

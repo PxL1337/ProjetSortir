@@ -1,0 +1,26 @@
+{% block body %}
+    <h1>Liste des lieux</h1>
+
+    <table>
+        <thead>
+        <tr>
+            <th>Nom</th>
+            <th>Rue</th>
+            <th>Latitude</th>
+            <th>Longitude</th>
+            <!-- Ajoutez d'autres colonnes si nécessaire -->
+        </tr>
+        </thead>
+        <tbody>
+        {% for place in places %}
+            <tr>
+                <td>{{ place.nom }}</td>
+                <td>{{ place.rue }}</td>
+                <td>{{ place.latitude }}</td>
+                <td>{{ place.longitude }}</td>
+                <!-- Ajoutez d'autres cellules si nécessaire -->
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

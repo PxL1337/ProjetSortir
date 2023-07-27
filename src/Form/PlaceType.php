@@ -7,6 +7,7 @@ use App\Entity\Place;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -21,7 +22,11 @@ class PlaceType extends AbstractType
                 'placeholder' => '',
             ])
             ->add('nom')
-            ->add('rue')
+            ->add('rue', TextType::class, [
+                'attr' => [
+                    'readonly' => true,  // This will not actually make the field read-only
+                ]
+            ])
             ->add('latitude', HiddenType::class)
             ->add('longitude', HiddenType::class)
         ;

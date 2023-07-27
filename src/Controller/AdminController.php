@@ -4,13 +4,16 @@ namespace App\Controller;
 
 use App\Entity\Campus;
 use App\Entity\City;
+use App\Entity\Place;
 use App\Entity\User;
 use App\Form\AdminUserType;
 use App\Form\CampusType;
 use App\Form\CityType;
+use App\Form\PlaceType;
 use App\Form\UserFilterType;
 use App\Repository\CampusRepository;
 use App\Repository\CityRepository;
+use App\Repository\PlaceRepository;
 use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -264,10 +267,79 @@ class AdminController extends AbstractController
 
     #[Route('/place/list', name: 'place_list')]
     #[IsGranted('ROLE_ADMIN')]
-    public function listPlace(): Response
+    public function listPlace(PlaceRepository $placeRepository): Response
     {
-        return $this->render('admin/place/place_list.html.twig');
+        $places = $placeRepository->findAll();
+
+        return $this->render('admin/place/list.html.twig', [
+            'places' => $places,
+        ]);
     }
 
+    #[Route('/place/add', name: 'place_add')]
+    #[IsGranted('ROLE_ADMIN')]
+    public function add(Request $request, EntityManagerInterface $entityManager): Response
+    {
+        $place = new Place();
+        $form = $this->createform(PlaceType::class, $place);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager->persist($place);
+            $entityManager->flush();
+
+            $this->addFlash('success', 'Le lieu a bien été ajouté');
+
+            return $this->redirectToRoute('admin_place_list');
+        }
+
+        return $this->render('/admin/place/add.html.twig', [
+            'place' => $place,
+            'form' => $form->createView(),
+        ]);
+    }
+
+    #[Route('/place/edit/{id}', name: 'place_edit')]
+    #[IsGranted('ROLE_ADMIN')]
+    public function editPlace(Place $place, Request $request): Response
+    {
+        $form = $this->createForm(PlaceType::class, $place);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $this->entityManager->flush();
+
+            $this->addFlash('success', 'Place updated successfully.');
+
+            return $this->redirectToRoute('admin_place_list');
+        }
+
+        return $this->render('admin/place/edit.html.twig', [
+            'place' => $place,
+            'form' => $form->createView(),
+        ]);
+    }
+
+    #[Route('/place/delete/{id}', name: 'place_delete')]
+    #[IsGranted('ROLE_ADMIN')]
+    public function deletePlace(Place $place): Response
+    {
+        return $this->render('admin/place/delete.html.twig', [
+            'place' => $place
+        ]);
+    }
+
+    #[Route('/place/confirm-delete/{id}', name: 'place_confirm_delete', methods: ['POST'])]
+    #[IsGranted('ROLE_ADMIN')]
+    public function confirmDeletePlace(Request $request, Place $place): Response
+    {
+        if ($this->isCsrfTokenValid('delete'.$place->getId(), $request->request->get('_token'))) {
+            $this->entityManager->remove($place);
+            $this->entityManager->flush();
+            $this->addFlash('success', 'Place deleted successfully.');
+        }
+
+        return $this->redirectToRoute('admin_place_list');
+    }
 
 }

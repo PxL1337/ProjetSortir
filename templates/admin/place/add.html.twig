@@ -1,0 +1,27 @@
+{% extends 'admin/dashboard.html.twig' %}
+
+{% block title %}New Place{% endblock %}
+
+{% block body %}
+    <h1>Create new Place</h1>
+
+    {{ form_start(form) }}
+    {{ form_widget(form) }}
+
+    <div id="suggestions"></div>
+
+    <button type="submit" class="btn btn-success">
+        Save
+    </button>
+    {{ form_end(form) }}
+
+    <a href="{{ path('place_list') }}" class="btn btn-danger">
+        Cancel
+    </a>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('js/placeDatasOSMNominatimAPI.js') }}"></script>
+    <script src="{{ asset('js/test.js') }}"></script>
+{% endblock %}
