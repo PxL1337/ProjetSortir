@@ -15,4 +15,12 @@ class MainController extends AbstractController
             'controller_name' => 'MainController',
         ]);
     }
+
+    #[Route('/Snake', name: 'app_snake')]
+    public function snake(): Response
+    {
+        return $this->render('main/snake.html.twig', [
+            'controller_name' => 'MainController',
+        ]);
+    }
 }
