@@ -405,3 +405,10 @@ input:not([type="submit"]):not([value=""]) {
     opacity: 1;
     display: block;
 }
+
+/* Map for place details */
+
+#mapId {
+    height: 400px;
+    width: 50%;
+}
