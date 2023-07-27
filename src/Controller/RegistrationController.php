@@ -33,7 +33,7 @@ class RegistrationController extends AbstractController
         // Assign the default role to the user
         $user->setRole($defaultRole);
 
-        $user->setActive(false);
+        $user->setActive(true);
 
         // Create and handle the form
         $form = $this->createForm(RegistrationFormType::class, $user);

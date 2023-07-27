@@ -7,18 +7,19 @@
         document.body.removeChild(loader);
     })
 })*/
-const preloader = document.querySelector("[data-preload]");
-window.addEventListener("load", function () {
-    preloader.classList.add("loaded");
-    document.body.classList.add("loaded");
-});
-
-/* NAV - START */
-let current = 0;
-for (let i = 0; i < document.links.length; i++) {
-    if (document.links[i].href === document.URL) {
-        current = i;
+(function() {
+    const preloader = document.querySelector("[data-preload]");
+    window.addEventListener("load", function () {
+        preloader.classList.add("loaded");
+        document.body.classList.add("loaded");
+    });
+    /* NAV - START */
+    let current = 0;
+    for (let i = 0; i < document.links.length; i++) {
+        if (document.links[i].href === document.URL) {
+            current = i;
+        }
     }
-}
-document.links[current].className = 'current';
-/* NAV - END */
+    document.links[current].className = 'current';
+    /* NAV - END */
+})();

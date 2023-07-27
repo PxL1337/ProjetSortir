@@ -18,7 +18,7 @@ class PlaceType extends AbstractType
             ->add('city', EntityType::class, [
                 'class' => City::class,
                 'choice_label' => 'nom',
-                'placeholder' => 'Choisir une ville',
+                'placeholder' => '',
             ])
             ->add('nom')
             ->add('rue')

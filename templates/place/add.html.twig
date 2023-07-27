@@ -8,19 +8,20 @@
     {{ form_start(form) }}
     {{ form_widget(form) }}
 
+    <div id="suggestions"></div>
+
     <button type="submit" class="btn btn-success">
         Save
     </button>
     {{ form_end(form) }}
 
-    <a href="{{ path('outing_create') }}" class="btn btn-danger">
+    <a href="{{ path('place_list') }}" class="btn btn-danger">
         Cancel
     </a>
-
-    <div id="suggestions" style="position: absolute; background: white; z-index: 99;"></div>
 {% endblock %}
 
 {% block javascripts %}
     {{ parent() }}
-    <script src="{{ asset('JS/place_form.js') }}"></script>
+    <script src="{{ asset('js/place_form.js') }}"></script>
+    <script src="{{ asset('js/test.js') }}"></script>
 {% endblock %}
