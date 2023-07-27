@@ -236,6 +236,7 @@ input[type="submit"] {
     color: var(--gray-peach);
     font-family: 'Edu SA Beginner', cursive, Serif;
     font-size: 0.8em;
+    transition: color 0.4s linear;
 
     /*color: var(--white);*/
     /*background: var(--Light-Sea-Green);*/
@@ -247,7 +248,14 @@ input[type="submit"]:hover {
 
     color: var(--Light-Sea-Green);
     background: var(--white);
+
 }
+
+
+
+
+
+
 
 ::placeholder {
     color: grey;
@@ -273,7 +281,7 @@ input[type="submit"]:hover {
     color: var(--gray-peach)
 }
 
-label {
+label:not([class="input-file"]) {
     display: block;
     margin-top: 1em;
 }
@@ -282,12 +290,14 @@ label:first-of-type {
     margin-top: 0;
 }
 
-input, textarea {
+input, textarea, select {
     padding: 0.3em;
     border: solid 2px var(--Light-Sea-Green);
     width: 100%;
     border-radius: 10px;
 }
+
+
 
 /* Each input that are not of type SUBMIT and HAVE a value */
 input:not([type="submit"]):not([value=""]) {

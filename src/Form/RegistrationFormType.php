@@ -46,6 +46,8 @@ class RegistrationFormType extends AbstractType
                 ],
             ])
             ->add('photoFile', FileType::class, [
+
+                'label_attr'=>['class'=>'input-file'],
                 'mapped' => false,
                 'required' => false,
                 'constraints' => [

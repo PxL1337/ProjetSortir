@@ -15,7 +15,10 @@ nav li {
 
 nav li a:hover {
     text-decoration: underline;
+    opacity: 1;
+
 }
+
 
 nav li a.current {
     color: var(--gray-peach);

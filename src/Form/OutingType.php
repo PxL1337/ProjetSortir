@@ -50,13 +50,17 @@ class OutingType extends AbstractType
             ->add('nom', TextType::class)
             ->add('dateHeureDebut', DateTimeType::class, [
                 'input' => 'datetime',
+                'html5'=>true,
+                'widget'=> 'single_text'
             ])
             ->add('duree', TimeType::class, [
-
+                'html5'=>true,
+                'widget'=> 'single_text',
                 'with_seconds' => false,
             ])
             ->add('dateLimiteInscription', DateTimeType::class, [
-                'input' => 'datetime',
+                'html5'=>true,
+                'widget'=> 'single_text'
             ])
             ->add('nbInscriptionMax', IntegerType::class)
             ->add(
@@ -68,16 +72,7 @@ class OutingType extends AbstractType
                     'maxlength' => '150',
                     'overflow' => 'hidden'))
             )
-            ->add('status', ChoiceType::class, [
-                'choices' => [
-                    'Créée' => 'Créée',
-                    'Ouverte' => 'Ouverte',
-                    'Clôturée' => 'Clôturée',
-                    'Activité en cours' => 'Activité en cours',
-                    'Passée' => 'Passée',
-                    'Annulée' => 'Annulée',
-                ],
-            ])
+
             /*
              ->add('Organizer')
              ->add('attendees')*/
@@ -86,6 +81,8 @@ class OutingType extends AbstractType
                 'choices' => $campusList,
                 'choice_label' => 'nom',
                 'placeholder' => 'Choisir un campus',
+
+
             ])/*
             ->add('place')
             ->add('rue')
