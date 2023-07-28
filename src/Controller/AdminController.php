@@ -10,7 +10,9 @@ use App\Form\AdminUserType;
 use App\Form\CampusType;
 use App\Form\CityType;
 use App\Form\PlaceType;
+use App\Form\SearchType;
 use App\Form\UserFilterType;
+use App\Model\SearchData;
 use App\Repository\CampusRepository;
 use App\Repository\CityRepository;
 use App\Repository\PlaceRepository;
@@ -191,14 +193,43 @@ class AdminController extends AbstractController
 
     #[Route('/city/list', name: 'city_list')]
     #[IsGranted('ROLE_ADMIN')]
-    public function listCity(CityRepository $cityRepository): Response
+    public function listCity(CityRepository $cityRepository, Request $request): Response
     {
+        $searchData = new SearchData();
+        $form = $this->createForm(SearchType::class, $searchData);
+
+
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()){
+            $searchData->page = $request ->query ->getInt('page', 1);
+            $cities = $cityRepository ->findBySearch($searchData);
+
+        }else{
+
+
         $cities = $cityRepository->findAll();
+        }
 
         return $this->render('admin/city/city_list.html.twig', [
-            'cities' => $cities,
+            'form'=>$form->createView(),
+            'cities' => $cities
+
         ]);
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     #[Route('/city/add', name: 'city_add')]
     #[IsGranted('ROLE_ADMIN')]

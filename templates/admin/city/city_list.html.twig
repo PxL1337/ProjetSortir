@@ -3,6 +3,10 @@
 {% block body %}
     <h1>List of Cities</h1>
 
+    {% include "components/_search_data.html.twig" with{
+        form: form
+    }only%}
+
     <table>
         <thead>
         <tr>

@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\City;
+use App\Model\SearchData;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -45,4 +46,20 @@ class CityRepository extends ServiceEntityRepository
 //            ->getOneOrNullResult()
 //        ;
 //    }
+
+
+
+
+    public function findBySearch(SearchData $searchData)
+    {
+        $query = $this->createQueryBuilder('r')
+            ->select('r')
+            ->where('r.codePostal LIKE :codePostal OR r.nom LIKE :nom')
+            ->setParameter('codePostal', '%' . $searchData->q . '%')
+            ->setParameter('nom', '%' . $searchData->q . '%')
+            ->getQuery();
+
+        return $query->getResult();
+    }
+
 }
