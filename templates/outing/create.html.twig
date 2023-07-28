@@ -1,19 +1,91 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Create outing | {{ parent() }}{% endblock %}
+{% block title %}Créer une sortie{% endblock %}
 
 {% block body %}
-    <div class="form-block">
-        <h2 class="form-title">Create outing</h2>
+    <h1>Créer une sortie</h1>
 
-        {{ form_errors(outingForm) }}
+    {{ form_start(outingForm) }}
+    {{ form_row(outingForm.nom) }}
+    {{ form_row(outingForm.dateHeureDebut) }}
+    {{ form_row(outingForm.duree) }}
+    {{ form_row(outingForm.dateLimiteInscription) }}
+    {{ form_row(outingForm.nbInscriptionMax) }}
+    {{ form_row(outingForm.infosSortie) }}
+    <h2>Campus</h2>
+    <p>{{ app.user.campus.nom }}</p>
 
-        {{ form_start(outingForm) }}
-        {{ form_widget(outingForm) }}
+    <h2>Lieu</h2>
+    {{ form_row(outingForm.city) }}
+    {{ form_row(outingForm.place) }}
 
-        <input type="submit" class="btn" value="Create">
-        {{ form_end(outingForm) }}
+    <h2>Rue :</h2>
+    <p id="street_display"></p>
 
-    </div>
+    <h2>Code Postal :</h2>
+    <p id="postal_code_display"></p>
 
+    <h2>Latitude :</h2>
+    <p id="latitude_display"></p>
+
+    <h2>Longitude :</h2>
+    <p id="longitude_display"></p>
+
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#placeModal">
+        Ajouter un nouveau lieu
+    </button>
+
+   {# <!-- Modal -->
+    <div class="modal fade" id="placeModal" tabindex="-1" aria-labelledby="placeModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="placeModalLabel">Nouveau lieu</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    {{ form(outingForm.newPlace) }}
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+                    <button type="submit" class="btn btn-primary">Enregistrer</button>
+                </div>
+            </div>
+        </div>
+    </div>#}
+
+    <button class="btn btn-success">Enregistrer</button>
+    {{ form_end(outingForm) }}
+
+
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+
+    <script>
+        var places = {
+            {% for place in places %}
+            '{{ place.id }}': {
+                'street': '{{ place.rue }}',
+                'postal_code': '{{ place.city.codePostal }}',
+                'latitude': '{{ place.latitude }}',
+                'longitude': '{{ place.longitude }}'
+            },
+            {% endfor %}
+        }
+
+        $('#outing_place').change(function() {
+            console.log('Le lieu a changé.');
+            var selectedPlaceId = $(this).val();
+            if (selectedPlaceId) {
+                var selectedPlace = places[selectedPlaceId];
+                $('#street_display').text(selectedPlace.street);
+                $('#postal_code_display').text(selectedPlace.postal_code);
+                $('#latitude_display').text(selectedPlace.latitude);
+                $('#longitude_display').text(selectedPlace.longitude);
+            }
+        });
+
+    </script>
 {% endblock %}

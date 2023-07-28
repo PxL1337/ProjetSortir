@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Outing;
 use App\Form\OutingType;
 use App\Repository\OutingRepository;
+use App\Repository\PlaceRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -26,14 +27,16 @@ class OutingController extends AbstractController
     }
 
     #[Route('/create', name: 'outing_create')]
-    public function create(Request $request): Response
+    public function create(Request $request, PlaceRepository $placeRepository): Response
     {
-
         $outing = new Outing();
         $outingForm = $this->createForm(OutingType::class, $outing);
 
+        $places = $placeRepository->findAll();
+
         return $this->render('outing/create.html.twig', [
-            "outingForm" => $outingForm->createView()
+            "outingForm" => $outingForm->createView(),
+            "places" => $places
         ]);
     }
 

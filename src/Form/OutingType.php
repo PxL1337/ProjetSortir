@@ -81,18 +81,26 @@ class OutingType extends AbstractType
                     'maxlength' => '150',
                     'overflow' => 'hidden'))
             )
+            ->add('city', EntityType::class, [
+                'class' => City::class,
+                'choice_label' => 'nom',
+                'placeholder' => 'Choisir une ville',
+                'mapped' => false,
+                'required' => false
+            ])
 
             /*
              ->add('Organizer')
              ->add('attendees')*/
-            ->add('campus', EntityType::class, [
+            /*->add('campus', EntityType::class, [
                 'class' => Campus::class,
                 'choices' => $campusList,
                 'choice_label' => 'nom',
                 'placeholder' => 'Choisir un campus',
 
 
-            ])/*
+            ])*/
+            /*
             ->add('place')
             ->add('rue')
             ->add('longitude', NumberType::class, [
