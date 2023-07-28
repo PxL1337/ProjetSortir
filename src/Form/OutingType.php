@@ -5,8 +5,10 @@ namespace App\Form;
 use App\Entity\Campus;
 use App\Entity\City;
 use App\Entity\Outing;
+use App\Entity\Place;
 use App\Repository\CampusRepository;
 use App\Repository\CityRepository;
+use App\Repository\PlaceRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
@@ -23,11 +25,13 @@ class OutingType extends AbstractType
 {
     public CampusRepository $campusRepository;
     public CityRepository $cityRepository;
+    public PlaceRepository $placeRepository;
 
-    public function __construct(CampusRepository $campusRepository, CityRepository $cityRepository)
+    public function __construct(CampusRepository $campusRepository, CityRepository $cityRepository,PlaceRepository $placeRepository)
     {
         $this->campusRepository = $campusRepository;
         $this->cityRepository = $cityRepository;
+        $this->placeRepository = $placeRepository;
     }
 
     public function buildForm(FormBuilderInterface $builder, array $options): void
@@ -43,6 +47,11 @@ class OutingType extends AbstractType
         $cityChoices = [];
         foreach ($cityList as $city) {
             $cityChoices[$city->getId()] = $city->getNom();
+        }
+        $placeList = $this->placeRepository->findAll();
+        $placeChoices = [];
+        foreach ($placeList as $place) {
+            $placeChoices[$place->getId()] = $place->getNom();
         }
 
 
@@ -91,13 +100,13 @@ class OutingType extends AbstractType
             ])
             ->add('lattitude', NumberType::class, [
                 'scale' => 8,
-            ])
-            ->add('city', EntityType::class, [
-                'class' => City::class,
-                'choices' => $cityList,
-                'choice_label' => 'nom',
-                'placeholder' => 'Choisir une ville',
             ])*/
+            ->add('place', EntityType::class, [
+                'class' => Place::class,
+                'choices' => $placeList,
+                'choice_label' => 'nom',
+                'placeholder' => 'Choisir un lieu',
+            ])
         ;
     }
 
