@@ -1,13 +1,53 @@
 {% extends 'admin/dashboard.html.twig' %}
 
+{% block extrastyles %}
+    <link rel="stylesheet" href="{{ asset('css/admin/userList.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+{% endblock %}
+
 {% block title %}Users list | {{ parent() }}{% endblock %}
 
 {% block body %}
-    <h1>Users list</h1>
+    <div class="userList-wrapper">
+        <h1>Users list</h1>
 
-    <button id="filter-button" class="btn btn-primary">Filter</button>
-    <button id="sort-button" class="btn btn-primary">Sort</button>
+        <form id="filter-form" class="d-none">
+            {{ form_start(filter_form) }}
+            <div class="filter-field">
+                {{ form_row(filter_form.role) }}
+                {{ form_row(filter_form.campus) }}
+            </div>
+            <div class="sort-field d-none">
+                {{ form_row(filter_form.sort) }}
+            </div>
+            {{ form_end(filter_form) }}
+        </form>
 
+        <section class="userList-nav">
+            <button id="filter-button" class="btn btn-primary">Filter</button>
+            <button id="sort-button" class="btn btn-primary">Sort</button>
+        </section>
+
+        <div class="userList-container">
+            <table class="userList-table">
+                <thead>
+                <tr>
+                    {#                    <th>Prénom</th> #}
+                    <th>Nom</th>
+                    <th>Email</th>
+                    {#                    <th>Téléphone</th> #}
+                    <th>Campus</th>
+                    <th>Rôle</th>
+                    <th>Actions</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% include 'admin/user/_list_user_table.html.twig' with {'users': users} %}
+                </tbody>
+            </table>
+
+<<<<<<< HEAD
+=======
     <form id="filter-form" class="d-none">
         {{ form_start(filter_form) }}
         <div class="filter-field">
@@ -34,6 +74,7 @@
         </table>
         <div class="table-list-container">
             {% include 'admin/user/_list_user_table.html.twig' with {'users': users} %}
+>>>>>>> 698b3a8099e3c5a406c53e14ec3ee174780c5b8e
         </div>
     </div>
 {% endblock %}
