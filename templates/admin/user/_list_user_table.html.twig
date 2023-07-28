@@ -1,0 +1,23 @@
+<table class="table">
+    <tbody>
+    {% for user in users %}
+        <tr>
+            <td>{{ user.firstname }} {{ user.lastname }}</td>
+            <td>{{ user.email }}</td>
+            <td>{{ user.campus.nom }}</td>
+            <td>{{ user.role.name }}</td>
+            <td>
+                <a href="{{ path('admin_modify_user', {'id': user.id}) }}" class="btn btn-primary">Modifier</a>
+                {% if user.role.name != 'ROLE_ADMIN' %}
+                    <a href="{{ path('admin_delete_user', {'id': user.id}) }}" class="btn btn-danger">Supprimer</a>
+                {% else %}
+                    {#<span class="btn btn-danger disabled">Supprimer</span>#}
+                {% endif %}
+            </td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+<div id="loading" class="d-none">
+    Loading...
+</div>
