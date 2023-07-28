@@ -5,37 +5,74 @@
 {% block body %}
     <h1>Créer une sortie</h1>
 
-    {{ form_start(outingForm) }}
-    {{ form_row(outingForm.nom) }}
-    {{ form_row(outingForm.dateHeureDebut) }}
-    {{ form_row(outingForm.duree) }}
-    {{ form_row(outingForm.dateLimiteInscription) }}
-    {{ form_row(outingForm.nbInscriptionMax) }}
-    {{ form_row(outingForm.infosSortie) }}
-    <h2>Campus</h2>
-    <p>{{ app.user.campus.nom }}</p>
+    {{ form_start(outingForm, {'attr': {'class': 'form-container'}}) }}
+    <div>
+        <div class="form-group">
+            {{ form_label(outingForm.nom) }}
+            {{ form_widget(outingForm.nom) }}
+        </div>
+        <div class="form-group">
+            {{ form_label(outingForm.dateHeureDebut) }}
+            {{ form_widget(outingForm.dateHeureDebut) }}
+        </div>
+        <div class="form-group">
+            {{ form_label(outingForm.duree) }}
+            {{ form_widget(outingForm.duree) }}
+        </div>
+        <div class="form-group">
+            {{ form_label(outingForm.dateLimiteInscription) }}
+            {{ form_widget(outingForm.dateLimiteInscription) }}
+        </div>
+        <div class="form-group">
+            {{ form_label(outingForm.nbInscriptionMax) }}
+            {{ form_widget(outingForm.nbInscriptionMax) }}
+        </div>
+        <div class="form-group">
+            {{ form_label(outingForm.infosSortie) }}
+            {{ form_widget(outingForm.infosSortie) }}
+        </div>
+    </div>
+    <div>
+        <div class="info-container">
+            <h3>Campus</h3>
+            <p>{{ app.user.campus.nom }}</p>
+        </div>
+        <div class="form-group">
+            {{ form_label(outingForm.city) }}
+            {{ form_widget(outingForm.city) }}
+        </div>
 
-    <h2>Lieu</h2>
-    {{ form_row(outingForm.city) }}
-    {{ form_row(outingForm.place) }}
+        <div class="place-container">
+            {{ form_label(outingForm.place) }}
+            {{ form_widget(outingForm.place) }}
+            <button type="button" class="icon-button">
+                <i class="fas fa-plus-circle"></i>
+            </button>
+        </div>
 
-    <h2>Rue :</h2>
-    <p id="street_display"></p>
 
-    <h2>Code Postal :</h2>
-    <p id="postal_code_display"></p>
+        <div class="infos-container"></div>
+            <div class="info-container">
+                <h3>Rue :</h3>
+                <p id="street_display"></p>
+            </div>
+            <div class="info-container">
+                <h3>Code Postal :</h3>
+                <p id="postal_code_display"></p>
+            </div>
+            <div class="info-container">
+                <h3>Latitude :</h3>
+                <p id="latitude_display"></p>
+            </div>
+            <div class="info-container">
+                <h3>Longitude :</h3>
+                <p id="longitude_display"></p>
+            </div>
+        </div>
+    {{ form_end(outingForm) }}
 
-    <h2>Latitude :</h2>
-    <p id="latitude_display"></p>
 
-    <h2>Longitude :</h2>
-    <p id="longitude_display"></p>
-
-    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#placeModal">
-        Ajouter un nouveau lieu
-    </button>
-
-   {# <!-- Modal -->
+    {# <!-- Modal -->
     <div class="modal fade" id="placeModal" tabindex="-1" aria-labelledby="placeModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -52,10 +89,11 @@
                 </div>
             </div>
         </div>
-    </div>#}
+    </div> #}
 
-    <button class="btn btn-success">Enregistrer</button>
-    {{ form_end(outingForm) }}
+    <div class="button-container">
+        <button class="btn btn-success">Enregistrer</button>
+    </div>
 
 
 {% endblock %}
@@ -75,7 +113,7 @@
             {% endfor %}
         }
 
-        $('#outing_place').change(function() {
+        $('#outing_place').change(function () {
             console.log('Le lieu a changé.');
             var selectedPlaceId = $(this).val();
             if (selectedPlaceId) {
