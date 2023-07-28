@@ -6,6 +6,7 @@ use App\Entity\Campus;
 use App\Entity\City;
 use App\Entity\Outing;
 use App\Entity\Place;
+use App\Form\DataTransformer\DateTimeTransformer;
 use App\Repository\CampusRepository;
 use App\Repository\CityRepository;
 use App\Repository\PlaceRepository;
@@ -116,6 +117,9 @@ class OutingType extends AbstractType
                 'placeholder' => 'Choisir un lieu',
             ])
         ;
+
+        $builder->get('duree')
+            ->addModelTransformer(new DateTimeTransformer());
     }
 
     public function configureOptions(OptionsResolver $resolver): void

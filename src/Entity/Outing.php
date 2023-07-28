@@ -210,4 +210,9 @@ class Outing
 
         return $this;
     }
+
+    public function getFormattedDuration(): string
+    {
+        return $this->duree->format('%H:%I');
+    }
 }
