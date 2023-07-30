@@ -1,0 +1,217 @@
+/*.userList-wrapper {*/
+/*    width: 80%;*/
+/*    margin: auto;*/
+/*}*/
+
+/*.userList-container {*/
+/*    box-shadow: rgba(0, 0, 0, 0.35) 0 5px 15px;*/
+/*    border-radius: 10px;*/
+/*    backdrop-filter: blur(4px);*/
+/*    padding: .5em;*/
+/*}*/
+
+/*.userList-content {*/
+/*    display: block;*/
+/*    table-layout: fixed;*/
+/*    min-height: 300px;*/
+/*    height: 55vh;*/
+/*    white-space: nowrap;*/
+/*    overflow: auto;*/
+/*    padding-right: .5em;*/
+/*}*/
+
+/*.userList-content thead {*/
+/*    position: sticky;*/
+/*    top: 0;*/
+/*    text-transform: uppercase;*/
+/*    letter-spacing: 2px;*/
+/*    padding: 1em 0;*/
+/*    background: var(--Black);*/
+/*    z-index: 10;*/
+/*}*/
+
+/*.userList-content thead th {*/
+/*    text-align: left;*/
+/*    font-size: 1.15em;*/
+/*    width: 10vw;*/
+/*}*/
+
+/*.userList-content table {*/
+/*    border-collapse: collapse;*/
+/*    width: 100%;*/
+/*    font-size: 1em;*/
+
+/*    padding: 0 0.45em 1em .15em;*/
+/*}*/
+
+/*.userList-content table tr {*/
+/*    letter-spacing: 1px;*/
+/*    font-size: .825em;*/
+/*}*/
+
+/*.userList-content table th,*/
+/*.userList-content table td {*/
+/*    width: 180px;*/
+/*    padding: .75em 0 0.75em 0.75em;*/
+/*}*/
+
+/*.userList-content table td {*/
+/*    letter-spacing: 2px;*/
+/*}*/
+
+/*.userList-content .userInfos {*/
+/*    display: inline-flex;*/
+/*    justify-content: center;*/
+/*    align-items: center;*/
+/*    flex-direction: row;*/
+/*    flex-wrap: nowrap;*/
+/*    padding: 0;*/
+/*    margin: 0;*/
+/*    gap: 25px;*/
+/*}*/
+
+/*.userList-content .userInfos span:first-of-type {*/
+/*    display: inline-flex;*/
+/*    justify-content: center;*/
+/*    align-items: start;*/
+/*    flex-direction: column;*/
+/*    flex-wrap: nowrap;*/
+/*    gap: 10px;*/
+/*}*/
+
+/*.userInfos-image-container {*/
+/*    display: inline-block;*/
+/*    position: relative;*/
+/*    overflow: hidden;*/
+/*    background: magenta;*/
+/*    border-radius: 100%;*/
+/*    width: 64px;*/
+/*    height: 64px;*/
+/*}*/
+
+/*.userInfos-image-container img {*/
+/*    width: auto;*/
+/*    height: 100%;*/
+/*}*/
+
+/*.userStatus #circleActive,*/
+/*.userStatus #circleInactive {*/
+/*    display: inline-block;*/
+/*    width: 12px;*/
+/*    height: 12px;*/
+/*    border-radius: 100%;*/
+/*    margin-right: .45em;*/
+/*}*/
+
+/*.userStatus #circleActive {*/
+/*    background: var(--Green-Flash);*/
+/*}*/
+
+/*.userStatus #circleInactive {*/
+/*    background: var(--Red-Flash);*/
+/*}*/
+
+/*@media screen and (max-width: 1200px) {*/
+/*    .userList-content thead {*/
+/*        display: none;*/
+/*    }*/
+
+/*    .userList-content table tr {*/
+/*        display: block;*/
+/*        float: left;*/
+/*    }*/
+
+/*    .userList-content table th, td {*/
+/*        display: block;*/
+/*    }*/
+/*}*/
+
+.list-wrapper {
+    width: 100%;
+    margin: auto;
+}
+
+.list-container {
+    display: flex;
+    flex-direction: row;
+    padding: .5em;
+    backdrop-filter: blur(4px);
+    box-shadow: rgba(0, 0, 0, 0.35) 0 5px 15px;
+    border-radius: 10px;
+}
+
+.flexible-list {
+    display: flex;
+    flex-direction: row;
+    min-height: 300px;
+    height: 550px;
+    overflow: auto;
+    padding-top: .5em;
+    gap: .5em .75em;
+    text-align: center;
+    width: 100%;
+    padding-bottom: 15px;
+}
+
+.list-row {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+
+    flex-shrink: 0;
+    flex-grow: 0;
+    flex-basis: 300px;
+    height: 100%;
+    font-size: .85em;
+}
+
+.list-row:nth-child(odd) {
+    background: rgba(0, 0, 0, .15);
+}
+
+.list-row:nth-child(even) {
+    background: rgba(0, 0, 0, .25);
+}
+
+.list-row section {
+    padding: 5px;
+}
+
+.list-row .user-section-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px 0;
+}
+
+.list-row .user-section-container .user-infos {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    padding: 0;
+}
+
+.list-row .user-section-container .user-icon {
+    display: inline-block;
+    position: relative;
+    overflow: hidden;
+    background: rgba(0, 0, 0, .15);
+    border: solid 1px rgba(0, 0, 0, .5);
+    border-radius: 100%;
+    width: 128px;
+    height: 128px;
+
+    margin: 0;
+    padding: 0;
+}
+
+.user-section-container .user-icon img {
+    width: auto;
+    height: 100%;
+    object-fit: contain;
+}
+
+.user-section-container .user-infos span {
+    font-size: .75em;
+    text-transform: uppercase;
+}

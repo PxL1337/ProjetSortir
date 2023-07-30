@@ -45,9 +45,21 @@ class AdminController extends AbstractController
 
     #[Route('/', name: 'dashboard')]
     #[IsGranted('ROLE_ADMIN')]
-    public function dashboard(): Response
+    public function dashboard(
+        UserRepository   $userRepository,
+        CampusRepository $campusRepository,
+        CityRepository   $cityRepository,
+        PlaceRepository  $placeRepository): Response
     {
-        return $this->render('admin/dashboard.html.twig');
+        // Toutes les données sans les filtres !
+        $users = $userRepository->findAll();
+        $campuses = $campusRepository->findAll();
+        $cities = $cityRepository->findAll();
+        $places = $placeRepository->findAll();
+
+        return $this->render('admin/dashboard.html.twig', [
+            'users' => $users, 'campuses' => $campuses, 'cities' => $cities, 'places' => $places
+        ]);
     }
 
     #[Route('/user/list', name: 'list_user')]

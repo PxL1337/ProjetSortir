@@ -6,7 +6,7 @@ html,textarea{
 
 ::-webkit-scrollbar{
     width: 0.4em;
-    height: 1em;
+    height: 0.4em;
 
 }
 
@@ -14,7 +14,6 @@ html,textarea{
     background-color: var(--Light-Sea-Green);
     border: .1em solid var(--white);
     border-radius: 100vw;
-
 }
 
 ::-webkit-scrollbar-track{

@@ -1,8 +1,99 @@
 {% extends 'base.html.twig' %}
 
+{% block extrastyles %}
+    <link rel="stylesheet" href="{{ asset('css/admin/dashboard.css') }}">
+{% endblock %}
+
 {% block navbar %}
     {% include('admin/inc/nav.html.twig') %}
 {% endblock %}
 
-{% block title %}Admin Panel{% endblock %}
+{% block title %} {{ parent() }} Admin Panel{% endblock %}
 
+{% block body %}
+    <div class="dashboard-wrapper">
+        <div class="dashboard-container">
+
+            <div class="dashboard-nav">
+                <ul>
+                    <li>
+                        <button>All</button>
+                    </li>
+                    <li>
+                        <button>Users</button>
+                    </li>
+                    <li>
+                        <button>Cities</button>
+                    </li>
+                    <li>
+                        <button>Campus</button>
+                    </li>
+                    <li>
+                        <button>Places</button>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="dashboard-main">
+                <div class="content-by-tag">
+                    <section class="content-title">Users</section>
+                    <div class="user-list">
+                        {% for user in users %}
+                            <div class="user-infos-wrapper">
+                                <section class="user-status">
+                                    {% if user.active == true %}
+                                        <span class="user-active">
+                                            Active
+                                        </span>
+                                    {% else %}
+                                        <span class="user-inactive">
+                                            Inactive
+                                        </span>
+                                    {% endif %}
+                                </section>
+
+                                <div class="user-infos-container">
+                                    <section class="user-icon">
+                                        <img
+                                                src="{{ asset('uploads/profile/photos/'~ user.photo) }}"
+                                                alt="{{ user.firstName }}">
+                                        >
+                                    </section>
+
+                                    <section class="user-infos">
+                                        <span class="user-name-email">
+                                            {{ user.Firstname }}
+                                            {{ user.lastName|upper }}
+                                            <span> {{ user.email }} </span>
+                                        </span>
+                                        <span> {{ user.campus.nom }} </span>
+                                        <span> {{ user.telephone }} </span>
+                                    </section>
+                                </div>
+
+                                <div class="user-actions">
+
+                                    <a href="{{ path('admin_modify_user', {'id': user.id}) }}" class="button-edit">
+                                        Edit
+                                    </a>
+                                    {% if user.role.name != 'ROLE_ADMIN' %}
+                                        <a href="{{ path('admin_delete_user', {'id': user.id}) }}"
+                                           class="button-delete">
+                                            Delete
+                                        </a>
+                                    {% else %}
+                                        <span class="button-disabled">
+                                            Delete
+                                        </span>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+{% endblock %}

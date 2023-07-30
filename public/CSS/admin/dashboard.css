@@ -1,0 +1,234 @@
+:root {
+    --90FadingBlackGradient: linear-gradient(90deg, rgba(0, 0, 0, .35), rgba(0, 0, 0, .05));
+    --180FadingBlackGradient: linear-gradient(180deg, rgba(0, 0, 0, .35), rgba(0, 0, 0, .05));
+    --180WhiteToClearkGradient: linear-gradient(180deg, rgba(255, 255, 255, 1), rgba(255, 255, 255, .5));
+}
+
+.dashboard-wrapper {
+    background: var(--180FadingBlackGradient);
+    border-radius: 10px;
+    backdrop-filter: blur(6px);
+}
+
+.dashboard-container {
+    display: flex;
+    flex-direction: column;
+    padding: 1em;
+}
+
+.dashboard-main {
+    padding: 1em .5em;
+}
+
+.dashboard-nav {
+    background: var(--90FadingBlackGradient);
+    border-radius: 10px;
+    padding: 0 .5em;
+}
+
+.dashboard-nav ul {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    padding: 0;
+    text-align: center;
+}
+
+.dashboard-nav ul li button {
+    border: none;
+    background: none;
+    padding: 0;
+    margin: 0;
+
+    font-size: .7em;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, .3);
+    font-weight: normal;
+}
+
+.dashboard-nav ul li button:hover {
+    text-decoration: underline 2px;
+    text-underline-offset: 4px;
+    cursor: pointer;
+    font-weight: bolder;
+}
+
+.dashboard-nav ul li:first-of-type button {
+    color: rgba(255, 255, 255, 1);
+}
+
+.content-by-tag:first-of-type {
+    display: inherit;
+}
+
+.content-by-tag {
+    display: none;
+}
+
+.content-title {
+    letter-spacing: 2px;
+    text-align: center;
+    text-transform: uppercase;
+    padding: .5em;
+    margin-bottom: .5em;
+    background: var(--90FadingBlackGradient);
+    border-radius: 10px;
+}
+
+.user-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    grid-gap: 1em;
+}
+
+.user-infos-wrapper {
+    width: 100%;
+    max-width: 100%;
+    height: max-content;
+    background: var(--180FadingBlackGradient);
+    border-radius: 10px;
+    border: solid 1px rgba(255, 255, 255, 0.2);
+}
+
+.user-infos-container {
+    display: flex;
+    flex-direction: row;
+    padding: 0 .5em .5em .5em;
+    clear: both;
+}
+
+.user-icon {
+    position: relative;
+    float: left;
+
+    overflow: hidden;
+    border: solid 1px #e7e7e7;
+    width: 100px;
+    height: 100px;
+    min-inline-size: 100px;
+    border-radius: 10%;
+}
+
+.user-icon img {
+    align-self: center;
+    margin: auto;
+    width: auto;
+    height: 100%;
+}
+
+.user-status {
+    position: relative;
+    float: right;
+    padding-top: 10px;
+    padding-right: 5px;
+    font-size: .55em;
+    text-transform: uppercase;
+}
+
+.user-active,
+.user-inactive {
+    border-radius: 8px;
+    padding: .25em 1em;
+}
+
+.user-active { background: var(--Green-Flash) }
+
+.user-inactive { background: var(--Red-Flash) }
+
+.user-infos {
+    display: inline-flex;
+    flex-direction: column;
+    justify-content: start;
+    gap: 10px;
+    padding: 0 .8em;
+    font-size: .825em;
+    width: 100%;
+}
+
+.user-name-email {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: start;
+    gap: 3px 0;
+}
+
+.user-name-email span {
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-size: .75em;
+}
+
+.user-actions {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+
+    text-align: center;
+    width: 100%;
+    padding: .5em .5em .5em 0;
+}
+
+.button-edit,
+.button-delete,
+.button-disabled {
+    border-radius: 10px;
+    width: 60px;
+    padding: .5em 1em;
+    font-size: .6em;
+    border: solid 2px rgba(0, 0, 0, 0);
+    color: var(--white);
+    text-transform: uppercase;
+    font-weight: normal;
+    letter-spacing: 1px;
+}
+
+.button-edit:hover,
+.button-delete:hover {
+    cursor: pointer;
+    border: solid 2px var(--white);
+    font-weight: bolder;
+}
+
+.button-edit {
+    background: var(--Blue-Hosta);
+}
+
+.button-delete {
+    background: var(--Red-Flash);
+}
+
+.button-disabled {
+    color: rgba(255, 255, 255, 0.4);
+    background: #646464;
+    cursor: not-allowed;
+}
+
+@media screen and (max-width: 1200px) {
+    .user-list {
+        grid-template-columns: repeat(auto-fit, minmax(100%, 1fr));
+    }
+
+    .user-infos-container { flex-wrap: wrap; }
+
+    .user-infos-container,
+    .user-actions {
+        justify-content: center;
+    }
+
+    .user-icon { margin-bottom: 15px; }
+
+    .user-infos,
+    .user-name-email {
+        align-items: center;
+    }
+
+    .user-name-email span { text-align: center; }
+
+}

@@ -10,9 +10,9 @@
         <li>
             <img src="{{ asset('uploads/profile/photos/' ~ app.user.photo) }}" alt="{{ app.user.firstName }}" style="max-width:200px;">
         </li>
-        <li><strong>Prénom :</strong> {{ app.user.firstName }}</li>
-        <li><strong>Nom :</strong> {{ app.user.lastName }}</li>
-        <li><strong>Téléphone :</strong> {{ app.user.telephone }}</li>
+        <li><strong>Firstname :</strong> {{ app.user.firstName }}</li>
+        <li><strong>Name :</strong> {{ app.user.lastName }}</li>
+        <li><strong>Phone :</strong> {{ app.user.telephone }}</li>
         <li><strong>Email :</strong> {{ app.user.email }}</li>
         <li><strong>Campus :</strong> {% if app.user.campus %}{{ app.user.campus.nom }}{% else %}Aucun{% endif %}</li>
     </ul>
