@@ -8,13 +8,14 @@ use App\Repository\OutingRepository;
 use App\Repository\PlaceRepository;
 use App\Repository\StatusRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Validator\Constraints\Date;
 use Symfony\Component\Validator\Constraints\DateTime;
-
+#[IsGranted('ROLE_USER')]
 class OutingController extends AbstractController
 {
     #[Route('/', name: 'outing_list')]

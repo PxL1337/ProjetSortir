@@ -7,6 +7,7 @@ use App\Entity\Role;
 use App\Form\RegistrationFormType;
 use App\Security\AppAuthenticator;
 use Doctrine\ORM\EntityManagerInterface;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\Request;
@@ -14,7 +15,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Http\Authentication\UserAuthenticatorInterface;
-
+#[IsGranted('ROLE_ADMIN')]
 class RegistrationController extends AbstractController
 {
     #[Route('/register', name: 'app_register')]
