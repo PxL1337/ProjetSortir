@@ -229,20 +229,6 @@ class AdminController extends AbstractController
         ]);
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     #[Route('/city/add', name: 'city_add')]
     #[IsGranted('ROLE_ADMIN')]
     public function addCity(Request $request): Response
