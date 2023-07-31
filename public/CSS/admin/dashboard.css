@@ -135,9 +135,12 @@
 .user-inactive {
     border-radius: 8px;
     padding: .25em 1em;
+    font-weight: bold;
+    letter-spacing: 1px;
 }
 
-.user-active { background: var(--Green-Flash) }
+.user-active { background: #42ab27
+}
 
 .user-inactive { background: var(--Red-Flash) }
 

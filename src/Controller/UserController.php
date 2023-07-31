@@ -24,12 +24,12 @@ class UserController extends AbstractController
      * @throws NonUniqueResultException
      */
     #[Route('/profile/{username}', name: 'user_profile')]
-    public function profile(string $username, UserRepository $userRepository): Response
+    public function profile(string $usernameWithCampus, UserRepository $userRepository): Response
     {
-        $userWithCampus = $userRepository->findByUsernameWithCampus($username);
+        $usernameWithCampus = $userRepository->findByUsernameWithCampus($usernameWithCampus);
 
         return $this->render('user/profile.html.twig', [
-            'user' => $userWithCampus,
+            'user' => $usernameWithCampus,
         ]);
     }
 
