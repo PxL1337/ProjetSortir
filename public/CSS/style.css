@@ -409,7 +409,7 @@ input:not([type="submit"]):not([value=""]) {
     width: 50%;
 }
 
-
+/* Outing form */
 .form-container {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -486,3 +486,5 @@ input:not([type="submit"]):not([value=""]) {
 .info-container h3 {
     margin-right: 10px;
 }
+
+

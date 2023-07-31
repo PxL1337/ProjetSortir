@@ -19,13 +19,12 @@
     {#  Fonts  #}
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Handlee&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Handlee&family=Tektur&display=swap" rel="stylesheet">
 
     {#  Scripts  #}
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 
-    {{ encore_entry_link_tags('app') }}
 
     {% block extrastyles %}{% endblock %}
 </head>
@@ -39,8 +38,7 @@
 
     <div class="container">
         <header>
-            <h1><a href="{{ path('app_main') }}"><img src="{{ asset('img/Plan-B.gif') }}" alt="Logo">Sortir !</a></h1>
-            <h2>Pour aller ou ? 🤷</h2>
+            <h1><a href="{{ path('outing_list') }}"><div class="animated-text">Sortir.com</div></a></h1>
             {% block navbar %}
                 {% include('inc/nav.html.twig') %}
             {% endblock %}
