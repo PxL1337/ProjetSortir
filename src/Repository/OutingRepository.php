@@ -28,10 +28,15 @@ class OutingRepository extends ServiceEntityRepository
         $query = $this
             ->createQueryBuilder('o')
             ->addSelect('o')
+            ->orderBy('o.dateHeureDebut', 'DESC')
             ;
         if (!empty($data->campus)) {
             $query->andWhere('o.campus = :campus')
                 ->setParameter('campus', $data->campus);
+        }
+        if (!empty($data->q)){
+            $query=$query->andWhere('o.nom LIKE :q')
+                ->setParameter('q', "%{$data->q}%");
         }
         return $query->getQuery()->getResult();
     }

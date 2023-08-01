@@ -26,6 +26,7 @@
     align-items: flex-start;
     flex-direction: column;
     color: var(--gray-peach);
+    max-width: 500px;
 }
 .outing-title{
     font-size: 2em;
