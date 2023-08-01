@@ -54,15 +54,23 @@
                     <input type="submit" class="btn" value="Login">
                 </section>
 
+                {# Remember me #}
+                <div class="checkbox mb-3">
+                    <label>
+                        <input type="checkbox" name="_remember_me"> Remember me
+                    </label>
+                </div>
                 {# Forgot password - with link towards regitration page #}
-                <section class="signUp-redirection">
+                {#<section class="signUp-redirection">
                     <p>Not a member?</p>
                     <a href="{{ path('app_register') }}">Sign up</a>
-                </section>
+                </section>#}
 
 
             </form>
-            <a href="{{ path('app_forgot_password_request')}}" title="reset password">Forgot your password ?</a>
+            <section class="forgotpassword">
+                <a href="{{ path('app_forgot_password_request')}}" title="reset password">Forgot your password ?</a>
+            </section>
         </div>
     </div>
 

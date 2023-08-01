@@ -21,6 +21,10 @@ class StatusRepository extends ServiceEntityRepository
         parent::__construct($registry, Status::class);
     }
 
+    public function findStatusByLibelle(string $libelle): ?Status
+    {
+        return $this->findOneBy(['libelle' => $libelle]);
+    }
 //    /**
 //     * @return Etat[] Returns an array of Etat objects
 //     */

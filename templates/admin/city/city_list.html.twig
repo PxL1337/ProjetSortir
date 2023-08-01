@@ -1,35 +1,29 @@
-{% extends 'admin/dashboard.html.twig' %}
+<div class="city-list">
+    {% for city in cities %}
+        <div class="city-infos-wrapper">
+            <div class="city-infos-container">
+                <section>
+                    <span> {{ city.id }} </span>
+                    <span> {{ city.nom }} </span>
+                    <span> {{ city.codePostal }} </span>
+                </section>
 
-{% block body %}
-    <h1>List of Cities</h1>
+                <div class="city-item-actions">
+                    <a href="{{ path('admin_city_edit', { id: city.id }) }}" class="button-edit">
+                        Edit
+                    </a>
+                    <a href="{{ path('admin_city_delete', { id: city.id }) }}"
+                       class="button-delete">
+                        Delete
+                    </a>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+</div>
 
-    {% include "components/_search_data.html.twig" with{
-        form: form
-    }only%}
-
-    <table>
-        <thead>
-        <tr>
-            <th>ID</th>
-            <th>Name</th>
-            <th>Code Postal</th>
-            <th>Actions</th>
-        </tr>
-        </thead>
-        <tbody>
-        {% for city in cities %}
-            <tr>
-                <td>{{ city.id }}</td>
-                <td>{{ city.nom }}</td>
-                <td>{{ city.codePostal }}</td>
-                <td>
-                    <a href="{{ path('admin_city_edit', { id: city.id }) }}">Edit</a>
-                    <a href="{{ path('admin_city_delete', { id: city.id }) }}">Delete</a>
-                </td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
-
-    <a href="{{ path('admin_city_add') }}">Add a new City</a>
-{% endblock %}
+<section class="current-datatype-add">
+    <a href="{{ path('admin_city_add') }}" class="button-add">
+        Add a new City
+    </a>
+</section>

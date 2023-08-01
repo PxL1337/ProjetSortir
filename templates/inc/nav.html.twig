@@ -4,7 +4,6 @@
         {% if app.user %}
             <li><a href="{{ path('user_profile', {'username': app.user.firstname}) }}" title="Profile">Profile</a></li>
             <li><a href="{{ path('outing_create') }}" title="Create Outing">Create</a></li>
-            <li><a href="{{ path('app_snake') }}" title="Snake">Snake</a></li>
 
             {% if is_granted("ROLE_ADMIN") %}
                 <li><a href="{{ path('admin_dashboard') }}" title="Dashboard">Admin</a></li>

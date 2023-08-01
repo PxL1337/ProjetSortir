@@ -1,135 +1,64 @@
-{% extends 'admin/dashboard.html.twig' %}
+<div class="user-list">
+    {% for user in users %}
+        <div class="user-infos-wrapper">
+            <div class="user-item-actions-topRight">
+                <section>
+                    {% if user.role.name != 'ROLE_ADMIN' %}
+                        <span class="icon-delete">
+                            <a href="{{ path('admin_delete_user', {'id': user.id}) }}"
+                               title="Delete {{ user.firstname }} {{ user.lastname|upper }}">
+                            <i class="fa-solid fa-trash"></i>
+                        </a>
+                        </span>
+                    {% else %}
+                        <span class="icon-disabled">
+                            <i class="fa-solid fa-trash"></i>
+                        </span>
+                    {% endif %}
+                </section>
+            </div>
 
-{% block extrastyles %}
-    <link rel="stylesheet" href="{{ asset('css/admin/user_List.css') }}">
-{% endblock %}
+            <div class="user-infos-container">
+                <section class="user-icon">
+                    <img
+                            src="{{ asset('uploads/profile/photos/'~ user.photo) }}"
+                            alt="{{ user.firstName }}">
+                    >
+                </section>
 
-{% block title %}Users list | {{ parent() }}{% endblock %}
+                <section class="user-status">
+                    {% if user.active == true %}
+                        <span class="user-active">
+                                            Active
+                                        </span>
+                    {% else %}
+                        <span class="user-inactive">
+                                            Inactive
+                                        </span>
+                    {% endif %}
+                </section>
 
-{% block body %}
-    <h1>Users list</h1>
+                <section class="user-infos">
+                                        <span class="user-name-email">
+                                            <span>
+                                                {{ user.firstname }}
+                                                {{ user.lastname|upper }}
+                                            </span>
+                                            <span> {{ user.email }} </span>
+                                        </span>
+                    <span> {{ user.campus.nom }} </span>
+                    <span> {{ user.telephone }} </span>
+                </section>
+            </div>
 
-    {#    <section class="list-actions"> #}
-    {#        <form id="filter-form" class="d-none"> #}
-    {#            {{ form_start(filter_form) }} #}
-    {#            <div class="filter-field"> #}
-    {#                {{ form_row(filter_form.role) }} #}
-    {#                {{ form_row(filter_form.campus) }} #}
-    {#            </div> #}
-    {#            <div class="sort-field d-none"> #}
-    {#                {{ form_row(filter_form.sort) }} #}
-    {#            </div> #}
-    {#            {{ form_end(filter_form) }} #}
-    {#        </form> #}
-    {#    </section> #}
-
-    {#    <div class="userList-wrapper"> #}
-    {#        <section class="userList-nav"> #}
-    {#            <button id="filter-button" class="btn btn-primary">Filter</button> #}
-    {#            <button id="sort-button" class="btn btn-primary">Sort</button> #}
-    {#        </section> #}
-
-    {#        <div class="userList-container"> #}
-    {#            <div class="userList-content"> #}
-    {#                <table> #}
-    {#                    <thead> #}
-    {#                    <tr> #}
-    {#                        <th>Name</th> #}
-    {#                        <th>Status</th> #}
-    {#                        <th>Phone</th> #}
-    {#                        <th>Campus</th> #}
-    {#                        <th>Actions</th> #}
-    {#                    </tr> #}
-    {#                    </thead> #}
-
-    {#                    #}{# #}
-    {#                    Juste modifier l'agencement des données en mode téléphone <= 1200px: #}
-    {#                        - L'email et le nom fusionne ensemble #}
-    {#                        - Popup pour éditer ou supprimer ? trois dots #}
-    {#                    #}
-    {#                    <tbody> #}
-    {#                    {% for user in users %} #}
-    {#                        <tr> #}
-    {#                            <td> #}
-    {#                                <section class="userInfos"> #}
-    {#                                    <section class="userInfos-image-container"> #}
-    {#                                        <img #}
-    {#                                                src="{{ asset('uploads/profile/photos/'~ user.photo) }}" #}
-    {#                                                alt="{{ user.firstName }}"> #}
-    {#                                    </section> #}
-    {#                                    <span> #}
-    {#                                        {{ user.firstName }} {{ user.lastName|upper }} #}
-    {#                                        <span> {{ user.email }} </span> #}
-    {#                                    </span> #}
-    {#                                </section> #}
-    {#                            </td> #}
-    {#                            <td>Salut2</td> #}
-    {#                            <td> {{ user.telephone }} </td> #}
-    {#                            <td> {{ user.campus.nom }} </td> #}
-    {#                            <td>Salut5</td> #}
-    {#                        </tr> #}
-    {#                    {% endfor %} #}
-    {#                    </tbody> #}
-    {#                </table> #}
-    {#            </div> #}
-    {#        </div> #}
-    {#    </div> #}
-
-    <div class="list-wrapper">
-        <div class="list-container">
-{#            <div class="list-header">#}
-{#                <p>User</p>#}
-{#                <p>Status</p>#}
-{#                <p>Campus</p>#}
-{#                <p>Phone</p>#}
-{#                <p>Actions</p>#}
-{#            </div>#}
-            <div class="flexible-list">
-                {% for user in users %}
-                    <div class="list-row">
-                        <section class="user-section-container">
-                            <section class="user-icon">
-                                <img
-                                        src="{{ asset('uploads/profile/photos/'~ user.photo) }}"
-                                        alt="{{ user.firstName }}">
-                                >
-                            </section>
-                            <section class="username">
-                                {{ user.Firstname }}
-                                {{ user.lastName|upper }}
-                                <span> {{ user.email }} </span>
-                            </section>
-                        </section>
-
-                        <section class="">
-                            <p>Data2</p>
-                        </section>
-
-                        <section class="">
-                            <p>Data3</p>
-                        </section>
-
-                        <section class="">
-                            <p>Data4</p>
-                        </section>
-
-                        <section class="">
-                            <p>Data5</p>
-                        </section>
-
-                    </div>
-                {% endfor %}
+            <div class="user-item-actions">
+                <section>
+                    <a href="{{ path('admin_modify_user', {'id': user.id}) }}" class="button-edit"
+                       title="Edit {{ user.firstname }} {{ user.lastname|upper }}">
+                        Edit
+                    </a>
+                </section>
             </div>
         </div>
-    </div>
-
-    {# <div id="loading" class="d-none"> #}
-    {#    Loading... #}
-    {# </div> #}
-
-{% endblock %}
-
-{% block javascripts %}
-    {{ parent() }}
-    <script src="{{ asset('JS/adminUserListLoadingTest.js') }}"></script>
-{% endblock %}
+    {% endfor %}
+</div>

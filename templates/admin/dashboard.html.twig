@@ -1,5 +1,8 @@
 {% extends 'base.html.twig' %}
 
+{% block cassecouilles %}
+{% endblock %}
+
 {% block extrastyles %}
     <link rel="stylesheet" href="{{ asset('css/admin/dashboard.css') }}">
 {% endblock %}
@@ -12,88 +15,84 @@
 
 {% block body %}
     <div class="dashboard-wrapper">
+
+        <div class="dbc-selected" hidden="hidden"></div>
+        <div class="dbc-not-selected" hidden="hidden"></div>
+
         <div class="dashboard-container">
 
             <div class="dashboard-nav">
-                <ul>
+                <ul id="dashboard-buttons">
                     <li>
-                        <button>All</button>
+                        <button title="Display all users">
+                            Users
+                        </button>
+                    </li>
+
+                    <li>
+                        <button title="Display all cities">
+                            Cities
+                        </button>
                     </li>
                     <li>
-                        <button>Users</button>
-                    </li>
-                    <li>
-                        <button>Cities</button>
-                    </li>
-                    <li>
-                        <button>Campus</button>
-                    </li>
-                    <li>
-                        <button>Places</button>
+                        <button title="Display all campuses">
+                            Campuses
+                        </button>
                     </li>
                 </ul>
             </div>
 
             <div class="dashboard-main">
-                <div class="content-by-tag">
+                <div class="dashboard-content">
                     <section class="content-title">Users</section>
-                    <div class="user-list">
-                        {% for user in users %}
-                            <div class="user-infos-wrapper">
-                                <section class="user-status">
-                                    {% if user.active == true %}
-                                        <span class="user-active">
-                                            Active
-                                        </span>
-                                    {% else %}
-                                        <span class="user-inactive">
-                                            Inactive
-                                        </span>
-                                    {% endif %}
-                                </section>
 
-                                <div class="user-infos-container">
-                                    <section class="user-icon">
-                                        <img
-                                                src="{{ asset('uploads/profile/photos/'~ user.photo) }}"
-                                                alt="{{ user.firstName }}">
-                                        >
-                                    </section>
-
-                                    <section class="user-infos">
-                                        <span class="user-name-email">
-                                            {{ user.firstname }}
-                                            {{ user.lastname|upper }}
-                                            <span> {{ user.email }} </span>
-                                        </span>
-                                        <span> {{ user.campus.nom }} </span>
-                                        <span> {{ user.telephone }} </span>
-                                    </section>
+                    <section class="list-actions">
+                        <section class="list-actions">
+                            <form id="filter-form" class="d-none">
+                                {{ form_start(filter_form) }}
+                                <div class="filter-field">
+                                    {{ form_row(filter_form.role) }}
+                                    {{ form_row(filter_form.campus) }}
                                 </div>
-
-                                <div class="user-actions">
-
-                                    <a href="{{ path('admin_modify_user', {'id': user.id}) }}" class="button-edit">
-                                        Edit
-                                    </a>
-                                    {% if user.role.name != 'ROLE_ADMIN' %}
-                                        <a href="{{ path('admin_delete_user', {'id': user.id}) }}"
-                                           class="button-delete">
-                                            Delete
-                                        </a>
-                                    {% else %}
-                                        <span class="button-disabled">
-                                            Delete
-                                        </span>
-                                    {% endif %}
+                                <div class="sort-field d-none">
+                                    {{ form_row(filter_form.sort) }}
                                 </div>
-                            </div>
-                        {% endfor %}
+                                {{ form_end(filter_form) }}
+                            </form>
+                        </section>
+
+                        <section class="list-actions-section">
+                            <button id="filter-button" class="list-actions-button">
+                                Filter
+                            </button>
+                            <button id="sort-button" class="list-actions-button">
+                                Sort
+                            </button>
+                        </section>
+
+                    </section>
+
+                    <div id="dashboard-contents-parent">
+                        <section class="section">
+                            {% include 'admin/user/list_user.html.twig' %}
+                        </section>
+
+                        <section class="section">
+                            {% include 'admin/city/city_list.html.twig' %}
+                        </section>
+
+                        <section class="section">
+                            {% include 'admin/campus/index.html.twig' %}
+                        </section>
                     </div>
                 </div>
             </div>
-
         </div>
     </div>
 
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('JS/adminUserListHandler.js') }}"></script>
 {% endblock %}
