@@ -4,16 +4,32 @@
 {% block title %}{{ parent() }}{% endblock %}
 
 {% block body %}
-    <section>
-        {% for outing in outings %}
-            <article>
-                <h3>{{ outing.nom }}</h3>
-                <div>Date et heure de début : le {{ outing.dateHeureDebut | date('d/m/y') }} à {{ outing.dateHeureDebut | date('H:i') }}</div>
-                <div>Limite d'inscription : {{ outing.nbInscriptionMax }}</div>
-                <div>Durée : {{ outing.formattedDuration }}</div>
-                <div>Lieu : {{ outing.place.nom }}</div>
-                <div>Campus : {{ outing.campus.nom }}</div>
-            </article>
-        {% endfor %}
-    </section>
+
+    <div class="filter-outings">
+        <h3 class="filters-title" >Filters</h3>
+        {{ form_start(form) }}
+        {{ form_widget(form) }}
+        <input type="submit"value="Filter">
+        {{ form_end(form) }}
+    </div>
+
+    <div class="outing-container">
+
+        <section class="outings-list">
+            {% for outing in outings %}
+                <article class="outing-card">
+                    <h3 class="outing-title">{{ outing.nom }}</h3>
+                    <div class="outing-text">
+                        <div>Date et heure de début : le {{ outing.dateHeureDebut | date('d/m/y') }} à {{ outing.dateHeureDebut | date('H:i') }}</div>
+                        <div>Limite d'inscription : {{ outing.nbInscriptionMax }}</div>
+                        <div>Durée : {{ outing.formattedDuration }}</div>
+                        <div>Lieu : {{ outing.place.nom }}</div>
+                        <div>Campus : {{ outing.campus.nom }}</div>
+                    </div>
+
+                </article>
+            {% endfor %}
+        </section>
+    </div>
+
 {% endblock %}

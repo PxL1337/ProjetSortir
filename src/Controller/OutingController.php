@@ -2,7 +2,9 @@
 
 namespace App\Controller;
 
+use App\Data\SearchData;
 use App\Entity\Outing;
+use App\Form\OutingsFilterType;
 use App\Form\OutingType;
 use App\Repository\OutingRepository;
 use App\Repository\PlaceRepository;
@@ -19,13 +21,25 @@ use Symfony\Component\Validator\Constraints\DateTime;
 class OutingController extends AbstractController
 {
     #[Route('/', name: 'outing_list')]
-    public function list(OutingRepository $sortieRepository): Response
+    public function list(OutingRepository $sortieRepository, Request $request): Response
     {
 
-        $outings = $sortieRepository->findBy([],[ 'dateHeureDebut' => 'DESC']);
+        $data = new SearchData();
+
+        $form = $this->createForm(OutingsFilterType::class, $data);
+        $form->handleRequest($request);
+        if($form->isSubmitted() && $form->isValid()){
+
+            $outings = $sortieRepository->findWithFilters($data);
+
+        }else{
+
+            $outings = $sortieRepository->findBy([],[ 'dateHeureDebut' => 'DESC']);
+        }
 
         return $this->render('outing/outing.html.twig', [
-            "outings" => $outings
+            "outings" => $outings,
+            'form'=> $form->createView()
         ]);
     }
 
