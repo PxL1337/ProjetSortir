@@ -47,6 +47,7 @@
     text-transform: uppercase;
     color: rgba(255, 255, 255, .3);
     font-weight: normal;
+    box-sizing: content-box
 }
 
 .dashboard-nav ul li button:hover {
@@ -56,8 +57,9 @@
     font-weight: bolder;
 }
 
-.dashboard-nav ul li:first-of-type button {
+.dashboard-nav ul .dbc-selected button {
     color: rgba(255, 255, 255, 1);
+    font-weight: bolder;
 }
 
 .content-by-tag:first-of-type {
@@ -90,7 +92,7 @@
 .user-infos-wrapper {
     width: 100%;
     max-width: 100%;
-    height: max-content;
+    height: 100%;
     background: var(--180FadingBlackGradient);
     border-radius: 10px;
     border: solid 1px rgba(255, 255, 255, 0.2);

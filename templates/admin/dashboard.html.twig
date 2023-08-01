@@ -15,11 +15,8 @@
         <div class="dashboard-container">
 
             <div class="dashboard-nav">
-                <ul>
-                    <li>
-                        <button>All</button>
-                    </li>
-                    <li>
+                <ul id="dashboard-buttons">
+                    <li class="dbc-selected">
                         <button>Users</button>
                     </li>
                     <li>
@@ -37,6 +34,26 @@
             <div class="dashboard-main">
                 <div class="content-by-tag">
                     <section class="content-title">Users</section>
+
+                    <section class="list-actions">
+                        <section class="list-actions">
+                            <form id="filter-form" class="d-none">
+                                {{ form_start(filter_form) }}
+                                <div class="filter-field">
+                                    {{ form_row(filter_form.role) }}
+                                    {{ form_row(filter_form.campus) }}
+                                </div>
+                                <div class="sort-field d-none">
+                                    {{ form_row(filter_form.sort) }}
+                                </div>
+                                {{ form_end(filter_form) }}
+                            </form>
+                        </section>
+
+                        <button id="filter-button" class="btn btn-primary">Filter</button>
+                        <button id="sort-button" class="btn btn-primary">Sort</button>
+                    </section>
+
                     <div class="user-list">
                         {% for user in users %}
                             <div class="user-infos-wrapper">
@@ -62,8 +79,10 @@
 
                                     <section class="user-infos">
                                         <span class="user-name-email">
-                                            {{ user.firstname }}
-                                            {{ user.lastname|upper }}
+                                            <span>
+                                                {{ user.firstname }}
+                                                {{ user.lastname|upper }}
+                                            </span>
                                             <span> {{ user.email }} </span>
                                         </span>
                                         <span> {{ user.campus.nom }} </span>
@@ -96,4 +115,9 @@
         </div>
     </div>
 
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('JS/adminUserListHandler.js') }}"></script>
 {% endblock %}
