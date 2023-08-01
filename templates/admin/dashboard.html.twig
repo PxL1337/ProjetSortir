@@ -17,22 +17,25 @@
             <div class="dashboard-nav">
                 <ul id="dashboard-buttons">
                     <li class="dbc-selected">
-                        <button>Users</button>
+                        <button title="Display all cities">
+                            Users
+                        </button>
                     </li>
                     <li>
-                        <button>Cities</button>
+                        <button title="Display all cities">
+                            Cities
+                        </button>
                     </li>
                     <li>
-                        <button>Campus</button>
-                    </li>
-                    <li>
-                        <button>Places</button>
+                        <button title="Display all campuses">
+                            Campuses
+                        </button>
                     </li>
                 </ul>
             </div>
 
             <div class="dashboard-main">
-                <div class="content-by-tag">
+                <div class="dashboard-content">
                     <section class="content-title">Users</section>
 
                     <section class="list-actions">
@@ -50,68 +53,32 @@
                             </form>
                         </section>
 
-                        <button id="filter-button" class="btn btn-primary">Filter</button>
-                        <button id="sort-button" class="btn btn-primary">Sort</button>
+                        <section class="list-actions-section">
+                            <button id="filter-button" class="list-actions-button">
+                                Filter
+                            </button>
+                            <button id="sort-button" class="list-actions-button">
+                                Sort
+                            </button>
+                        </section>
+
                     </section>
 
-                    <div class="user-list">
-                        {% for user in users %}
-                            <div class="user-infos-wrapper">
-                                <section class="user-status">
-                                    {% if user.active == true %}
-                                        <span class="user-active">
-                                            Active
-                                        </span>
-                                    {% else %}
-                                        <span class="user-inactive">
-                                            Inactive
-                                        </span>
-                                    {% endif %}
-                                </section>
+                    <div id="dashboard-contents-parent">
+                        <section class="section">
+                            {% include 'admin/user/list_user.html.twig' %}
+                        </section>
 
-                                <div class="user-infos-container">
-                                    <section class="user-icon">
-                                        <img
-                                                src="{{ asset('uploads/profile/photos/'~ user.photo) }}"
-                                                alt="{{ user.firstName }}">
-                                        >
-                                    </section>
+                        <section class="section">
+                            {% include 'admin/city/city_list.html.twig' %}
+                        </section>
 
-                                    <section class="user-infos">
-                                        <span class="user-name-email">
-                                            <span>
-                                                {{ user.firstname }}
-                                                {{ user.lastname|upper }}
-                                            </span>
-                                            <span> {{ user.email }} </span>
-                                        </span>
-                                        <span> {{ user.campus.nom }} </span>
-                                        <span> {{ user.telephone }} </span>
-                                    </section>
-                                </div>
-
-                                <div class="user-actions">
-
-                                    <a href="{{ path('admin_modify_user', {'id': user.id}) }}" class="button-edit">
-                                        Edit
-                                    </a>
-                                    {% if user.role.name != 'ROLE_ADMIN' %}
-                                        <a href="{{ path('admin_delete_user', {'id': user.id}) }}"
-                                           class="button-delete">
-                                            Delete
-                                        </a>
-                                    {% else %}
-                                        <span class="button-disabled">
-                                            Delete
-                                        </span>
-                                    {% endif %}
-                                </div>
-                            </div>
-                        {% endfor %}
+                        <section class="section">
+                            {% include 'admin/campus/index.html.twig' %}
+                        </section>
                     </div>
                 </div>
             </div>
-
         </div>
     </div>
 

@@ -1,7 +1,7 @@
 :root {
     --90FadingBlackGradient: linear-gradient(90deg, rgba(0, 0, 0, .35), rgba(0, 0, 0, .05));
     --180FadingBlackGradient: linear-gradient(180deg, rgba(0, 0, 0, .35), rgba(0, 0, 0, .05));
-    --180WhiteToClearkGradient: linear-gradient(180deg, rgba(255, 255, 255, 1), rgba(255, 255, 255, .5));
+    --180WhiteToClearkGradient: linear-gradient(180deg, rgba(255, 255, 255, .75), rgba(255, 255, 255, 0));
 }
 
 .dashboard-wrapper {
@@ -28,12 +28,13 @@
 
 .dashboard-nav ul {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
     justify-content: center;
     align-items: center;
     width: 100%;
     padding: 0;
     text-align: center;
+    gap: 15px 0;
 }
 
 .dashboard-nav ul li button {
@@ -59,56 +60,92 @@
 
 .dashboard-nav ul .dbc-selected button {
     color: rgba(255, 255, 255, 1);
-    font-weight: bolder;
-}
-
-.content-by-tag:first-of-type {
-    display: inherit;
-}
-
-.content-by-tag {
-    display: none;
 }
 
 .content-title {
     letter-spacing: 2px;
     text-align: center;
     text-transform: uppercase;
-    padding: .5em;
-    margin-bottom: .5em;
+    padding: .5em .5em .25em .5em;
     background: var(--90FadingBlackGradient);
     border-radius: 10px;
 }
 
-.user-list {
+.list-actions-section {
+    display: flex;
+    align-items: start;
+    width: 100%;
+    height: min-content;
+    padding: .75em 0;
+    gap: 0 .75em;
+}
+
+.list-actions-section .list-actions-button {
+    width: 7.5em;
+    padding: .5em 0;
+}
+
+.user-list,
+.campus-list,
+.city-list {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
     justify-content: center;
     align-items: center;
     width: 100%;
     grid-gap: 1em;
+    height: 100%;
 }
 
-.user-infos-wrapper {
+.user-infos-wrapper,
+.city-infos-wrapper,
+.campus-infos-wrapper {
     width: 100%;
     max-width: 100%;
-    height: 100%;
     background: var(--180FadingBlackGradient);
     border-radius: 10px;
     border: solid 1px rgba(255, 255, 255, 0.2);
 }
 
+.city-infos-wrapper {
+    height: 100%;
+}
+
 .user-infos-container {
+    display: flex;
+    flex-direction: column;
+    padding: 0.5em 0;
+    clear: both;
+    align-items: center;
+    gap: 1em;
+}
+
+
+.city-infos-container,
+.campus-infos-container {
     display: flex;
     flex-direction: row;
     padding: 0 .5em .5em .5em;
     clear: both;
 }
 
-.user-icon {
-    position: relative;
-    float: left;
+.city-infos-container,
+.campus-infos-container {
+    align-items: center;
+    padding: 0.5em;
+    height: 2em;
+}
 
+.city-infos-container section span,
+.campus-infos-container span {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    padding: .5em .5em .5em .75em;
+}
+
+.user-icon {
     overflow: hidden;
     border: solid 1px #e7e7e7;
     width: 100px;
@@ -118,40 +155,42 @@
 }
 
 .user-icon img {
-    align-self: center;
     margin: auto;
     width: auto;
     height: 100%;
 }
 
 .user-status {
-    position: relative;
-    float: right;
-    padding-top: 10px;
-    padding-right: 5px;
     font-size: .55em;
     text-transform: uppercase;
+    width: 100px;
 }
 
 .user-active,
 .user-inactive {
     border-radius: 8px;
-    padding: .25em 1em;
+    padding: .5em;
     font-weight: bold;
     letter-spacing: 1px;
+    display: block;
+    text-align: center;
 }
 
-.user-active { background: #42ab27
+.user-active {
+    background: var(--180FadingBlackGradient);
+    border: solid 2px #42ab27
 }
 
-.user-inactive { background: var(--Red-Flash) }
+.user-inactive {
+    background: var(--180FadingBlackGradient);
+    border: solid 2px var(--Red-Flash)
+}
 
 .user-infos {
     display: inline-flex;
     flex-direction: column;
-    justify-content: start;
-    gap: 10px;
-    padding: 0 .8em;
+    align-items: center;
+    gap: 1em;
     font-size: .825em;
     width: 100%;
 }
@@ -159,29 +198,57 @@
 .user-name-email {
     display: inline-flex;
     flex-direction: column;
-    align-items: start;
+    align-items: center;
     gap: 3px 0;
 }
 
 .user-name-email span {
     text-transform: uppercase;
     letter-spacing: 2px;
-    font-size: .75em;
 }
 
-.user-actions {
-    display: inline-flex;
+.user-name-email span:last-child {
+    font-size: .5em;
+}
+
+.user-item-actions,
+.city-item-actions,
+.campus-item-actions {
+    display: flex;
     justify-content: center;
     align-items: center;
     gap: 20px;
 
-    text-align: center;
     width: 100%;
-    padding: .5em .5em .5em 0;
 }
 
+.user-item-actions section,
+.city-item-actions section,
+.campus-item-actions section {
+    display: flex;
+    width: 100%;
+    padding: .5em;
+    gap: 1em;
+    justify-content: center;
+}
+
+.user-item-actions section a {
+    width: 15em;
+}
+
+.city-item-actions,
+.campus-item-actions {
+    justify-content: end;
+}
+
+.city-infos-container section {
+    display: flex;
+}
+
+.list-actions-button,
 .button-edit,
 .button-delete,
+.button-add,
 .button-disabled {
     border-radius: 10px;
     width: 60px;
@@ -192,17 +259,22 @@
     text-transform: uppercase;
     font-weight: normal;
     letter-spacing: 1px;
+    text-align: center;
 }
 
+.list-actions-button:hover,
 .button-edit:hover,
+.button-add:hover,
 .button-delete:hover {
     cursor: pointer;
     border: solid 2px var(--white);
     font-weight: bolder;
 }
 
-.button-edit {
-    background: var(--Blue-Hosta);
+.list-actions-button,
+.button-edit,
+.button-add {
+    background: var(--Dusty-Blue);
 }
 
 .button-delete {
@@ -215,19 +287,28 @@
     cursor: not-allowed;
 }
 
+.current-datatype-add {
+    margin: .65em 0;
+    padding: .25em 0;
+    width: 100%;
+}
+
 @media screen and (max-width: 1200px) {
-    .user-list {
+    .user-list,
+    .city-list,
+    .campus-list {
         grid-template-columns: repeat(auto-fit, minmax(100%, 1fr));
     }
 
-    .user-infos-container { flex-wrap: wrap; }
+    .user-infos-container {
+        flex-wrap: wrap;
+    }
 
-    .user-infos-container,
-    .user-actions {
+    .user-infos-container {
         justify-content: center;
     }
 
-    .user-icon { margin-bottom: 15px; }
+    /*.user-icon { margin-bottom: 15px; }*/
 
     .user-infos,
     .user-name-email {
@@ -236,4 +317,7 @@
 
     .user-name-email span { text-align: center; }
 
+    .list-actions-button, .button-edit, .button-delete, .button-add, .button-disabled {
+        flex: 1;
+    }
 }

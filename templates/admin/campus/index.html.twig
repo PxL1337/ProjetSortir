@@ -1,19 +1,25 @@
-{% extends 'admin/dashboard.html.twig' %}
+<div class="campus-list">
+    {% for campus in campuses %}
+<div class="campus-infos-wrapper">
+    <div class="campus-infos-container">
+        <span>{{ campus.nom }} {# ou le champ approprié de votre entité Campus #}</span>
 
-{% block title %}Campus List{% endblock %}
+        <div class="campus-item-actions">
+            <a href="{{ path('admin_campus_edit', {'id': campus.id}) }}" class="button-edit">
+                Edit
+            </a>
+            <a href="{{ path('admin_campus_delete', {'id': campus.id}) }}"
+               class="button-delete">
+                Delete
+            </a>
+        </div>
+    </div>
+</div>
+    {% endfor %}
+</div>
 
-{% block body %}
-    <h1>Campus List</h1>
-
-    <a href="{{ path('admin_campus_new') }}">Add New Campus</a>
-
-    <ul>
-        {% for campus in campuses %}
-            <li>
-                {{ campus.nom }} {# ou le champ approprié de votre entité Campus #}
-                <a href="{{ path('admin_campus_edit', {'id': campus.id}) }}">edit</a>
-                <a href="{{ path('admin_campus_delete', {'id': campus.id}) }}">delete</a>
-            </li>
-        {% endfor %}
-    </ul>
-{% endblock %}
+<section class="current-datatype-add">
+    <a href="{{ path('admin_campus_new') }}" class="button-add">
+        Add New Campus
+    </a>
+</section>
