@@ -1,5 +1,8 @@
 {% extends 'base.html.twig' %}
 
+{% block cassecouilles %}
+{% endblock %}
+
 {% block extrastyles %}
     <link rel="stylesheet" href="{{ asset('css/admin/dashboard.css') }}">
 {% endblock %}
@@ -12,15 +15,20 @@
 
 {% block body %}
     <div class="dashboard-wrapper">
+
+        <div class="dbc-selected" hidden="hidden"></div>
+        <div class="dbc-not-selected" hidden="hidden"></div>
+
         <div class="dashboard-container">
 
             <div class="dashboard-nav">
                 <ul id="dashboard-buttons">
-                    <li class="dbc-selected">
-                        <button title="Display all cities">
+                    <li>
+                        <button title="Display all users">
                             Users
                         </button>
                     </li>
+
                     <li>
                         <button title="Display all cities">
                             Cities

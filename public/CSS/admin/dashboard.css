@@ -58,8 +58,9 @@
     font-weight: bolder;
 }
 
-.dashboard-nav ul .dbc-selected button {
+.dashboard-nav ul li.dbc-selected button {
     color: rgba(255, 255, 255, 1);
+    font-weight: bolder;
 }
 
 .content-title {
@@ -95,6 +96,10 @@
     width: 100%;
     grid-gap: 1em;
     height: 100%;
+}
+
+.user-list {
+    grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
 }
 
 .user-infos-wrapper,
@@ -147,11 +152,12 @@
 
 .user-icon {
     overflow: hidden;
-    border: solid 1px #e7e7e7;
+    border: solid .125em white;
     width: 100px;
     height: 100px;
     min-inline-size: 100px;
     border-radius: 10%;
+    box-shadow: 0 .35em 0.65em var(--Black);
 }
 
 .user-icon img {
@@ -193,6 +199,16 @@
     gap: 1em;
     font-size: .825em;
     width: 100%;
+}
+
+.user-item-actions-topRight {
+    position: relative;
+}
+
+.user-item-actions-topRight section {
+    position: absolute;
+    top: 0.313em;
+    right: 0.625em;
 }
 
 .user-name-email {
@@ -282,8 +298,8 @@
 }
 
 .button-disabled {
-    color: rgba(255, 255, 255, 0.4);
     background: #646464;
+    color: rgba(255, 255, 255, 0.4);
     cursor: not-allowed;
 }
 
@@ -291,6 +307,20 @@
     margin: .65em 0;
     padding: .25em 0;
     width: 100%;
+}
+
+.icon-delete i,
+.icon-disabled i {
+    font-size: .85em;
+}
+
+.icon-delete i {
+    color: var(--Red-Flash);
+}
+
+.icon-disabled i {
+    cursor: not-allowed;
+    color: rgba(100, 100, 100, 0.4);
 }
 
 @media screen and (max-width: 1200px) {

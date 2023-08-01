@@ -1,22 +1,24 @@
 <div class="user-list">
     {% for user in users %}
         <div class="user-infos-wrapper">
-            <div class="user-infos-container">
-                <div class="user-item-actions-topRight">
-                    <section>
-                        {% if user.role.name != 'ROLE_ADMIN' %}
+            <div class="user-item-actions-topRight">
+                <section>
+                    {% if user.role.name != 'ROLE_ADMIN' %}
+                        <span class="icon-delete">
                             <a href="{{ path('admin_delete_user', {'id': user.id}) }}"
-                               class="button-delete">
-                                Delete
-                            </a>
-                        {% else %}
-                            <span class="button-disabled">
-                        Delete
-                    </span>
-                        {% endif %}
-                    </section>
-                </div>
+                               title="Delete {{ user.firstname }} {{ user.lastname|upper }}">
+                            <i class="fa-solid fa-trash"></i>
+                        </a>
+                        </span>
+                    {% else %}
+                        <span class="icon-disabled">
+                            <i class="fa-solid fa-trash"></i>
+                        </span>
+                    {% endif %}
+                </section>
+            </div>
 
+            <div class="user-infos-container">
                 <section class="user-icon">
                     <img
                             src="{{ asset('uploads/profile/photos/'~ user.photo) }}"
@@ -51,7 +53,8 @@
 
             <div class="user-item-actions">
                 <section>
-                    <a href="{{ path('admin_modify_user', {'id': user.id}) }}" class="button-edit">
+                    <a href="{{ path('admin_modify_user', {'id': user.id}) }}" class="button-edit"
+                       title="Edit {{ user.firstname }} {{ user.lastname|upper }}">
                         Edit
                     </a>
                 </section>

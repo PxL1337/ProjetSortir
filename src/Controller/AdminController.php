@@ -242,7 +242,7 @@ class AdminController extends AbstractController
 
             $this->addFlash('success', 'City added successfully.');
 
-            return $this->redirectToRoute('admin_city_list');
+            return $this->redirectToRoute('admin_dashboard');
         }
 
         return $this->render('admin/city/city_add.html.twig', [
