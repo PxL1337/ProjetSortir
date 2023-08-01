@@ -33,15 +33,24 @@ class OutingStatusUpdater
     public function updateStatus(Outing $outing): void
     {
         $now = new \DateTime();
-        if ($outing->getStatus()->getLibelle() === 'Créée' && $outing->getDateHeureDebut() <= $now) {
+        if ($outing->getStatus()->getLibelle() === 'Créée' /*&& $outing->isPublished()*/) {
             $outing->setStatus($this->statuses['Ouverte']);
         } elseif ($outing->getStatus()->getLibelle() === 'Ouverte' && $outing->getDateLimiteInscription() <= $now) {
             $outing->setStatus($this->statuses['Clôturée']);
+        /*} elseif ($outing->getStatus()->getLibelle() === 'Ouverte' && $outing->isCancelled()) {
+            $outing->setStatus($this->statuses['Annulée']);*/
         } elseif ($outing->getStatus()->getLibelle() === 'Clôturée' && $outing->getDateHeureDebut() <= $now) {
             $outing->setStatus($this->statuses['Activité en cours']);
-        } elseif ($outing->getStatus()->getLibelle() === 'Activité en cours' && $outing->getDateHeureDebut() <= $now) {
+        } elseif ($outing->getStatus()->getLibelle() === 'Activité en cours' && $now >= $this->getOutingEndTime($outing)) {
             $outing->setStatus($this->statuses['Passée']);
         }
+    }
+
+    private function getOutingEndTime(Outing $outing): \DateTimeInterface
+    {
+        $endDateTime = clone $outing->getDateHeureDebut();
+        $endDateTime->add($outing->getDuree());
+        return $endDateTime;
     }
 
     public function updateAllOutingsStatuses(): void
