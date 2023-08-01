@@ -132,3 +132,8 @@ form .signUp-redirection {
 .signUp-redirection a:hover {
     text-decoration: underline;
 }
+
+
+.forgotpassword {
+    margin-top: 15px;
+}
