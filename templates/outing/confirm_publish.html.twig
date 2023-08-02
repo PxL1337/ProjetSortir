@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Confirmer la publication{% endblock %}
+
+{% block body %}
+    <div class="outing-publish-confirm">
+        <h1>Confirmer la publication</h1>
+
+        <p>Êtes-vous sûr de vouloir publier la sortie "{{ outing.nom }}" ?</p>
+
+        <a href="{{ path('outing_publish', {id: outing.id}) }}" class="btn btn-primary">Oui, publier</a>
+        <a href="{{ path('outing_detail', {id: outing.id}) }}" class="btn btn-secondary">Non, retourner aux détails de
+            la sortie</a>
+    </div>
+{% endblock %}

@@ -1,0 +1,47 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Détail de la sortie{% endblock %}
+
+{% block body %}
+    <div class="outing-detail">
+        <h2>{{ outing.nom }}</h2>
+        <p>Infos sur la sortie : {{ outing.infosSortie }}</p>
+        <p>Du {{ outing.dateHeureDebut | date('d/m/y H:i') }} au {{ outing.heureFin | date('d/m/y H:i') }}</p>
+
+        {% if outing.status.libelle == 'Annulée' %}
+            <p>Motif d'annulation : {{ outing.cancellationReason }}</p>
+        {% endif %}
+
+        {% if app.user not in outing.attendees %}
+            <p>Date limite d'inscription : {{ outing.dateLimiteInscription | date('d/m/y H:i') }}</p>
+        {% else %}
+            <p>Vous êtes déjà inscrit à cette sortie.</p>
+        {% endif %}
+
+        <p>Organisateur : {{ outing.Organizer.firstname }} {{ outing.Organizer.lastname }}</p>
+
+        <h3>Participants : {{ outing.attendees.count }}/{{ outing.nbInscriptionMax }}</h3>
+        <ul>
+            {% for attendee in outing.attendees %}
+                <li>{{ attendee.firstname }} {{ attendee.lastname }}</li>
+            {% endfor %}
+        </ul>
+
+        <p>Places restantes : {{ outing.getRemainingPlaces }}</p>
+
+        {# Add the buttons here #}
+        {% if app.user and outing.status.libelle == 'Ouverte' and outing.dateLimiteInscription > 'now'|date('Y-m-d H:i:s') %}
+            {% if app.user in outing.attendees %}
+                <a href="{{ path('outing_confirm_unregister', {id: outing.id}) }}" class="btn btn-warning">Se
+                    désister</a>
+            {% else %}
+                <a href="{{ path('outing_register', {id: outing.id}) }}" class="btn btn-primary">S'inscrire</a>
+            {% endif %}
+        {% endif %}
+
+        {% if app.user == outing.organizer and outing.status.libelle == 'Créée' %}
+            <a href="{{ path('outing_edit', {id: outing.id}) }}" class="btn btn-secondary">Modifier</a>
+            <a href="{{ path('outing_confirm_publish', {id: outing.id}) }}" class="btn btn-primary">Publier</a>
+        {% endif %}
+    </div>
+{% endblock %}

@@ -99,7 +99,7 @@ class AdminController extends AbstractController
 
             $this->addFlash('success', 'User updated successfully.');
 
-            return $this->redirectToRoute('admin_dashboard_users');
+            return $this->redirectToRoute('admin_dashboard_user');
         }
 
         return $this->render('admin/user/modify_user.html.twig', [

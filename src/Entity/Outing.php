@@ -9,6 +9,12 @@ use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: OutingRepository::class)]
+#[ORM\Index(columns: ["date_heure_debut"], name: "outing_date_heure_debut_idx")]
+#[ORM\Index(columns: ["date_limite_inscription"], name: "outing_date_limite_inscription_idx")]
+#[ORM\Index(columns: ["status_id"], name: "outing_status_idx")]
+#[ORM\Index(columns: ["organizer_id"], name: "outing_organizer_idx")]
+#[ORM\Index(columns: ["campus_id"], name: "outing_campus_idx")]
+#[ORM\Index(columns: ["place_id"], name: "outing_place_idx")]
 class Outing
 {
     #[ORM\Id]
@@ -35,8 +41,7 @@ class Outing
     private ?string $infosSortie = null;
 
 
-
-    #[ORM\ManyToOne(inversedBy: 'outings')]
+    #[ORM\ManyToOne(fetch: "EAGER", inversedBy: 'outings')]
     #[ORM\JoinColumn(nullable: false)]
     private ?Status $status = null;
 
@@ -47,13 +52,16 @@ class Outing
     #[ORM\ManyToMany(targetEntity: User::class, inversedBy: 'outingsPlanned')]
     private Collection $attendees;
 
-    #[ORM\ManyToOne(inversedBy: 'outings')]
+    #[ORM\ManyToOne(fetch: "EAGER", inversedBy: 'outings')]
     #[ORM\JoinColumn(nullable: false)]
     private ?Campus $campus = null;
 
-    #[ORM\ManyToOne(inversedBy: 'outings')]
+    #[ORM\ManyToOne(fetch: "EAGER", inversedBy: 'outings')]
     #[ORM\JoinColumn(nullable: false)]
     private ?Place $place = null;
+
+    #[ORM\Column(type: Types::TEXT, nullable: true)]
+    private ?string $cancellationReason = null;
 
     public function __construct()
     {
@@ -137,8 +145,6 @@ class Outing
         return $this;
     }
 
-
-
     public function getStatus(): ?Status
     {
         return $this->status;
@@ -214,5 +220,31 @@ class Outing
     public function getFormattedDuration(): string
     {
         return $this->duree->format('%H:%I');
+    }
+
+    public function getHeureFin(): ?\DateTimeInterface
+    {
+        // Clone la dateHeureDebut pour ne pas modifier l'original
+        $heureFin = clone $this->dateHeureDebut;
+        // Ajoute la durée à la dateHeureDebut pour obtenir la date et l'heure de fin
+        $heureFin->add($this->duree);
+        return $heureFin;
+    }
+
+    public function getRemainingPlaces(): int
+    {
+        return $this->nbInscriptionMax - $this->attendees->count();
+    }
+
+    public function getCancellationReason(): ?string
+    {
+        return $this->cancellationReason;
+    }
+
+    public function setCancellationReason(?string $cancellationReason): static
+    {
+        $this->cancellationReason = $cancellationReason;
+
+        return $this;
     }
 }

@@ -28,6 +28,4 @@ class SearchData
      */
     public ?DateTimeInterface $dateMax = null;
 
-
-
 }

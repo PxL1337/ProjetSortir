@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Annuler la sortie{% endblock %}
+
+{% block body %}
+    <div class="outing-cancel">
+        <h1>Annuler la sortie</h1>
+        <p>Voulez-vous vraiment annuler la sortie "{{ outing.nom }}" ? Cette action est irréversible.</p>
+        {{ form_start(form) }}
+        {{ form_row(form.cancellationReason) }}
+        <button type="submit" class="btn btn-danger">Annuler la sortie</button>
+        {{ form_end(form) }}
+    </div>
+{% endblock %}

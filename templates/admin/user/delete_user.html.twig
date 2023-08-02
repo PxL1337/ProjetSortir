@@ -9,7 +9,7 @@
 
     <form method="post" action="{{ path('admin_confirm_delete', {'id': user.id}) }}">
         <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ user.id) }}">
-        <a href="{{ path('admin_list_user') }}" class="btn btn-default">Annuler</a>
+        <a href="{{ path('admin_dashboard') }}" class="btn btn-default">Annuler</a>
         <input type="submit" value="Supprimer" class="btn btn-danger">
     </form>
 {% endblock %}

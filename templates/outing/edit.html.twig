@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Modifier la sortie{% endblock %}
+
+{% block body %}
+    <div class="outing-edit">
+        <h2>Modifier la sortie "{{ outing.nom }}"</h2>
+
+        {{ form_start(form) }}
+        {{ form_widget(form) }}
+        <button type="submit" class="btn btn-primary">Enregistrer</button>
+        {{ form_end(form) }}
+
+        <a href="{{ path('outing_detail', {id: outing.id}) }}" class="btn btn-secondary">Retour</a>
+    </div>
+{% endblock %}

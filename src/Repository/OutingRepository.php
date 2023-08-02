@@ -2,7 +2,6 @@
 
 namespace App\Repository;
 
-use App\Data\SearchData;
 use App\Entity\Outing;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
@@ -22,14 +21,30 @@ class OutingRepository extends ServiceEntityRepository
         parent::__construct($registry, Outing::class);
     }
 
+    public function findAllWithAttendees(): array
+    {
+        $qb = $this->createQueryBuilder('o');
+
+        $qb->select('o', 'att', 'org', 'sta', 'cam', 'pla')
+            ->leftJoin('o.attendees', 'att')
+            ->join('o.Organizer', 'org')
+            ->join('o.status', 'sta')
+            ->join('o.campus', 'cam')
+            ->join('o.place', 'pla')
+            ->orderBy('o.dateHeureDebut', 'DESC');
+
+        $query = $qb->getQuery();
+
+        // returns an array of Outing objects
+        return $query->getResult();
+    }
 
     public function findWithFilters(SearchData $data) {
-
         $query = $this
             ->createQueryBuilder('o')
             ->addSelect('o')
             ->orderBy('o.dateHeureDebut', 'DESC')
-            ;
+        ;
         if (!empty($data->campus)) {
             $query->andWhere('o.campus = :campus')
                 ->setParameter('campus', $data->campus);
