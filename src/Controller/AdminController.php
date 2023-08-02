@@ -47,19 +47,33 @@ class AdminController extends AbstractController
     #[Route('/dashboard', name: 'dashboard')]
     #[IsGranted('ROLE_ADMIN')]
     public function dashboard(
-        Request         $request,
-        UserRepository  $userRepository,
-        CityRepository  $cityRepository,
+        Request          $request,
+        UserRepository   $userRepository,
+        CityRepository   $cityRepository,
         CampusRepository $campusRepository,
-        RoleRepository  $roleRepository): Response
+        RoleRepository   $roleRepository): Response
     {
         $filterForm = $this->createForm(UserFilterType::class);
         $filterForm->handleRequest($request);
 
-        $cities = $cityRepository->findAll();
+        // Factorisable en getCityContent
+        $citiesSearchCityForm = $this->createForm(SearchType::class);
+        $citiesSearchCityForm->handleRequest($request);
+        $searchInput = $citiesSearchCityForm->get('input')->getData();
+
+        if ($citiesSearchCityForm->isSubmitted() && $citiesSearchCityForm->isValid()) {
+            $cities = array_values($this->getCityComponents( $cityRepository, $searchInput))[1];
+        }
+        else {
+            $cities = array_values($this->getCityComponents( $cityRepository, null))[1];
+        }
+
+        dump("Cities has been set");
+
         $campuses = $campusRepository->findAll();
         $roles = $roleRepository->findAll();
 
+        // Factorisable en getUserContent
         if ($filterForm->isSubmitted() && $filterForm->isValid()) {
             $filters = $filterForm->getData();
             $users = $userRepository->findAllWithRolesAndFilters($filters);
@@ -67,24 +81,32 @@ class AdminController extends AbstractController
             $users = $userRepository->findAllWithRoles();
         }
 
+        dump($cities);
+
         return $this->render('admin/dashboard.html.twig', [
             'users' => $users,
             'filter_form' => $filterForm->createView(),
             'cities' => $cities,
+            'search_city_form' => $citiesSearchCityForm->createView(),
             'campuses' => $campuses,
             'roles' => $roles,
         ]);
     }
 
-    #[Route('/dashboard/cities', name: 'dashboard_cities')]
-    #[IsGranted('ROLE_ADMIN')]
-    public function dashboard_getCities(CityRepository $cityRepository): Response
+    public function getCityComponents(CityRepository $cityRepository, ?string $searchInput): array
     {
-        $cities = $cityRepository->findAll();
+        $searchData = new SearchData();
+        $searchData->input = $searchInput;
 
-        return $this->render('admin/dashboard.html.twig', [
-            '$cities' => $cities,
-        ]);
+        $searchCityForm = $this->createForm(SearchType::class, $searchData);
+
+        $cities = $searchInput ?
+            $cityRepository->findBySearch($searchData) : $cityRepository->findAll();
+
+        return [
+            'searchCityForm' => $searchCityForm,
+            'cities' => $cities
+        ];
     }
 
     #[Route('/user/modify/{id}', name: 'modify_user')]
@@ -132,15 +154,6 @@ class AdminController extends AbstractController
         }
 
         return $this->redirectToRoute('admin_dashboard');
-    }
-
-
-    #[Route('/campus/list', name: 'campus_index', methods: ['GET'])]
-    public function listCampus(CampusRepository $campusRepository): Response
-    {
-        return $this->render('admin/campus/index.html.twig', [
-            'campuses' => $campusRepository->findAll(),
-        ]);
     }
 
     #[Route('/campus/add', name: 'campus_new', methods: ['GET', 'POST'])]
@@ -200,32 +213,6 @@ class AdminController extends AbstractController
         }
 
         return $this->redirectToRoute('admin_campus_index');
-    }
-
-    #[Route('/city/list', name: 'city_list')]
-    #[IsGranted('ROLE_ADMIN')]
-    public function listCity(CityRepository $cityRepository, Request $request): Response
-    {
-        $searchData = new SearchData();
-        $form = $this->createForm(SearchType::class, $searchData);
-
-
-        $form->handleRequest($request);
-        if ($form->isSubmitted() && $form->isValid()) {
-            $searchData->page = $request->query->getInt('page', 1);
-            $cities = $cityRepository->findBySearch($searchData);
-
-        } else {
-
-
-            $cities = $cityRepository->findAll();
-        }
-
-        return $this->render('admin/city/city_list.html.twig', [
-            'form' => $form->createView(),
-            'cities' => $cities
-
-        ]);
     }
 
     #[Route('/city/add', name: 'city_add')]
@@ -292,90 +279,4 @@ class AdminController extends AbstractController
 
         return $this->redirectToRoute('admin_city_list');
     }
-
-    #[Route('/place/list', name: 'place_list')]
-    #[IsGranted('ROLE_ADMIN')]
-    public function listPlace(PlaceRepository $placeRepository): Response
-    {
-        $places = $placeRepository->findAll();
-
-        return $this->render('admin/place/list.html.twig', [
-            'places' => $places,
-        ]);
-    }
-
-    #[Route('/detail/{id}', name: 'place_detail')]
-    public function detail(Place $place): Response
-    {
-        return $this->render('admin/place/detail.html.twig', [
-            'place' => $place,
-        ]);
-    }
-
-    #[Route('/place/add', name: 'place_add')]
-    #[IsGranted('ROLE_ADMIN')]
-    public function add(Request $request, EntityManagerInterface $entityManager): Response
-    {
-        $place = new Place();
-        $form = $this->createform(PlaceType::class, $place);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager->persist($place);
-            $entityManager->flush();
-
-            $this->addFlash('success', 'Le lieu a bien été ajouté');
-
-            return $this->redirectToRoute('admin_place_list');
-        }
-
-        return $this->render('/admin/place/add.html.twig', [
-            'place' => $place,
-            'form' => $form->createView(),
-        ]);
-    }
-
-    #[Route('/place/edit/{id}', name: 'place_edit')]
-    #[IsGranted('ROLE_ADMIN')]
-    public function editPlace(Place $place, Request $request): Response
-    {
-        $form = $this->createForm(PlaceType::class, $place);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $this->entityManager->flush();
-
-            $this->addFlash('success', 'Place updated successfully.');
-
-            return $this->redirectToRoute('admin_place_list');
-        }
-
-        return $this->render('admin/place/edit.html.twig', [
-            'place' => $place,
-            'form' => $form->createView(),
-        ]);
-    }
-
-    #[Route('/place/delete/{id}', name: 'place_delete')]
-    #[IsGranted('ROLE_ADMIN')]
-    public function deletePlace(Place $place): Response
-    {
-        return $this->render('admin/place/delete.html.twig', [
-            'place' => $place
-        ]);
-    }
-
-    #[Route('/place/confirm-delete/{id}', name: 'place_confirm_delete', methods: ['POST'])]
-    #[IsGranted('ROLE_ADMIN')]
-    public function confirmDeletePlace(Request $request, Place $place): Response
-    {
-        if ($this->isCsrfTokenValid('delete' . $place->getId(), $request->request->get('_token'))) {
-            $this->entityManager->remove($place);
-            $this->entityManager->flush();
-            $this->addFlash('success', 'Place deleted successfully.');
-        }
-
-        return $this->redirectToRoute('admin_place_list');
-    }
-
 }

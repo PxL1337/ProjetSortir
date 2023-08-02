@@ -8,7 +8,7 @@ use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * @extends ServiceEntityRepository<Ville>
+ * @extends ServiceEntityRepository<City>
  *
  * @method City|null find($id, $lockMode = null, $lockVersion = null)
  * @method City|null findOneBy(array $criteria, array $orderBy = null)
@@ -47,16 +47,13 @@ class CityRepository extends ServiceEntityRepository
 //        ;
 //    }
 
-
-
-
     public function findBySearch(SearchData $searchData)
     {
-        $query = $this->createQueryBuilder('r')
-            ->select('r')
-            ->where('r.codePostal LIKE :codePostal OR r.nom LIKE :nom')
-            ->setParameter('codePostal', '%' . $searchData->q . '%')
-            ->setParameter('nom', '%' . $searchData->q . '%')
+        $query = $this->createQueryBuilder('c')
+            ->select('c')
+            ->where('c.codePostal LIKE :codePostal OR c.nom LIKE :nom')
+            ->setParameter('codePostal', '%' . $searchData->input . '%')
+            ->setParameter('nom', '%' . $searchData->input . '%')
             ->getQuery();
 
         return $query->getResult();

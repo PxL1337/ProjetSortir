@@ -1,64 +1,93 @@
-<div class="user-list">
-    {% for user in users %}
-        <div class="user-infos-wrapper">
-            <div class="user-item-actions-topRight">
-                <section>
-                    {% if user.role.name != 'ROLE_ADMIN' %}
-                        <span class="icon-delete">
+<div class="users-wrapper">
+
+    <div class="users-actions" id="filtering-and-sorting">
+        <section class="users-actions-forms-section">
+            <form id="filter-form" class="d-none">
+                {{ form_start(filter_form) }}
+                <div class="filter-field">
+                    {{ form_row(filter_form.role) }}
+                    {{ form_row(filter_form.campus) }}
+                </div>
+                <div class="sort-field d-none">
+                    {{ form_row(filter_form.sort) }}
+                </div>
+                {{ form_end(filter_form) }}
+            </form>
+        </section>
+
+        <section class="form-actions-buttons-section">
+            <button id="filter-button" class="form-actions-button">
+                Filter
+            </button>
+            <button id="sort-button" class="form-actions-button">
+                Sort
+            </button>
+        </section>
+
+    </div>
+    <div class="user-list">
+        {% for user in users %}
+            <div class="user-infos-wrapper">
+                <div class="user-item-actions-topRight">
+                    <section>
+                        {% if user.role.name != 'ROLE_ADMIN' %}
+                            <span class="icon-delete">
                             <a href="{{ path('admin_delete_user', {'id': user.id}) }}"
                                title="Delete {{ user.firstname }} {{ user.lastname|upper }}">
                             <i class="fa-solid fa-trash"></i>
                         </a>
                         </span>
-                    {% else %}
-                        <span class="icon-disabled">
+                        {% else %}
+                            <span class="icon-disabled">
                             <i class="fa-solid fa-trash"></i>
                         </span>
-                    {% endif %}
-                </section>
-            </div>
+                        {% endif %}
+                    </section>
+                </div>
 
-            <div class="user-infos-container">
-                <section class="user-icon">
-                    <img
-                            src="{{ asset('uploads/profile/photos/'~ user.photo) }}"
-                            alt="{{ user.firstName }}">
-                    >
-                </section>
+                <div class="user-infos-container">
+                    <section class="user-icon">
+                        <img
+                                src="{{ asset('uploads/profile/photos/'~ user.photo) }}"
+                                alt="{{ user.firstName }}">
+                        >
+                    </section>
 
-                <section class="user-status">
-                    {% if user.active == true %}
-                        <span class="user-active">
+                    <section class="user-status">
+                        {% if user.active == true %}
+                            <span class="user-active">
                                             Active
-                                        </span>
-                    {% else %}
-                        <span class="user-inactive">
+                            </span>
+                        {% else %}
+                            <span class="user-inactive">
                                             Inactive
-                                        </span>
-                    {% endif %}
-                </section>
+                            </span>
+                        {% endif %}
+                    </section>
 
-                <section class="user-infos">
-                                        <span class="user-name-email">
-                                            <span>
-                                                {{ user.firstname }}
-                                                {{ user.lastname|upper }}
-                                            </span>
-                                            <span> {{ user.email }} </span>
-                                        </span>
-                    <span> {{ user.campus.nom }} </span>
-                    <span> {{ user.telephone }} </span>
-                </section>
-            </div>
+                    <section class="user-infos">
+                        <span class="user-name-email">
+                             <span>
+                                 {{ user.firstname }}
+                                 {{ user.lastname|upper }}
+                            </span>
+                            <span> {{ user.email }} </span>
+                        </span>
+                        <span> {{ user.campus.nom }} </span>
+                        <span> {{ user.telephone }} </span>
+                    </section>
+                </div>
 
-            <div class="user-item-actions">
-                <section>
-                    <a href="{{ path('admin_modify_user', {'id': user.id}) }}" class="button-edit"
-                       title="Edit {{ user.firstname }} {{ user.lastname|upper }}">
-                        Edit
-                    </a>
-                </section>
+                <div class="user-item-actions">
+                    <section>
+                        <a href="{{ path('admin_modify_user', {'id': user.id}) }}" class="button-edit"
+                           title="Edit {{ user.firstname }} {{ user.lastname|upper }}">
+                            Edit
+                        </a>
+                    </section>
+                </div>
             </div>
-        </div>
-    {% endfor %}
+        {% endfor %}
+    </div>
+
 </div>

@@ -1,12 +1,24 @@
 {% extends 'admin/dashboard.html.twig' %}
 
+{% block title %}
+    {{ parent() }} | Editing {{ city.name }}
+{% endblock %}
+
 {% block body %}
-    <h1>Edit City</h1>
+    <div class="form-wrapper">
+        <h1>Editing {{ city.name }}</h1>
 
-    {{ form_start(form) }}
-    {{ form_widget(form) }}
+        <div class="form-container">
+            {{ form_start(form) }}
+            {{ form_widget(form) }}
+        </div>
 
-    <button type="submit">Save</button>
-    {{ form_end(form) }}
+        <section class="generic-actions-buttons-section">
+            <button type="submit" class="button-positive-action">
+                Save modifications
+            </button>
+            {{ form_end(form) }}
+        </section>
+    </div>
 {% endblock %}
 

@@ -13,12 +13,15 @@ class SearchType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-      $builder
-          ->add('q', TextType::class, [
-              'attr' =>[
-                  'placeholder' => 'Recherche via un mot clé'
-              ]
-          ]);
+        $builder
+            ->add('input', TextType::class,
+                [
+                    'required' => false,
+                    'attr' => [
+                        'placeholder' => 'Recherche via un mot clé',
+                        'id' => 'form_search_city'
+                    ]
+                ]);
     }
 
     public function configureOptions(OptionsResolver $resolver)
@@ -28,6 +31,5 @@ class SearchType extends AbstractType
             'method' => 'GET',
             'csrf_protection' => false
         ]);
-
     }
 }

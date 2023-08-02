@@ -1,8 +1,5 @@
 {% extends 'base.html.twig' %}
 
-{% block cassecouilles %}
-{% endblock %}
-
 {% block extrastyles %}
     <link rel="stylesheet" href="{{ asset('css/admin/dashboard.css') }}">
 {% endblock %}
@@ -44,44 +41,23 @@
 
             <div class="dashboard-main">
                 <div class="dashboard-content">
-                    <section class="content-title">Users</section>
-
-                    <section class="list-actions">
-                        <section class="list-actions">
-                            <form id="filter-form" class="d-none">
-                                {{ form_start(filter_form) }}
-                                <div class="filter-field">
-                                    {{ form_row(filter_form.role) }}
-                                    {{ form_row(filter_form.campus) }}
-                                </div>
-                                <div class="sort-field d-none">
-                                    {{ form_row(filter_form.sort) }}
-                                </div>
-                                {{ form_end(filter_form) }}
-                            </form>
-                        </section>
-
-                        <section class="list-actions-section">
-                            <button id="filter-button" class="list-actions-button">
-                                Filter
-                            </button>
-                            <button id="sort-button" class="list-actions-button">
-                                Sort
-                            </button>
-                        </section>
-
+                    <section class="content-title">
+                        TITLE (SELECTED CONTENT)
                     </section>
 
                     <div id="dashboard-contents-parent">
-                        <section class="section">
+                        <section
+                                class="content-section" id="users-section">
                             {% include 'admin/user/list_user.html.twig' %}
                         </section>
 
-                        <section class="section">
+                        <section
+                                class="content-section" id="cities-section">
                             {% include 'admin/city/city_list.html.twig' %}
                         </section>
 
-                        <section class="section">
+                        <section class="content-section"
+                                 id="campuses-section">
                             {% include 'admin/campus/index.html.twig' %}
                         </section>
                     </div>
@@ -94,5 +70,6 @@
 
 {% block javascripts %}
     {{ parent() }}
-    <script src="{{ asset('JS/adminUserListHandler.js') }}"></script>
+    <script src="{{ asset('JS/admin/adminUserListHandler.js') }}"></script>
+    <script src="{{ asset('JS/admin/dashboardBehaviours.js') }}"></script>
 {% endblock %}

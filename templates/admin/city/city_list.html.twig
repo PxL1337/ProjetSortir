@@ -1,25 +1,37 @@
-<div class="city-list">
-    {% for city in cities %}
-        <div class="city-infos-wrapper">
-            <div class="city-infos-container">
-                <section>
-                    <span> {{ city.id }} </span>
-                    <span> {{ city.nom }} </span>
-                    <span> {{ city.codePostal }} </span>
-                </section>
+<div class="cities-wrapper">
 
-                <div class="city-item-actions">
-                    <a href="{{ path('admin_city_edit', { id: city.id }) }}" class="button-edit">
-                        Edit
-                    </a>
-                    <a href="{{ path('admin_city_delete', { id: city.id }) }}"
-                       class="button-delete">
-                        Delete
-                    </a>
+    <div class="cities-actions">
+        <section class="cities-actions-forms-section">
+            {% include "components/_search_data.html.twig" with{
+                form: search_city_form
+            } %}
+        </section>
+    </div>
+
+    <div class="city-list">
+        {% for city in cities %}
+            <div class="city-infos-wrapper">
+                <div class="city-infos-container">
+                    <section>
+                        <span> {{ city.id }} </span>
+                        <span> {{ city.nom }} </span>
+                        <span> {{ city.codePostal }} </span>
+                    </section>
+
+                    <div class="city-item-actions">
+                        <a href="{{ path('admin_city_edit', { id: city.id }) }}" class="button-edit">
+                            Edit
+                        </a>
+                        <a href="{{ path('admin_city_delete', { id: city.id }) }}"
+                           class="button-delete">
+                            Delete
+                        </a>
+                    </div>
                 </div>
             </div>
-        </div>
-    {% endfor %}
+        {% endfor %}
+    </div>
+
 </div>
 
 <section class="current-datatype-add">

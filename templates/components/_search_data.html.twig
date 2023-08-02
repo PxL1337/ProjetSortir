@@ -1,8 +1,13 @@
-{{ form_start(form) }}
-<div class="flex justify-center">
-    <div class="mb-3 xl:w-96">
-        {{ form_widget(form.q) }}
-        <button type="submit">Recherche</button>
+<div class="generic-form-container">
+{{ form_start(form, {'attr': {'id': 'form_search_city'}}) }}
+    <div class="generic-form-content">
+        {{ form_widget(form.input) }}
+
+        <section class="form-actions-buttons-section">
+            <button type="submit" class="form-actions-button">
+                Recherche
+            </button>
+        </section>
     </div>
-</div>
 {{ form_end(form) }}
+</div>

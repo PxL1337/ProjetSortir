@@ -1,14 +1,23 @@
 {% extends 'admin/dashboard.html.twig' %}
 
-{% block title %}Modification d'utilisateur | {{ parent() }}{% endblock %}
+{% block title %}
+    {{ parent() }} | Modifying {{ user.pseudo }}
+{% endblock %}
 
 {% block body %}
-    <h1>Modification d'utilisateur</h1>
+    <div class="form-wrapper">
+        <h1>Modifying {{ user.pseudo }}</h1>
+        <div class="form-container">
+            {{ form_start(form) }}
+            {{ form_widget(form) }}
+        </div>
 
-    {{ form_start(form) }}
-    {{ form_widget(form) }}
-
-    <button type="submit" class="btn btn-success">Enregistrer les modifications</button>
-    {{ form_end(form) }}
+        <section class="generic-actions-buttons-section">
+            <button type="submit" class="button-positive-action">
+                Save modifications
+            </button>
+        </section>
+        {{ form_end(form) }}
+    </div>
 {% endblock %}
 
