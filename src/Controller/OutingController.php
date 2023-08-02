@@ -9,6 +9,7 @@ use App\Data\SearchData;
 use App\Repository\OutingRepository;
 use App\Repository\PlaceRepository;
 use App\Repository\StatusRepository;
+use App\Service\OutingStatusUpdater;
 use Doctrine\ORM\EntityManagerInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -20,8 +21,10 @@ use Symfony\Component\Routing\Annotation\Route;
 class OutingController extends AbstractController
 {
     #[Route('/', name: 'outing_list')]
-    public function list(OutingRepository $sortieRepository, Request $request): Response
+    public function list(OutingRepository $sortieRepository, Request $request, OutingStatusUpdater $outingStatusUpdater): Response
     {
+        // Update Outing Status
+        $outingStatusUpdater->updateAllOutingsStatuses();
 
         $data = new SearchData();
 
@@ -32,8 +35,7 @@ class OutingController extends AbstractController
             $outings = $sortieRepository->findWithFilters($data);
 
         }else{
-
-            $outings = $sortieRepository->findBy([],[ 'dateHeureDebut' => 'DESC']);
+            $outings = $sortieRepository->findWithFilters($data);
         }
 
         return $this->render('outing/outing.html.twig', [
@@ -42,7 +44,7 @@ class OutingController extends AbstractController
         ]);
     }
 
-    /*#[Route('/', name: 'outing_list')]
+   /* #[Route('/', name: 'outing_list')]
     public function list(OutingRepository $sortieRepository, OutingStatusUpdater $outingStatusUpdater): Response
     {
         // Update Outing Status

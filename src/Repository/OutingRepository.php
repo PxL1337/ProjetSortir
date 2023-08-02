@@ -43,9 +43,14 @@ class OutingRepository extends ServiceEntityRepository
     public function findWithFilters(SearchData $data) {
         $query = $this
             ->createQueryBuilder('o')
-            ->addSelect('o')
-            ->orderBy('o.dateHeureDebut', 'DESC')
-        ;
+            ->select('o', 'att', 'org', 'sta', 'cam', 'pla')  // Include all related entities
+            ->leftJoin('o.attendees', 'att')
+            ->join('o.Organizer', 'org')
+            ->join('o.status', 'sta')
+            ->join('o.campus', 'cam')
+            ->join('o.place', 'pla')  // Join other entities here as needed
+            ->orderBy('o.dateHeureDebut', 'DESC');
+
         if (!empty($data->campus)) {
             $query->andWhere('o.campus = :campus')
                 ->setParameter('campus', $data->campus);
@@ -65,5 +70,6 @@ class OutingRepository extends ServiceEntityRepository
 
         return $query->getQuery()->getResult();
     }
+
 }
 
