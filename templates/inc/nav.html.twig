@@ -3,7 +3,6 @@
         <li><a href="{{ path('outing_list') }}" title="home">Home</a></li>
         {% if app.user %}
             <li><a href="{{ path('user_profile', {'username': app.user.firstname}) }}" title="Profile">Profile</a></li>
-            <li><a href="{{ path('outing_create') }}" title="Create Outing">Create</a></li>
 
             {% if is_granted("ROLE_ADMIN") %}
                 <li><a href="{{ path('admin_dashboard') }}" title="Dashboard">Admin</a></li>

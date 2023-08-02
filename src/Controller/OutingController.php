@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Outing;
+use App\Form\CancelOutingType;
 use App\Form\OutingsFilterType;
 use App\Form\OutingType;
 use App\Data\SearchData;
@@ -14,12 +15,20 @@ use Doctrine\ORM\EntityManagerInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 #[IsGranted('ROLE_USER')]
 class OutingController extends AbstractController
 {
+    private $requestStack;
+
+    public function __construct(RequestStack $requestStack)
+    {
+        $this->requestStack = $requestStack;
+    }
+
     #[Route('/', name: 'outing_list')]
     public function list(OutingRepository $sortieRepository, Request $request, OutingStatusUpdater $outingStatusUpdater): Response
     {
@@ -32,10 +41,8 @@ class OutingController extends AbstractController
         $form = $this->createForm(OutingsFilterType::class, $data);
         $form->handleRequest($request);
         if($form->isSubmitted() && $form->isValid()){
-
             $outings = $sortieRepository->findWithFilters($data);
-
-        }else{
+        } else {
             $outings = $sortieRepository->findWithFilters($data);
         }
 
@@ -44,19 +51,6 @@ class OutingController extends AbstractController
             'form'=> $form->createView()
         ]);
     }
-
-   /* #[Route('/', name: 'outing_list')]
-    public function list(OutingRepository $sortieRepository, OutingStatusUpdater $outingStatusUpdater): Response
-    {
-        // Update Outing Status
-        $outingStatusUpdater->updateAllOutingsStatuses();
-
-        $outings = $sortieRepository->findAllWithAttendees();
-
-        return $this->render('outing/outing.html.twig', [
-            "outings" => $outings
-        ]);
-    }*/
 
     #[Route('/create', name: 'outing_create')]
     #[IsGranted('ROLE_ORGANISATEUR')]
@@ -85,9 +79,6 @@ class OutingController extends AbstractController
             $entityManager->persist($outing);
             $entityManager->flush();
 
-            // Add a flash message
-            $this->addFlash('success', 'La sortie a été créée avec succès !');
-
             // Redirect to the outing list page
             return $this->redirectToRoute('outing_list');
         }
@@ -109,15 +100,29 @@ class OutingController extends AbstractController
         }
 
         $form = $this->createForm(OutingType::class, $outing);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager->persist($outing);
+            $entityManager->flush();
+
+            $this->addFlash('success', 'La sortie a été modifiée avec succès !');
+
+            $referer = $request->get('referer');
+            return $this->redirect($referer);
+        }
+
+        $referer = $this->requestStack->getCurrentRequest()->headers->get('referer');
 
         return $this->render('outing/edit.html.twig', [
             'outing' => $outing,
             'form' => $form->createView(),
+            'referer' => $referer,
         ]);
     }
 
     #[Route('/outing/{id}/register', name: 'outing_register')]
-    public function register(Outing $outing, EntityManagerInterface $entityManager): Response
+    public function register(Outing $outing, EntityManagerInterface $entityManager, Request $request): Response
     {
         $user = $this->getUser();
 
@@ -130,12 +135,17 @@ class OutingController extends AbstractController
             $entityManager->persist($outing);
             $entityManager->persist($user);
             $entityManager->flush();
+
             $this->addFlash('success', 'Vous êtes maintenant inscrit à cette sortie !');
+
+            $referer = $request->getSession()->get('referer', $this->generateUrl('outing_list'));
+            return $this->redirect($referer);
         } else {
             $this->addFlash('warning', 'Vous ne pouvez pas vous inscrire à cette sortie.');
-        }
 
-        return $this->redirectToRoute('outing_list', ['id' => $outing->getId()]);
+            $referer = $request->get('referer');
+            return $this->redirect($referer);
+        }
     }
 
     #[Route('/outing/{id}', name: 'outing_detail')]
@@ -162,12 +172,19 @@ class OutingController extends AbstractController
             $entityManager->persist($outing);
             $entityManager->persist($user);
             $entityManager->flush();
+
             $this->addFlash('success', 'Vous êtes maintenant désinscrit de cette sortie !');
+
+            $referer = $request->getSession()->get('referer');
+            $request->getSession()->remove('referer');
+            return $this->redirect($referer);
         } else {
             $this->addFlash('warning', 'Vous ne pouvez pas vous désinscrire de cette sortie.');
-        }
 
-        return $this->redirectToRoute('outing_detail', ['id' => $outing->getId()]);
+            $referer = $request->getSession()->get('referer');
+            $request->getSession()->remove('referer');
+            return $this->redirect($referer);
+        }
     }
 
     #[Route('/outing/{id}/confirm_unregister', name: 'outing_confirm_unregister')]
@@ -177,6 +194,7 @@ class OutingController extends AbstractController
 
         if ($outing->getDateHeureDebut() > new \DateTime() && $outing->getAttendees()->contains($user)) {
             $request->getSession()->set('confirm_unregister', true);
+            $request->getSession()->set('referer', $request->headers->get('referer'));
 
             return $this->render('outing/confirm_unregister.html.twig', [
                 'outing' => $outing,
@@ -206,8 +224,10 @@ class OutingController extends AbstractController
         // Add a flash message
         $this->addFlash('success', 'La sortie a été publiée avec succès !');
 
-        // Redirect to the outing detail page
-        return $this->redirectToRoute('outing_detail', ['id' => $outing->getId()]);
+        // Get the referer from the session and redirect to it
+        $referer = $request->getSession()->get('referer');
+        $request->getSession()->remove('referer');
+        return $this->redirect($referer);
     }
 
     #[Route('/outing/{id}/confirm_publish', name: 'outing_confirm_publish')]
@@ -222,6 +242,9 @@ class OutingController extends AbstractController
         if ($outing->getStatus()->getLibelle() !== 'Créée') {
             throw $this->createAccessDeniedException('Cette sortie n\'est pas dans l\'état "Créée".');
         }
+
+        // Store the referer in the session
+        $request->getSession()->set('referer', $request->headers->get('referer'));
 
         $request->getSession()->set('confirm_publish', true);
 
@@ -250,7 +273,9 @@ class OutingController extends AbstractController
 
             $this->addFlash('success', 'La sortie a été annulée avec succès !');
 
-            return $this->redirectToRoute('outing_list');
+            $referer = $request->getSession()->get('referer');
+            $request->getSession()->remove('referer');
+            return $this->redirect($referer);
         }
 
         return $this->render('outing/cancel.html.twig', [

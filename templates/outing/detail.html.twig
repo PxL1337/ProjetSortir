@@ -7,6 +7,8 @@
         <h2>{{ outing.nom }}</h2>
         <p>Infos sur la sortie : {{ outing.infosSortie }}</p>
         <p>Du {{ outing.dateHeureDebut | date('d/m/y H:i') }} au {{ outing.heureFin | date('d/m/y H:i') }}</p>
+        <p>Campus : {{ outing.campus.nom }}</p>
+        <p>Ville : {{ outing.place.city.nom }}</p>
 
         {% if outing.status.libelle == 'Annulée' %}
             <p>Motif d'annulation : {{ outing.cancellationReason }}</p>

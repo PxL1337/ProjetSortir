@@ -9,10 +9,13 @@
         <div class="filters-title" >
             <p>Bonjour {{ app.user.firstname }}</p>
             <p>Date : {{ "now" | date('d/m/y H:i')}}</p>
+            {% if is_granted('ROLE_ORGANISATEUR') %}
+                <a href="{{ path('outing_create') }}" title="Create Outing" class="btn btn-primary">Create outing</a>
+            {% endif %}
         </div>
         {{ form_start(form) }}
         {{ form_widget(form) }}
-        <input type="submit"value="Filter">
+        <input type="submit" value="Filter">
         {{ form_end(form) }}
     </div>
 

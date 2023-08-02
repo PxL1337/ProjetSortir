@@ -247,4 +247,8 @@ class Outing
 
         return $this;
     }
+    public function getCity(): ?City
+    {
+        return $this->getPlace()->getCity();
+    }
 }
