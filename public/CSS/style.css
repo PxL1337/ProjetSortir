@@ -214,20 +214,20 @@ header a img {
 /*ERROR IN REGISTRATION FORM - END*/
 
 /* Removes the black outline */
-input {
+input, .btn{
     outline: none;
 
 }
 
-input:focus {
+input:focus, .btn {
     border: solid 2px var(--Dusty-Blue);
 }
 
-input:hover {
+input:hover, .btn {
     outline: solid 1px var(--Blue-Hosta);
 }
 
-input[type="submit"] {
+input[type="submit"], .btn {
     width: 100%;
     border-radius: 10px;
     margin-top: 1.5em;

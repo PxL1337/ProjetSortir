@@ -35,7 +35,6 @@ class OutingController extends AbstractController
             $outings = $sortieRepository->findWithFilters($data);
 
         }else{
-            $data = new SearchData();
             $outings = $sortieRepository->findWithFilters($data);
         }
 

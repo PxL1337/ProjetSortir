@@ -62,5 +62,328 @@
     border-right: none;
 }
 
+/* outing.css */
+
+/* Styles for the outing detail page */
+
+.outing-detail {
+    /* Styles for the outing detail page */
+    background-color: rgba(40, 55, 57, 0.3);
+    border-radius: 10px;
+    color: var(--white);
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+.outing-detail h2 {
+    /* Styles for the heading */
+    font-size: 2em;
+    color: var(--Dusty-Blue);
+}
+
+.outing-detail p {
+    /* Styles for the paragraphs */
+    font-size: 1em;
+    line-height: 1.5;
+}
+
+.outing-detail ul {
+    /* Styles for the list of attendees */
+    list-style-type: none;
+    padding-left: 0;
+}
+
+.outing-detail .btn {
+    /* Styles for the buttons */
+    font-size: 1em;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    color: var(--white);
+    background-color: var(--Verdigris);
+    transition: background-color 0.3s ease;
+}
+
+.outing-detail .btn:hover {
+    background-color: var(--Dusty-Blue);
+}
+
+/* Styles for the outing edit page */
+
+.outing-edit {
+    /* Styles for the outing edit page */
+    background-color: rgba(40, 55, 57, 0.3);
+    border-radius: 10px;
+    color: var(--white);
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+.outing-edit h2 {
+    /* Styles for the heading */
+    font-size: 2em;
+    color: var(--Dusty-Blue);
+}
+
+.outing-edit form {
+    /* Styles for the form */
+    display: flex;
+    flex-direction: column;
+}
+
+.outing-edit .btn {
+    /* Styles for the buttons */
+    font-size: 1em;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    color: var(--white);
+    background-color: var(--Verdigris);
+    transition: background-color 0.3s ease;
+}
+
+.outing-edit .btn:hover {
+    background-color: var(--Dusty-Blue);
+}
+
+/* Styles for the confirm unregister page */
+
+.confirm-unregister {
+    /* Styles for the confirm unregister page */
+    background-color: rgba(40, 55, 57, 0.3);
+    border-radius: 10px;
+    color: var(--white);
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+.confirm-unregister h2 {
+    /* Styles for the heading */
+    font-size: 2em;
+    color: var(--Dusty-Blue);
+}
+
+.confirm-unregister p {
+    /* Styles for the paragraph */
+    font-size: 1em;
+    line-height: 1.5;
+}
+
+.confirm-unregister .btn {
+    /* Styles for the buttons */
+    font-size: 1em;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    color: var(--white);
+    background-color: var(--Verdigris);
+    transition: background-color 0.3s ease;
+}
+
+.confirm-unregister .btn:hover {
+    background-color: var(--Dusty-Blue);
+}
+
+/* Styles for the confirm publish page */
+
+.confirm-publish {
+    /* Styles for the confirm publish page */
+    background-color: rgba(40, 55, 57, 0.3);
+    border-radius: 10px;
+    color: var(--white);
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+.confirm-publish h1 {
+    /* Styles for the heading */
+    font-size: 2em;
+    color: var(--Dusty-Blue);
+}
+
+.confirm-publish p {
+    /* Styles for the paragraph */
+    font-size: 1em;
+    line-height: 1.5;
+}
+
+.confirm-publish .btn {
+    /* Styles for the buttons */
+    font-size: 1em;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    color: var(--white);
+    background-color: var(--Verdigris);
+    transition: background-color 0.3s ease;
+}
+
+.confirm-publish .btn:hover {
+    background-color: var(--Dusty-Blue);
+}
+
+/* Styles for the cancel outing page */
+
+.cancel-outing {
+    /* Styles for the cancel outing page */
+    background-color: rgba(40, 55, 57, 0.3);
+    border-radius: 10px;
+    color: var(--white);
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+.cancel-outing h1 {
+    /* Styles for the heading */
+    font-size: 2em;
+    color: var(--Dusty-Blue);
+}
+
+.cancel-outing p {
+    /* Styles for the paragraph */
+    font-size: 1em;
+    line-height: 1.5;
+}
+
+.cancel-outing form {
+    /* Styles for the form */
+    display: flex;
+    flex-direction: column;
+}
+
+.cancel-outing .btn {
+    /* Styles for the buttons */
+    font-size: 1em;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    color: var(--white);
+    background-color: var(--Verdigris);
+    transition: background-color 0.3s ease;
+}
+
+.cancel-outing .btn:hover {
+    background-color: var(--Dusty-Blue);
+}
+
+/* Styles for the outing unregister confirmation page */
+
+.outing-unregister-confirm {
+    /* Styles for the outing unregister confirmation page */
+    background-color: rgba(40, 55, 57, 0.3);
+    border-radius: 10px;
+    color: var(--white);
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+.outing-unregister-confirm h2 {
+    /* Styles for the heading */
+    font-size: 2em;
+    color: var(--Dusty-Blue);
+}
+
+.outing-unregister-confirm p {
+    /* Styles for the paragraph */
+    font-size: 1em;
+    line-height: 1.5;
+}
+
+.outing-unregister-confirm .btn {
+    /* Styles for the buttons */
+    font-size: 1em;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    color: var(--white);
+    background-color: var(--Verdigris);
+    transition: background-color 0.3s ease;
+}
+
+.outing-unregister-confirm .btn:hover {
+    background-color: var(--Dusty-Blue);
+}
+
+/* Styles for the outing publish confirmation page */
+
+.outing-publish-confirm {
+    /* Styles for the outing publish confirmation page */
+    background-color: rgba(40, 55, 57, 0.3);
+    border-radius: 10px;
+    color: var(--white);
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+.outing-publish-confirm h1 {
+    /* Styles for the heading */
+    font-size: 2em;
+    color: var(--Dusty-Blue);
+}
+
+.outing-publish-confirm p {
+    /* Styles for the paragraph */
+    font-size: 1em;
+    line-height: 1.5;
+}
+
+.outing-publish-confirm .btn {
+    /* Styles for the buttons */
+    font-size: 1em;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    color: var(--white);
+    background-color: var(--Verdigris);
+    transition: background-color 0.3s ease;
+}
+
+.outing-publish-confirm .btn:hover {
+    background-color: var(--Dusty-Blue);
+}
+
+/* Styles for the outing cancel page */
+
+.outing-cancel {
+    /* Styles for the outing cancel page */
+    background-color: rgba(40, 55, 57, 0.3);
+    border-radius: 10px;
+    color: var(--white);
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+.outing-cancel h1 {
+    /* Styles for the heading */
+    font-size: 2em;
+    color: var(--Dusty-Blue);
+}
+
+.outing-cancel p {
+    /* Styles for the paragraph */
+    font-size: 1em;
+    line-height: 1.5;
+}
+
+.outing-cancel form {
+    /* Styles for the form */
+    display: flex;
+    flex-direction: column;
+}
+
+.outing-cancel .btn {
+    /* Styles for the buttons */
+    font-size: 1em;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    color: var(--white);
+    background-color: var(--Verdigris);
+    transition: background-color 0.3s ease;
+}
+
+.outing-cancel .btn:hover {
+    background-color: var(--Dusty-Blue);
+}
 
 

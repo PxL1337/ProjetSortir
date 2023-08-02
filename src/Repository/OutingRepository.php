@@ -52,7 +52,7 @@ class OutingRepository extends ServiceEntityRepository
             ->orderBy('o.dateHeureDebut', 'DESC');
 
         if (!empty($data->campus)) {
-            $query->andWhere('o.campus = :campus')
+            $query->andWhere('o.campus IN (:campus)')
                 ->setParameter('campus', $data->campus);
         }
         if (!empty($data->q)){

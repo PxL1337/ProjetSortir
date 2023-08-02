@@ -6,7 +6,10 @@
 {% block body %}
 
     <div class="filter-outings">
-        <h3 class="filters-title" >Filters</h3>
+        <div class="filters-title" >
+            <p>Bonjour {{ app.user.firstname }}</p>
+            <p>Date : {{ "now" | date('d/m/y H:i')}}</p>
+        </div>
         {{ form_start(form) }}
         {{ form_widget(form) }}
         <input type="submit"value="Filter">
@@ -38,9 +41,9 @@
                     {% endif %}
 
                     {% if app.user == outing.organizer and outing.status.libelle == 'Créée' %}
-                        <a href="{{ path('outing_edit', {id: outing.id}) }}" class="btn btn-primary">Modifier</a>
-                        <a href="{{ path('outing_publish', {id: outing.id}) }}" class="btn btn-primary">Publier</a>
-                        <a href="{{ path('outing_cancel', {id: outing.id}) }}" class="btn btn-danger">Annuler</a>
+                        <a href="{{ path('outing_edit', {id: outing.id}) }}" class="btn">Modifier</a>
+                        <a href="{{ path('outing_publish', {id: outing.id}) }}" class="btn">Publier</a>
+                        <a href="{{ path('outing_cancel', {id: outing.id}) }}" class="btn">Annuler</a>
                     {% endif %}
                 </article>
             {% endfor %}
