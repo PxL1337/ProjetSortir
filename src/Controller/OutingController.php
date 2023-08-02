@@ -27,6 +27,7 @@ class OutingController extends AbstractController
         $outingStatusUpdater->updateAllOutingsStatuses();
 
         $data = new SearchData();
+        $data->setUser($this->getUser());
 
         $form = $this->createForm(OutingsFilterType::class, $data);
         $form->handleRequest($request);

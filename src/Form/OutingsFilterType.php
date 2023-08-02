@@ -7,6 +7,7 @@ use App\Entity\Campus;
 
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -44,6 +45,22 @@ class OutingsFilterType extends AbstractType
                 'required' => false,
                 'widget' => 'single_text',
                 'html5' => true,
+            ])
+            ->add('organizer', CheckboxType::class, [
+                'required' => false,
+                'label' => "Sorties dont je suis l'organisateur",
+            ])
+            ->add('planned', CheckboxType::class, [
+                'required' => false,
+                'label' => "Sorties auxquelles je suis inscrit",
+            ])
+            ->add('notRegistered', CheckboxType::class, [
+                'required' => false,
+                'label' => "Sorties auxquelles je ne suis pas inscrit",
+            ])
+            ->add('past', CheckboxType::class, [
+                'required' => false,
+                'label' => "Sorties passées",
             ])
         ;
     }

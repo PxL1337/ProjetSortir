@@ -68,6 +68,26 @@ class OutingRepository extends ServiceEntityRepository
                 ->setParameter('dateMax', $data->dateMax);
         }
 
+        if ($data->organizer) {
+            $query->andWhere('org = :user')
+                ->setParameter('user', $data->getUser());
+        }
+
+        if ($data->planned) {
+            $query->andWhere(':user MEMBER OF o.attendees')
+                ->setParameter('user', $data->getUser());
+        }
+
+        if ($data->notRegistered) {
+            $query->andWhere(':user NOT MEMBER OF o.attendees')
+                ->setParameter('user', $data->getUser());
+        }
+
+        if ($data->past) {
+            $query->andWhere('o.dateHeureDebut < :now')
+                ->setParameter('now', new \DateTime());
+        }
+
         return $query->getQuery()->getResult();
     }
 
