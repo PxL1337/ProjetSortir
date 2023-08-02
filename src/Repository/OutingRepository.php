@@ -2,6 +2,7 @@
 
 namespace App\Repository;
 
+use App\Data\SearchData;
 use App\Entity\Outing;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
@@ -53,6 +54,15 @@ class OutingRepository extends ServiceEntityRepository
             $query=$query->andWhere('o.nom LIKE :q')
                 ->setParameter('q', "%{$data->q}%");
         }
+        if (!empty($data->dateMin)){
+            $query = $query->andWhere('o.dateHeureDebut >= :dateMin')
+                ->setParameter('dateMin', $data->dateMin);
+        }
+        if (!empty($data->dateMax)){
+            $query = $query->andWhere('o.dateHeureDebut <= :dateMax')
+                ->setParameter('dateMax', $data->dateMax);
+        }
+
         return $query->getQuery()->getResult();
     }
 }
