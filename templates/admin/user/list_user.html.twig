@@ -15,6 +15,14 @@
             </form>
         </section>
 
+        <div class="users-actions">
+            <section class="users-actions-forms-section">
+                {% include "components/_search_data.html.twig" with{
+                    form: search_user_form
+                } %}
+            </section>
+        </div>
+
         <section class="users-form-actions-buttons-section">
             <button id="filter-button" class="form-actions-button">
                 Filter
