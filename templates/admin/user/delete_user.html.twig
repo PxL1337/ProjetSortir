@@ -3,15 +3,34 @@
 {% block title %}Suppression d'utilisateur  | {{ parent() }}{% endblock %}
 
 {% block body %}
-    <h1>Suppression d'utilisateur</h1>
+    <div class="data-view-wrapper">
+        <div class="data-view-container">
 
-    <p>Êtes-vous sûr de vouloir supprimer l'utilisateur {{ user.email }} ?</p>
+            <div class="data-view-action-content">
+                <h1 class="data-view-action-title">
+                    User suppression
+                </h1>
 
-    <form method="post" action="{{ path('admin_confirm_delete', {'id': user.id}) }}">
-        <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ user.id) }}">
-        <a href="{{ path('admin_dashboard') }}" class="btn btn-default">Annuler</a>
-        <input type="submit" value="Supprimer" class="btn btn-danger">
-    </form>
+                <p class="data-view-action-message">
+                    Are you sure you want to delete the user "{{ user.email }}" ?
+                </p>
+
+                <div class="data-view-delete-form">
+                    <form method="post" action="{{ path('admin_confirm_delete', {'id': user.id}) }}">
+                        <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ user.id) }}">
+
+                        <button type="submit" class="data-view-button-delete">
+                            Yes, confirm suppression
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div class="data-view-bottom-section">
+            <a href="{{ path('admin_dashboard') }}" class="button-back">
+                Cancel suppression
+            </a>
+        </div>
+    </div>
 {% endblock %}
-
-

@@ -1,6 +1,9 @@
 const dashboardParentContentSelector = document.getElementById('dashboard-contents-parent');
 const allDashboardContentSections = dashboardParentContentSelector.querySelectorAll('.content-section');
 const LOCAL_STORAGE_DASHBOARD_INDEX = 'DASHBOARD_SELECTED_CONTENT_INDEX';
+const dashboardContentTitle = document.querySelector('.content-title');
+
+initBeforeDocumentLoaded();
 
 document.addEventListener('DOMContentLoaded', function () {
     handleDashboardNavElements();
@@ -10,23 +13,14 @@ function handleDashboardNavElements() {
     const dashboardNav_ulElement = document.getElementById('dashboard-buttons');
     const dashboardNav_liElements = dashboardNav_ulElement.querySelectorAll('li');
 
-    const dashboardContentTitle = document.querySelector('.content-title');
-
     initDashboard();
     handleDashboardCategoryButtonsClick();
 
     function initDashboard() {
         let index = getDashboardIndexFromLocalStorage();
 
-        hideAllDashboardContents();
-        allDashboardContentSections[index].style.display = 'inline';
-
-        let title =
-            allDashboardContentSections[index].id
-                .replace("-section", "");
-        changeDashboardContentTitle(title.toUpperCase());
-
         selectContentCategoryOnInit();
+        allDashboardContentSections[index].style.display = 'inline';
 
         function selectContentCategoryOnInit() {
             let index = getDashboardIndexFromLocalStorage();
@@ -81,11 +75,6 @@ function handleDashboardNavElements() {
         }
     }
 
-    function changeDashboardContentTitle(newTitle) {
-        dashboardContentTitle.innerHTML = "";
-        dashboardContentTitle.innerHTML = newTitle;
-    }
-
     function displayElementById(id) {
         let element = document.getElementById(id);
 
@@ -104,6 +93,14 @@ function handleDashboardNavElements() {
 
         element.style.display = 'none';
     }
+}
+
+function initBeforeDocumentLoaded() {
+    let title = allDashboardContentSections[getDashboardIndexFromLocalStorage()].id
+        .replace("-section", "");
+    changeDashboardContentTitle(title.toUpperCase());
+
+    hideAllDashboardContents();
 }
 
 function displayDashboardContent(indexToDisplay) {
@@ -130,6 +127,11 @@ function addOrSetClassNameToElement(element, className) {
 
     element.classList.replace(element.className, className);
     // console.log("Setting class name");
+}
+
+function changeDashboardContentTitle(newTitle) {
+    dashboardContentTitle.innerHTML = "";
+    dashboardContentTitle.innerHTML = newTitle;
 }
 
 function setDashboardIndexInLocalStorage(index) {

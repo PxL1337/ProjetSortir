@@ -5,22 +5,25 @@
 {% endblock %}
 
 {% block body %}
-    <div class="editing-data-form-wrapper">
-        <h1>Editing {{ campus.nom }}</h1>
+    <div class="data-view-wrapper">
+        <div class="data-view-container">
+            <h1>Editing {{ campus.nom }}</h1>
 
-        <div class="editing-data-form-container">
-            {{ form_start(form) }}
-            {{ form_widget(form) }}
+            <div class="data-view-content">
+                {{ form_start(form) }}
+                {{ form_widget(form) }}
+            </div>
+            <section class="data-view-button-section">
+                <button type="submit" class="button-save">
+                    Save modifications
+                </button>
+            </section>
+            {{ form_end(form) }}
         </div>
-        <section class="generic-actions-buttons-section">
-            <button type="submit" class="button-positive-action">
-                Save modifications
-            </button>
-        </section>
-        {{ form_end(form) }}
+        <div class="data-view-bottom-section">
+            <a href="{{ path('admin_dashboard') }}" class="button-back">
+                Back to list
+            </a>
+        </div>
     </div>
-
-    <a href="{{ path('admin_dashboard') }}">
-        Back to list
-    </a>
 {% endblock %}

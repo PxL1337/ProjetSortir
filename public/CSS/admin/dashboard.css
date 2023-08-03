@@ -106,11 +106,9 @@
 .campus-list,
 .city-list {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(15em, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(9.5em, 1fr));
     justify-content: center;
     align-items: center;
-    width: 100%;
-    height: 100%;
     gap: .75em;
 }
 
@@ -118,11 +116,18 @@
     grid-template-columns: repeat(auto-fit, minmax(14em, 1fr));
 }
 
-.campus-list {
-    margin-top: 1em;
+#campuses-section .data-found {
+    padding-top: .75em;
 }
 
-.editing-data-form-wrapper,
+.data-found {
+    font-size: .75em;
+    margin: 0;
+    padding-left: .25em;
+    padding-bottom: .75em;
+}
+
+.data-view-container,
 .user-infos-wrapper,
 .city-infos-wrapper,
 .campus-infos-wrapper {
@@ -146,29 +151,104 @@
     gap: 1em;
 }
 
-.editing-data-form-container,
+.data-view-content,
 .city-infos-container,
 .campus-infos-container {
     display: flex;
-    flex-direction: row;
-    padding: 0 .5em .5em .5em;
+    flex-direction: column;
+    padding: .5em;
     clear: both;
+}
+
+.user-infos-container,
+.city-infos-container,
+.campus-infos-container {
+    -webkit-animation: fadeInFromNone 1.5s ease-out;
+    -moz-animation: fadeInFromNone 1.5s ease-out;
+    -o-animation: fadeInFromNone 1.5s ease-out;
+    animation: fadeInFromNone 1.5s ease-out;
+}
+
+@-webkit-keyframes fadeInFromNone {
+    0% {
+        display: none;
+        opacity: 0;
+    }
+
+    1% {
+        display: block;
+        opacity: 0;
+    }
+
+    100% {
+        display: block;
+        opacity: 1;
+    }
+}
+
+@-moz-keyframes fadeInFromNone {
+    0% {
+        display: none;
+        opacity: 0;
+    }
+
+    1% {
+        display: block;
+        opacity: 0;
+    }
+
+    100% {
+        display: block;
+        opacity: 1;
+    }
+}
+
+@-o-keyframes fadeInFromNone {
+    0% {
+        display: none;
+        opacity: 0;
+    }
+
+    1% {
+        display: block;
+        opacity: 0;
+    }
+
+    100% {
+        display: block;
+        opacity: 1;
+    }
+}
+
+@keyframes fadeInFromNone {
+    0% {
+        display: none;
+        opacity: 0;
+    }
+
+    1% {
+        display: block;
+        opacity: 0;
+    }
+
+    100% {
+        display: block;
+        opacity: 1;
+    }
 }
 
 .city-infos-container,
 .campus-infos-container {
     align-items: center;
-    padding: 0.5em;
-    height: 2em;
+    padding: 1em;
+    gap: .5em;
 }
 
 .city-infos-container section span,
 .campus-infos-container span {
     width: 100%;
-    height: 100%;
-    display: flex;
-    align-items: center;
     padding: .5em .5em .5em .75em;
+    text-align: center;
 }
 
 .user-icon {
@@ -228,8 +308,8 @@
 
 .user-item-actions-topRight section {
     position: absolute;
-    top: 0.313em;
-    right: 0.625em;
+    top: 0.6em;
+    right: 0.75em;
 }
 
 .user-name-email {
@@ -259,8 +339,13 @@
     width: 100%;
 }
 
+.city-infos-container section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
 .user-item-actions section,
-.city-item-actions section,
 .campus-item-actions section {
     display: flex;
     width: 100%;
@@ -269,30 +354,26 @@
     justify-content: center;
 }
 
-.user-item-actions .button-edit {
+.user-item-actions .button-edit,
+.city-item-actions .button-edit,
+.campus-item-actions .button-edit {
     width: 15em;
-    flex: .55;
+    flex: 1;
 }
 
-.city-item-actions,
-.campus-item-actions {
-    justify-content: end;
-}
-
-.city-infos-container section {
-    display: flex;
-}
-
+.data-view-delete-form form button[type="submit"],
 .button-positive-action,
 .form-actions-button,
 .form-actions-button-cancel,
 .button-edit,
 .button-delete,
 .button-add,
-.button-disabled {
+.button-disabled,
+.button-back,
+.button-save {
     border-radius: 0.625em;
     width: 3.75em;
-    padding: .6em 1em;
+    padding: .75em 1em;
     font-size: .6em;
     border: solid 2px rgba(0, 0, 0, 0);
     color: var(--white);
@@ -301,24 +382,43 @@
     text-align: center;
 }
 
+.data-view-delete-form button[type="submit"]:hover,
 .button-positive-action:hover,
 .form-actions-button:hover,
 .form-actions-button-cancel:hover,
 .button-edit:hover,
 .button-add:hover,
-.button-delete:hover {
+.button-delete:hover,
+.button-back:hover,
+.button-save:hover {
     cursor: pointer;
     border: solid 2px var(--white);
     font-weight: bolder;
+    transition: border 0.4s linear;
+}
+
+.data-view-content form button[type="submit"] {
+    margin-top: 0;
+    width: 100%;
+    border: solid 2px rgba(0, 0, 0, 0);
+    transition: none;
+    font-family: inherit;
 }
 
 .button-positive-action,
 .form-actions-button,
 .button-edit,
-.button-add {
+.button-add,
+.button-back,
+.button-save {
     background: var(--Dusty-Blue);
 }
 
+.button-add {
+    flex: .125;
+}
+
+.data-view-delete-form button[type="submit"],
 .button-delete,
 .form-actions-button-cancel {
     background: var(--Red-Flash);
@@ -331,9 +431,19 @@
 }
 
 .current-datatype-add {
-    margin: .65em 0;
+    display: flex;
+    margin-bottom: .65em;
     padding: .25em 0;
     width: 100%;
+    gap: 1em 0;
+}
+
+.current-datatype-add a {
+    display: inline-flex;
+    justify-content: center;
+    align-items: baseline;
+    width: 100%;
+    gap: 0 .6em;
 }
 
 .icon-delete i,
@@ -348,21 +458,6 @@
 .icon-disabled i {
     cursor: not-allowed;
     color: rgba(100, 100, 100, 0.4);
-}
-
-.editing-data-form-wrapper h1 {
-    margin: 1em 0 0 0;
-}
-
-.editing-data-form-container {
-    width: 100%;
-    justify-content: center;
-    align-items: center;
-}
-
-.editing-data-form-container form {
-    padding: 1em 4em;
-    flex: 1;
 }
 
 .search-form-actions-buttons-section,
@@ -398,6 +493,68 @@
     gap: .5em;
 }
 
+.data-view-wrapper {
+    width: 80%;
+    margin: auto;
+}
+
+.data-view-container h1 {
+    margin: 1em 0 0 0;
+}
+
+.data-view-action-content {
+    text-align: center;
+    padding: .5em 1em;
+}
+
+.data-view-delete-form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: .75em;
+}
+
+.data-view-delete-form form {
+    display: inline-flex;
+    flex: .3;
+}
+
+.data-view-delete-form form button[type="submit"]{
+    width: 100%;
+    margin: 0;
+    padding: .75em;
+}
+
+.data-view-content {
+    justify-content: center;
+    align-items: center;
+}
+
+.data-view-content form {
+    width: 60%;
+}
+
+.data-view-button-section,
+.data-view-bottom-section {
+    display: flex;
+    justify-content: center;
+    align-items: start;
+    padding: 1em;
+}
+
+.data-view-bottom-section {
+    justify-content: start;
+    padding: 1em 0;
+}
+
+.data-view-button-section .button-save {
+    flex: .25;
+}
+
+.data-view-bottom-section .button-back {
+    flex: .15;
+}
+
 @media screen and (max-width: 75em) {
     .dashboard-nav ul {
         grid-template-columns: repeat(auto-fit, 100%);
@@ -408,10 +565,13 @@
         padding: 0.6em 0 0.3em 0;
     }
 
-    .user-list,
+    .user-list {
+        grid-template-columns: repeat(auto-fit, minmax(12em, 1fr));
+    }
+
     .city-list,
     .campus-list {
-        grid-template-columns: repeat(auto-fit, minmax(100%, 1fr));
+        grid-template-columns: repeat(auto-fit, minmax(7.5em, 1fr));
     }
 
     .user-infos-container {
@@ -447,12 +607,43 @@
         width: 15em;
     }
 
-    .user-item-actions .button-edit {
-        flex: 0.5;
+    .current-datatype-add .button-add,
+    .user-item-actions .button-edit,
+    .data-view-button-section .button-save,
+    .data-view-bottom-section .button-back {
+        flex: 1;
         padding: .85em 1em;
+    }
+
+    .data-view-content form {
+        width: 85%;
+    }
+
+    .current-datatype-add .button-add {
+        flex: 1;
     }
 
     .search-form-actions-buttons-section .form-actions-button {
         padding: .85em;
+    }
+}
+
+@media screen and (max-width: 62.5em) {
+    .data-view-wrapper {
+        width: 70%;
+    }
+
+    .data-view-delete-form form {
+        flex: .75;
+    }
+}
+
+@media screen and (max-width: 31.25em) {
+    .data-view-wrapper {
+        width: 100%;
+    }
+
+    .data-view-delete-form form {
+        flex: 1;
     }
 }

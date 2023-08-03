@@ -15,14 +15,6 @@
             </form>
         </section>
 
-        <div class="users-actions">
-            <section class="users-actions-forms-section">
-                {% include "components/_search_data.html.twig" with{
-                    form: search_user_form
-                } %}
-            </section>
-        </div>
-
         <section class="users-form-actions-buttons-section">
             <button id="filter-button" class="form-actions-button">
                 Filter
@@ -30,22 +22,25 @@
             <button id="sort-button" class="form-actions-button">
                 Sort
             </button>
-            {% if filter_form.vars.submitted %}
 
-                {% set value = filter_form.vars.value %}
-                {% if value.role.name is defined and not null %}
-                    {% set message = value.role.name|replace({'ROLE_': ''}) %}
-                {% endif %}
+            {# Applied filter cancellation button #}
+            <span>
+                {% if filter_form.vars.submitted %}
 
-                {% if value.campus.nom is defined and not null %}
-                    {% set message = value.campus.nom %}
-                {% endif %}
+                    {% set value = filter_form.vars.value %}
+                    {% if value.role is not null %}
+                        {% set message = value.role.name|replace({'ROLE_': ''}) %}
+                    {% endif %}
 
-                {% if value.sort is defined and not null %}
-                    {% set message = value.sort %}
-                {% endif %}
+                    {% if value.campus is not null %}
+                        {% set message = value.campus.nom %}
+                    {% endif %}
 
-                <a href="{{ path('admin_dashboard') }}">
+                    {% if value.sort is not null %}
+                        {% set message = value.sort %}
+                    {% endif %}
+
+                    <a href="{{ path('admin_dashboard') }}">
                     <button class="form-actions-button-cancel">
                          <span>
                                <i class="fa-solid fa-xmark"></i>
@@ -53,9 +48,22 @@
                          </span>
                     </button>
                 </a>
-            {% endif %}
+                {% endif %}
+            </span>
         </section>
     </div>
+
+    <p class="data-found">
+        {{ users|length }} result(s) found.
+    </p>
+
+    <section class="current-datatype-add">
+        <a href="{{ path('admin_user_add') }}" class="button-add">
+            <i class="fa-solid fa-plus"></i>
+            Add New User
+        </a>
+    </section>
+
     <div class="user-list">
         {% for user in users %}
             <div class="user-infos-wrapper">

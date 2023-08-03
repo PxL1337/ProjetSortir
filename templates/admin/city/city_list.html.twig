@@ -8,12 +8,34 @@
         </section>
     </div>
 
+    <p class="data-found">
+        {{ cities|length }} result(s) found.
+    </p>
+
+
+    <section class="current-datatype-add">
+        <a href="{{ path('admin_city_add') }}" class="button-add">
+            <i class="fa-solid fa-plus"></i>
+            Add a new City
+        </a>
+    </section>
+
     <div class="city-list">
         {% for city in cities %}
             <div class="city-infos-wrapper">
+                <div class="user-item-actions-topRight">
+                    <section>
+                            <span class="icon-delete">
+                            <a href="{{ path('admin_city_delete', {'id': city.id}) }}"
+                               title="Delete {{ city.nom }}">
+                                <i class="fa-solid fa-trash"></i>
+                            </a>
+                        </span>
+                    </section>
+                </div>
+
                 <div class="city-infos-container">
                     <section>
-                        <span> {{ city.id }} </span>
                         <span> {{ city.nom }} </span>
                         <span> {{ city.codePostal }} </span>
                     </section>
@@ -22,20 +44,9 @@
                         <a href="{{ path('admin_city_edit', { id: city.id }) }}" class="button-edit">
                             Edit
                         </a>
-                        <a href="{{ path('admin_city_delete', { id: city.id }) }}"
-                           class="button-delete">
-                            Delete
-                        </a>
                     </div>
                 </div>
             </div>
         {% endfor %}
     </div>
-
 </div>
-
-<section class="current-datatype-add">
-    <a href="{{ path('admin_city_add') }}" class="button-add">
-        Add a new City
-    </a>
-</section>

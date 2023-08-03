@@ -41,23 +41,18 @@
 
             <div class="dashboard-main">
                 <div class="dashboard-content">
-                    <section class="content-title">
-                        TITLE (SELECTED CONTENT)
-                    </section>
+                    <section class="content-title">Category</section>
 
                     <div id="dashboard-contents-parent">
-                        <section
-                                class="content-section" id="users-section">
+                        <section class="content-section" id="users-section">
                             {% include 'admin/user/list_user.html.twig' %}
                         </section>
 
-                        <section
-                                class="content-section" id="cities-section">
+                        <section class="content-section" id="cities-section">
                             {% include 'admin/city/city_list.html.twig' %}
                         </section>
 
-                        <section class="content-section"
-                                 id="campuses-section">
+                        <section class="content-section" id="campuses-section">
                             {% include 'admin/campus/index.html.twig' %}
                         </section>
                     </div>

@@ -1,25 +1,37 @@
-<div class="campus-list">
-    {% for campus in campuses %}
-<div class="campus-infos-wrapper">
-    <div class="campus-infos-container">
-        <span>{{ campus.nom }} {# ou le champ approprié de votre entité Campus #}</span>
-
-        <div class="campus-item-actions">
-            <a href="{{ path('admin_campus_edit', {'id': campus.id}) }}" class="button-edit">
-                Edit
-            </a>
-            <a href="{{ path('admin_campus_delete', {'id': campus.id}) }}"
-               class="button-delete">
-                Delete
-            </a>
-        </div>
-    </div>
-</div>
-    {% endfor %}
-</div>
+<p class="data-found">
+    {{ campuses|length }} result(s) found.
+</p>
 
 <section class="current-datatype-add">
     <a href="{{ path('admin_campus_new') }}" class="button-add">
+        <i class="fa-solid fa-plus"></i>
         Add New Campus
     </a>
 </section>
+
+<div class="campus-list">
+    {% for campus in campuses %}
+        <div class="campus-infos-wrapper">
+            <div class="user-item-actions-topRight">
+                <section>
+                            <span class="icon-delete">
+                            <a href="{{ path('admin_campus_delete', {'id': campus.id}) }}"
+                               title="Delete {{ campus.nom }}">
+                                <i class="fa-solid fa-trash"></i>
+                            </a>
+                        </span>
+                </section>
+            </div>
+
+            <div class="campus-infos-container">
+                <span>{{ campus.nom }} {# ou le champ approprié de votre entité Campus #}</span>
+
+                <div class="campus-item-actions">
+                    <a href="{{ path('admin_campus_edit', {'id': campus.id}) }}" class="button-edit">
+                        Edit
+                    </a>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+</div>
