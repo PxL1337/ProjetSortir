@@ -5,9 +5,10 @@
 {% endblock %}
 
 {% block body %}
-    <div class="form-wrapper">
+    <div class="editing-data-form-wrapper">
         <h1>Modifying {{ user.pseudo }}</h1>
-        <div class="form-container">
+
+        <div class="editing-data-form-container">
             {{ form_start(form) }}
             {{ form_widget(form) }}
         </div>

@@ -18,7 +18,7 @@ class SearchType extends AbstractType
                 [
                     'required' => false,
                     'attr' => [
-                        'placeholder' => 'Recherche via un mot clé',
+                        'placeholder' => 'Search by keyword',
                         'id' => 'form_search_city'
                     ]
                 ]);

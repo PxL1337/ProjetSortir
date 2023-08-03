@@ -12,6 +12,6 @@
     <form method="post" action="{{ path('admin_campus_confirm_delete', {'id': campus.id}) }}">
         <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ campus.id) }}">
         <button class="btn btn-danger">Supprimer</button>
-        <a href="{{ path('admin_campus_index') }}" class="btn btn-secondary">Annuler</a>
+        <a href="{{ path('admin_dashboard') }}" class="btn btn-secondary">Annuler</a>
     </form>
 {% endblock %}

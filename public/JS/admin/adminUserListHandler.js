@@ -57,15 +57,15 @@ function handleFilteringAndSortingBehaviours() {
 
         loadingElement.classList.remove('d-none');
 
-        const formData = new FormData(filterForm);
+        // const formData = new FormData(filterForm);
 
-        fetch(filterForm.action, {
-            method: 'POST', body: formData
-        })
-            .then(response => new Promise(resolve => setTimeout(() => resolve(response.text()), 2000))) // Ajoute un délai de 2 secondes
-            .then(data => {
-                userTableContainer.innerHTML = data;
-                loadingElement.classList.add('d-none');
-            });
+        // fetch(filterForm.action, {
+        //     method: 'POST', body: formData
+        // })
+        //     .then(response => new Promise(resolve => setTimeout(() => resolve(response.text()), 2000))) // Ajoute un délai de 2 secondes
+        //     .then(data => {
+        //         userTableContainer.innerHTML = data;
+        //         loadingElement.classList.add('d-none');
+        //     });
     });
 }

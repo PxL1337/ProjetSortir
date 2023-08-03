@@ -1,9 +1,9 @@
-{% extends 'admin/dashboard.html.twig' %}
+{% extends 'base.html.twig' %}
 
 {% block body %}
     <h1>Modifier un lieu</h1>
 
-    <form method="post" action="{{ path('admin_place_edit', { 'id': place.id }) }}">
+    <form method="post" action="{{ path('place_edit', { 'id': place.id }) }}">
         {{ form_start(form) }}
         {{ form_widget(form) }}
 
@@ -13,7 +13,7 @@
         {{ form_end(form) }}
     </form>
 
-    <a href="{{ path('admin_place_list') }}">Retour à la liste</a>
+    <a href="{{ path('place_list') }}">Retour à la liste</a>
 {% endblock %}
 
 {% block javascripts %}

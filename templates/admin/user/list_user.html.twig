@@ -15,15 +15,38 @@
             </form>
         </section>
 
-        <section class="form-actions-buttons-section">
+        <section class="users-form-actions-buttons-section">
             <button id="filter-button" class="form-actions-button">
                 Filter
             </button>
             <button id="sort-button" class="form-actions-button">
                 Sort
             </button>
-        </section>
+            {% if filter_form.vars.submitted %}
 
+                {% set value = filter_form.vars.value %}
+                {% if value.role.name is defined and not null %}
+                    {% set message = value.role.name|replace({'ROLE_': ''}) %}
+                {% endif %}
+
+                {% if value.campus.nom is defined and not null %}
+                    {% set message = value.campus.nom %}
+                {% endif %}
+
+                {% if value.sort is defined and not null %}
+                    {% set message = value.sort %}
+                {% endif %}
+
+                <a href="{{ path('admin_dashboard') }}">
+                    <button class="form-actions-button-cancel">
+                         <span>
+                               <i class="fa-solid fa-xmark"></i>
+                               {{ message }}
+                         </span>
+                    </button>
+                </a>
+            {% endif %}
+        </section>
     </div>
     <div class="user-list">
         {% for user in users %}

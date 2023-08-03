@@ -6,8 +6,8 @@
 
 .dashboard-wrapper {
     background: var(--180FadingBlackGradient);
-    border-radius: 10px;
-    backdrop-filter: blur(6px);
+    border-radius: 0.625em;
+    backdrop-filter: blur(0.375em);
 }
 
 .dashboard-container {
@@ -17,24 +17,24 @@
 }
 
 .dashboard-main {
-    padding: 1em .5em;
+    padding: .75em 0;
 }
 
 .dashboard-nav {
     background: var(--90FadingBlackGradient);
-    border-radius: 10px;
+    border-radius: .625em;
     padding: 0 .5em;
 }
 
 .dashboard-nav ul {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(15em, 1fr));
     justify-content: center;
     align-items: center;
     width: 100%;
     padding: 0;
     text-align: center;
-    gap: 15px 0;
+    gap: 1em 0;
 }
 
 .dashboard-nav ul li button {
@@ -67,38 +67,46 @@
     letter-spacing: 2px;
     text-align: center;
     text-transform: uppercase;
-    padding: .5em .5em .25em .5em;
+    padding: 0.6em 0.6em .3em 0.6em;
     background: var(--90FadingBlackGradient);
-    border-radius: 10px;
-}
-
-.form-actions-buttons-section {
-    display: flex;
-    align-items: start;
-    width: 100%;
-    height: min-content;
-    gap: 0 .75em;
-}
-
-.form-actions-buttons-section .form-actions-button {
-    width: 7.5em;
-    padding: .5em 0;
+    border-radius: .625em;
+    width: 10em;
+    font-size: .85em;
 }
 
 .users-actions,
 .cities-actions {
     padding: .75em 0;
+    width: 50%;
+}
+
+.cities-actions {
+    width: 25%;
 }
 
 .users-actions-forms-section {
 
 }
 
+.users-actions-forms-section .filter-field,
+.users-actions-forms-section .sort-field {
+    padding-bottom: .75em;
+}
+
+.users-actions-forms-section .filter-field label,
+.users-actions-forms-section .sort-field label{
+    padding: 0;
+}
+
+.users-actions-forms-section .filter-field div:not(:first-of-type) {
+    padding-top: .75em;
+}
+
 .user-list,
 .campus-list,
 .city-list {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(15em, 1fr));
     justify-content: center;
     align-items: center;
     width: 100%;
@@ -107,21 +115,21 @@
 }
 
 .user-list {
-    grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(14em, 1fr));
 }
 
 .campus-list {
     margin-top: 1em;
 }
 
-.form-wrapper,
+.editing-data-form-wrapper,
 .user-infos-wrapper,
 .city-infos-wrapper,
 .campus-infos-wrapper {
     width: 100%;
     max-width: 100%;
     background: var(--180FadingBlackGradient);
-    border-radius: 10px;
+    border-radius: 0.625em;
     border: solid 1px rgba(255, 255, 255, 0.2);
 }
 
@@ -138,7 +146,7 @@
     gap: 1em;
 }
 
-.form-container,
+.editing-data-form-container,
 .city-infos-container,
 .campus-infos-container {
     display: flex;
@@ -166,9 +174,9 @@
 .user-icon {
     overflow: hidden;
     border: solid .125em white;
-    width: 100px;
-    height: 100px;
-    min-inline-size: 100px;
+    width: 6.25em;
+    height: 6.25em;
+    min-inline-size: 6.25em;
     border-radius: 10%;
     box-shadow: 0 .35em 0.65em var(--Black);
 }
@@ -182,12 +190,12 @@
 .user-status {
     font-size: .55em;
     text-transform: uppercase;
-    width: 100px;
+    width: 6.25em;
 }
 
 .user-active,
 .user-inactive {
-    border-radius: 8px;
+    border-radius: 0.5em;
     padding: .5em;
     font-weight: bold;
     letter-spacing: 1px;
@@ -228,7 +236,7 @@
     display: inline-flex;
     flex-direction: column;
     align-items: center;
-    gap: 3px 0;
+    gap: 0.188em 0;
 }
 
 .user-name-email span {
@@ -246,7 +254,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 20px;
+    gap: 1.25em;
 
     width: 100%;
 }
@@ -261,8 +269,9 @@
     justify-content: center;
 }
 
-.user-item-actions section a {
+.user-item-actions .button-edit {
     width: 15em;
+    flex: .55;
 }
 
 .city-item-actions,
@@ -276,24 +285,25 @@
 
 .button-positive-action,
 .form-actions-button,
+.form-actions-button-cancel,
 .button-edit,
 .button-delete,
 .button-add,
 .button-disabled {
-    border-radius: 10px;
-    width: 60px;
-    padding: .5em 1em;
+    border-radius: 0.625em;
+    width: 3.75em;
+    padding: .6em 1em;
     font-size: .6em;
     border: solid 2px rgba(0, 0, 0, 0);
     color: var(--white);
     text-transform: uppercase;
     font-weight: normal;
-    letter-spacing: 1px;
     text-align: center;
 }
 
 .button-positive-action:hover,
 .form-actions-button:hover,
+.form-actions-button-cancel:hover,
 .button-edit:hover,
 .button-add:hover,
 .button-delete:hover {
@@ -309,7 +319,8 @@
     background: var(--Dusty-Blue);
 }
 
-.button-delete {
+.button-delete,
+.form-actions-button-cancel {
     background: var(--Red-Flash);
 }
 
@@ -339,22 +350,64 @@
     color: rgba(100, 100, 100, 0.4);
 }
 
-.form-wrapper h1 {
+.editing-data-form-wrapper h1 {
     margin: 1em 0 0 0;
 }
 
-.form-container {
+.editing-data-form-container {
     width: 100%;
     justify-content: center;
     align-items: center;
 }
 
-.form-container form {
+.editing-data-form-container form {
     padding: 1em 4em;
     flex: 1;
 }
 
-@media screen and (max-width: 1200px) {
+.search-form-actions-buttons-section,
+.users-form-actions-buttons-section,
+.editing-data-form-buttons-section {
+    display: flex;
+    align-items: start;
+    width: 100%;
+    height: min-content;
+    gap: 0 .75em;
+}
+
+.editing-data-form-buttons-section {
+    flex-direction: column;
+    gap: .75em 0;
+}
+
+.users-form-actions-buttons-section .form-actions-button,
+.users-form-actions-buttons-section .form-actions-button-cancel,
+.search-form-actions-buttons-section .form-actions-button {
+    width: 11.5em;
+    padding: .6em 0;
+}
+
+.users-form-actions-buttons-section .form-actions-button-cancel {
+    width: max-content;
+    padding: .6em;
+}
+
+.users-form-actions-buttons-section .form-actions-button-cancel span {
+    display: flex;
+    flex-direction: row-reverse;
+    gap: .5em;
+}
+
+@media screen and (max-width: 75em) {
+    .dashboard-nav ul {
+        grid-template-columns: repeat(auto-fit, 100%);
+    }
+
+    .content-title {
+        width: 100%;
+        padding: 0.6em 0 0.3em 0;
+    }
+
     .user-list,
     .city-list,
     .campus-list {
@@ -385,7 +438,21 @@
         flex: 1;
     }
 
+    .users-actions,
+    .cities-actions {
+        width: 100%;
+    }
+
     .user-item-actions section {
         width: 15em;
+    }
+
+    .user-item-actions .button-edit {
+        flex: 0.5;
+        padding: .85em 1em;
+    }
+
+    .search-form-actions-buttons-section .form-actions-button {
+        padding: .85em;
     }
 }
