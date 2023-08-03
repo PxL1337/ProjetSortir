@@ -457,6 +457,22 @@ input[type="checkbox"]{
 
 }
 
+@media screen and (max-width: 860px) {
+    .outing-container {
+        margin-left: 0;
+    }
+
+    .filter-outings {
+        min-width: 100%;
+        margin: 0;
+        padding-right: 10px;
+    }
+
+    .outings-list {
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    }
+}
+
 
 
 
