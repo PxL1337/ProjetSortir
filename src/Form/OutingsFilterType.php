@@ -56,11 +56,12 @@ class OutingsFilterType extends AbstractType
             ])
             ->add('notRegistered', CheckboxType::class, [
                 'required' => false,
-                'label' => "Sorties auxquelles je ne suis pas inscrit",
+                'label' => "Sorties auxquelles je ne participe pas",
             ])
             ->add('past', CheckboxType::class, [
                 'required' => false,
                 'label' => "Sorties passées",
+
             ])
             ->add('pastMonth', CheckboxType::class, [
                 'label'    => 'Sorties du mois dernier',

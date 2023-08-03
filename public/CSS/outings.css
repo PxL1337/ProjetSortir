@@ -40,7 +40,7 @@
 .filter-outings {
     display: block;
     float: left;
-    min-width: 250px;
+    min-width: 350px;
     min-height: 1000px;
     line-height: 3em;
     background-color: rgba(40, 55, 57, 0.8);
@@ -50,6 +50,8 @@
     border-radius: 6px;
     color: var(--gray-peach);
 }
+
+
 
 .filters-title {
     border: solid 5px var(--Light-Sea-Green);
@@ -383,5 +385,31 @@
 .outing-cancel .btn:hover {
     background-color: var(--Dusty-Blue);
 }
+.checkboxes{
+
+
+    justify-content: left;
+    flex-direction: row;
+
+
+
+}
+input[type="checkbox"]{
+    padding : 0;
+    margin: 0;
+    max-width:  20px;
+
+
+
+}
+
+.checkboxes label{
+    display: inline-block;
+
+
+
+}
+
+
 
 

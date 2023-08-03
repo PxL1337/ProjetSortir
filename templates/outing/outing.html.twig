@@ -14,7 +14,16 @@
                 {% endif %}
             </div>
             {{ form_start(form) }}
-            {{ form_widget(form) }}
+            {{ form_row(form.q, {'attr': {'placeholder': 'Search'}}) }}
+            {{ form_row(form.campus) }}
+            {{ form_row(form.dateMin) }}
+            {{ form_row(form.dateMax) }}
+            {% for field in ['organizer', 'planned', 'notRegistered', 'past', 'pastMonth'] %}
+                <div class="checkboxes">
+
+                    {{ form_row(form[field], {'attr':{'class' : 'checkboxes'}}) }}
+                </div>
+            {% endfor %}
             <input type="submit" value="Filter">
             {{ form_end(form) }}
         </div>
