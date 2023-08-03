@@ -1,14 +1,14 @@
 {% extends 'admin/dashboard.html.twig' %}
 
 {% block title %}
-    {{ parent() }} | Editing {{ city.name }}
+    {{ parent() }} | Editing {{ city.nom }}
 {% endblock %}
 
 {% block body %}
-    <div class="form-wrapper">
-        <h1>Editing {{ city.name }}</h1>
+    <div class="editing-data-form-wrapper">
+        <h1>Editing {{ city.nom }}</h1>
 
-        <div class="form-container">
+        <div class="editing-data-form-container">
             {{ form_start(form) }}
             {{ form_widget(form) }}
         </div>

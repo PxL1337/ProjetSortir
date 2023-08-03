@@ -410,25 +410,25 @@ input:not([type="submit"]):not([value=""]) {
 }
 
 /* Outing form */
-.form-container {
+.editing-data-form-container {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 20px;
 }
 
-.form-container .form-group {
+.editing-data-form-container .form-group {
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin-bottom: 20px;
 }
 
-.form-container label {
+.editing-data-form-container label {
     margin-right: 20px;
 }
 
-.form-container input,
-.form-container select {
+.editing-data-form-container input,
+.editing-data-form-container select {
     flex-grow: 1;
 }
 

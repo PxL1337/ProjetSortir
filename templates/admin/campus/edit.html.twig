@@ -5,10 +5,10 @@
 {% endblock %}
 
 {% block body %}
-    <div class="form-wrapper">
+    <div class="editing-data-form-wrapper">
         <h1>Editing {{ campus.nom }}</h1>
 
-        <div class="form-container">
+        <div class="editing-data-form-container">
             {{ form_start(form) }}
             {{ form_widget(form) }}
         </div>
@@ -20,7 +20,7 @@
         {{ form_end(form) }}
     </div>
 
-    <a href="{{ path('admin_campus_index') }}">
+    <a href="{{ path('admin_dashboard') }}">
         Back to list
     </a>
 {% endblock %}

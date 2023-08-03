@@ -19,25 +19,25 @@ class UserFilterType extends AbstractType
                 'class' => Campus::class,
                 'choice_label' => 'nom',
                 'required' => false,
-                'placeholder' => 'Tous les campus',
+                'placeholder' => 'All campuses',
             ])
             ->add('role', EntityType::class, [
                 'class' => Role::class,
                 'choice_label' => 'name',
                 'required' => false,
-                'placeholder' => 'Tous les rôles',
+                'placeholder' => 'All roles',
             ])
             ->add('sort', ChoiceType::class, [
-                'choices'  => [
-                    'Prénom' => 'firstname',
-                    'Nom' => 'lastname',
+                'required' => false,
+                'label' => 'Sort users by',
+                'choices' => [
+                    'Firstname' => 'firstname',
+                    'Lastname' => 'lastname',
                     'Email' => 'email',
                     'Campus' => 'campus',
-                    'Rôle' => 'role',
-                ],
-                'required' => false,
-            ])
-        ;
+                    'Role' => 'role'],
+                'placeholder' => 'Choose sorting option',
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void
