@@ -68,6 +68,19 @@ class AdminController extends AbstractController
             $cities = array_values($this->getCityComponents( $cityRepository, null))[1];
         }
 
+
+        // Factorisable en getCityContent
+        $searchUserForm = $this->createForm(SearchType::class);
+        $searchUserForm->handleRequest($request);
+        $searchInput = $searchUserForm->get('input')->getData();
+
+        if ($searchUserForm->isSubmitted() && $searchUserForm->isValid()) {
+            $users = array_values($this->getUserComponents( $userRepository, $searchInput))[1];
+        }
+        else {
+            $users = array_values($this->getUserComponents( $userRepository, null))[1];
+        }
+
         dump("Cities has been set");
 
         $campuses = $campusRepository->findAll();
@@ -90,6 +103,7 @@ class AdminController extends AbstractController
             'search_city_form' => $searchCityForm->createView(),
             'campuses' => $campuses,
             'roles' => $roles,
+            'search_user_form' => $searchUserForm->createView(),
         ]);
     }
 
@@ -106,6 +120,23 @@ class AdminController extends AbstractController
         return [
             'searchCityForm' => $searchCityForm,
             'cities' => $cities
+        ];
+    }
+
+    public function getUserComponents(UserRepository $userRepository, ?string $searchInput): array
+    {
+        $searchData = new SearchData();
+        $searchData->input = $searchInput;
+
+        $searchUserForm = $this->createForm(SearchType::class, $searchData);
+
+        $users = $searchInput ?
+            $userRepository->findBySearch($searchData) : $userRepository->findAll();
+
+
+        return [
+            'searchUserForm' => $searchUserForm,
+            'users' => $users
         ];
     }
 

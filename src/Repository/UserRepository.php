@@ -121,4 +121,15 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
 //            ->getOneOrNullResult()
 //        ;
 //    }
+    public function findBySearch(\App\Model\SearchData $searchData)
+    {
+            $query = $this->createQueryBuilder('u')
+                ->select('u')
+                ->where('u.firstname LIKE :firstname OR u.lastname LIKE :lastname')
+                ->setParameter('firstname', '%' . $searchData->input . '%')
+                ->setParameter('lastname', '%' . $searchData->input . '%')
+                ->getQuery();
+
+            return $query->getResult();
+    }
 }
