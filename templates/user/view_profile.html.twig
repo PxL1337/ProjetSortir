@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Profil de {{user.firstName}} | {{ parent() }}{% endblock %}
+
+{% block body %}
+
+    <section class="profile">
+        <strong>{{ user.pseudo }}</strong>
+
+        <ul>
+            <li>
+                <img src="{{ asset('uploads/profile/photos/' ~ user.photo) }}" alt="{{ user.firstName }}" style="max-width:200px;">
+            </li>
+            <li><strong>Firstname :</strong> {{ user.firstName }}</li>
+            <li><strong>Name :</strong> {{ user.lastName }}</li>
+            <li><strong>Phone :</strong> {{ user.telephone }}</li>
+            <li><strong>Email :</strong> {{ user.email }}</li>
+            <li><strong>Campus :</strong> {% if user.campus %}{{ user.campus.nom }}{% else %}Aucun{% endif %}</li>
+        </ul>
+    </section>
+{% endblock %}

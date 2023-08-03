@@ -20,15 +20,32 @@ use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 #[Route('/user')]
 class UserController extends AbstractController
 {
-    /**
-     * @throws NonUniqueResultException
-     */
+
     #[Route('/profile/{username}', name: 'user_profile')]
     public function profile(string $username, UserRepository $userRepository): Response
     {
+
         $user = $userRepository->findByUsernameWithCampus($username);
 
+        if ($user !== $this->getUser()) {
+            return $this->redirectToRoute('user_view_profile', ['username' => $username]);
+        }
+
         return $this->render('user/profile.html.twig', [
+            'user' => $user,
+        ]);
+    }
+
+    #[Route('/profile/view/{username}', name: 'user_view_profile')]
+    public function viewProfile(string $username, UserRepository $userRepository): Response
+    {
+        $user = $userRepository->findByUsernameWithCampus($username);
+
+        if ($user === $this->getUser()) {
+            return $this->redirectToRoute('user_profile');
+        }
+
+        return $this->render('user/view_profile.html.twig', [
             'user' => $user,
         ]);
     }

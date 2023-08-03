@@ -25,7 +25,11 @@
         <h3>Participants : {{ outing.attendees.count }}/{{ outing.nbInscriptionMax }}</h3>
         <ul>
             {% for attendee in outing.attendees %}
-                <li>{{ attendee.firstname }} {{ attendee.lastname }}</li>
+                <li>
+                    <a href="{{ path('user_view_profile', {username: attendee.pseudo}) }}">
+                        {{ attendee.firstname }} {{ attendee.lastname }}
+                    </a>
+                </li>
             {% endfor %}
         </ul>
 
