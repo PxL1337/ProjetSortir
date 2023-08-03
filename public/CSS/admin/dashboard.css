@@ -160,13 +160,14 @@
     clear: both;
 }
 
-.user-infos-container,
-.city-infos-container,
-.campus-infos-container {
-    -webkit-animation: fadeInFromNone 1.5s ease-out;
-    -moz-animation: fadeInFromNone 1.5s ease-out;
-    -o-animation: fadeInFromNone 1.5s ease-out;
-    animation: fadeInFromNone 1.5s ease-out;
+.content-title,
+.user-infos-wrapper,
+.city-infos-wrapper,
+.campus-infos-wrapper {
+    -webkit-animation: fadeInFromNone   1.5s ease;
+    -moz-animation: fadeInFromNone      1.5s ease;
+    -o-animation: fadeInFromNone        1.5s ease;
+    animation: fadeInFromNone           1.5s ease;
 }
 
 @-webkit-keyframes fadeInFromNone {
