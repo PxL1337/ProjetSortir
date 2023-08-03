@@ -10,6 +10,29 @@
     backdrop-filter: blur(0.375em);
 }
 
+.dashboard-wrapper select,
+.data-view-wrapper select,
+.dashboard-wrapper input:not([type="submit"]):not([value=""]),
+.data-view-wrapper input:not([type="submit"]):not([value=""]) {
+    transition: .2s linear;
+    background: var(--90FadingBlackGradient);
+    color: white;
+    outline: none;
+    border: 2px solid var(--Dusty-Blue);
+}
+
+.dashboard-wrapper select option,
+.data-view-wrapper select option {
+    color: black;
+}
+
+.dashboard-wrapper input:not([type="submit"]):not([value=""]):hover,
+.data-view-wrapper input:not([type="submit"]):not([value=""]):hover {
+    transform:scale(1.01);
+    border: 2px solid var(--white);
+}
+
+
 .dashboard-container {
     display: flex;
     flex-direction: column;
@@ -48,7 +71,8 @@
     text-transform: uppercase;
     color: rgba(255, 255, 255, .3);
     font-weight: normal;
-    box-sizing: content-box
+    box-sizing: content-box;
+    transition: .25s ease-in-out;
 }
 
 .dashboard-nav ul li button:hover {
@@ -56,6 +80,7 @@
     text-underline-offset: 4px;
     cursor: pointer;
     font-weight: bolder;
+    transform:scale(1.15);
 }
 
 .dashboard-nav ul li.dbc-selected button {
@@ -63,20 +88,9 @@
     font-weight: bolder;
 }
 
-.content-title {
-    letter-spacing: 2px;
-    text-align: center;
-    text-transform: uppercase;
-    padding: 0.6em 0.6em .3em 0.6em;
-    background: var(--90FadingBlackGradient);
-    border-radius: .625em;
-    width: 10em;
-    font-size: .85em;
-}
-
 .users-actions,
 .cities-actions {
-    padding: .75em 0;
+    padding-bottom: .75em;
     width: 50%;
 }
 
@@ -84,8 +98,13 @@
     width: 25%;
 }
 
-.users-actions-forms-section {
-
+#cities-section .form-actions-button-cancel {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0 .6em;
+    margin-top: .75em;
+    width: 20em;
 }
 
 .users-actions-forms-section .filter-field,
@@ -114,10 +133,6 @@
 
 .user-list {
     grid-template-columns: repeat(auto-fit, minmax(14em, 1fr));
-}
-
-#campuses-section .data-found {
-    padding-top: .75em;
 }
 
 .data-found {
@@ -160,6 +175,7 @@
     clear: both;
 }
 
+.dashboard-wrapper,
 .content-title,
 .user-infos-wrapper,
 .city-infos-wrapper,
@@ -382,6 +398,7 @@
     text-transform: uppercase;
     font-weight: normal;
     text-align: center;
+    transition: 0.25s ease-in-out;
 }
 
 .data-view-add-form button[type="submit"]:hover,
@@ -397,7 +414,7 @@
     cursor: pointer;
     border: solid 2px var(--white);
     font-weight: bolder;
-    transition: border 0.4s linear;
+    transform:scale(1.025);
 }
 
 .data-view-content form button[type="submit"] {
@@ -453,6 +470,11 @@
 .icon-delete i,
 .icon-disabled i {
     font-size: .85em;
+    transition: .2s ease-in-out;
+}
+
+.icon-delete i:hover {
+    transform:scale(1.35);
 }
 
 .icon-delete i {
@@ -605,6 +627,20 @@
     .button-add,
     .button-disabled {
         flex: 1;
+    }
+
+    #cities-section .form-actions-button-cancel {
+        width: 100%;
+    }
+
+    .user-item-actions-topRight section {
+        top: .35em;
+        right: .35em;
+    }
+
+    .icon-delete i,
+    .icon-disabled i {
+        font-size: .8em;
     }
 
     .users-actions,

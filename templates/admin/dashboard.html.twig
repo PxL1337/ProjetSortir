@@ -8,7 +8,7 @@
     {% include('admin/inc/nav.html.twig') %}
 {% endblock %}
 
-{% block title %} {{ parent() }} Admin Panel{% endblock %}
+{% block title %} {{ parent() }} | Admin Panel {% endblock %}
 
 {% block body %}
     <div class="dashboard-wrapper">
@@ -41,9 +41,8 @@
 
             <div class="dashboard-main">
                 <div class="dashboard-content">
-                    <section class="content-title"></section>
-
                     <div id="dashboard-contents-parent">
+
                         <section class="content-section" id="users-section">
                             {% include 'admin/user/list_user.html.twig' %}
                         </section>

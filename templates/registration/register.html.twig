@@ -1,20 +1,40 @@
-{% extends 'base.html.twig' %}
+{% extends 'admin/dashboard.html.twig' %}
 
-{% block title %}Register  | {{ parent() }}{% endblock %}
+{% block extrastyles %}
+    <link rel="stylesheet" href="{{ asset('/css/admin/dashboard.css') }}">
+{% endblock %}
+
+{% block title %}
+    {{ parent() }} | Creating new user
+{% endblock %}
 
 {% block body %}
-    <div class="form-block">
-        <h2 class="form-title">Register</h2>
+    <div class="data-view-wrapper">
+        <div class="data-view-container">
+            <div class="data-view-action-content">
+                <h1 class="data-view-action-title">
+                    Create new user
+                </h1>
 
-        {{ form_errors(registrationForm) }}
+                <div class="data-view-add-form">
+                    {{ form_errors(registrationForm) }}
 
-        {{ form_start(registrationForm) }}
-        {{ form_widget(registrationForm) }}
+                    {{ form_start(registrationForm) }}
+                    {{ form_widget(registrationForm) }}
 
-
-        <input type="submit" class="btn" value="Register">
-        {{ form_end(registrationForm) }}
-
+                    <span>
+                        <button type="submit">
+                            Create
+                        </button>
+                    </span>
+                    {{ form_end(registrationForm) }}
+                </div>
+            </div>
+        </div>
+        <div class="data-view-bottom-section">
+            <a href="{{ path('admin_dashboard') }}" class="button-back">
+                Back to list
+            </a>
+        </div>
     </div>
-
 {% endblock %}

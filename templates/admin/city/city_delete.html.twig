@@ -1,11 +1,15 @@
 {% extends 'admin/dashboard.html.twig' %}
 
+{% block title %}
+    {{ parent() }} | Suppressing city "{{ city.nom }}"
+{% endblock %}
+
 {% block body %}
     <div class="data-view-wrapper">
         <div class="data-view-container">
             <div class="data-view-action-content">
                 <h1 class="data-view-action-title">
-                    City suppression
+                    Suppressing city "{{ city.nom }}"
                 </h1>
 
                 <p class="data-view-action-message">

@@ -45,8 +45,6 @@ function handleDashboardNavElements() {
                 deselectAllDashboardButtons();
                 selectDashboardButton(index, 'dbc-selected');
 
-                changeDashboardContentTitle(li.textContent);
-
                 setDashboardIndexInLocalStorage(index);
 
                 hideAllDashboardContents();
@@ -74,32 +72,9 @@ function handleDashboardNavElements() {
             })
         }
     }
-
-    function displayElementById(id) {
-        let element = document.getElementById(id);
-
-        if (element.style.display === 'inline') {
-            return;
-        }
-        element.style.display = 'inline';
-    }
-
-    function hideElementById(id) {
-        let element = document.getElementById(id);
-
-        if (element.style.display === 'none') {
-            return;
-        }
-
-        element.style.display = 'none';
-    }
 }
 
 function initBeforeDocumentLoaded() {
-    let title = allDashboardContentSections[getDashboardIndexFromLocalStorage()].id
-        .replace("-section", "");
-    changeDashboardContentTitle(title.toUpperCase());
-
     hideAllDashboardContents();
 }
 
@@ -127,11 +102,6 @@ function addOrSetClassNameToElement(element, className) {
 
     element.classList.replace(element.className, className);
     // console.log("Setting class name");
-}
-
-function changeDashboardContentTitle(newTitle) {
-    dashboardContentTitle.innerHTML = "";
-    dashboardContentTitle.innerHTML = newTitle;
 }
 
 function setDashboardIndexInLocalStorage(index) {

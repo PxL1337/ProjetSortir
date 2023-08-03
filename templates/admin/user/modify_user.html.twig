@@ -1,13 +1,13 @@
 {% extends 'admin/dashboard.html.twig' %}
 
 {% block title %}
-    {{ parent() }} | Modifying {{ user.pseudo }}
+    {{ parent() }} | Modifying user "{{ user.pseudo }}"
 {% endblock %}
 
 {% block body %}
     <div class="data-view-wrapper">
         <div class="data-view-container">
-            <h1>Modifying {{ user.pseudo }}</h1>
+            <h1>Modifying user "{{ user.pseudo }}"</h1>
 
             <div class="data-view-content">
                 {{ form_start(form) }}
