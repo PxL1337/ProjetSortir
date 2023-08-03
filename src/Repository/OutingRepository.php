@@ -66,6 +66,13 @@ class OutingRepository extends ServiceEntityRepository
             ->join('o.place', 'pla')  // Join other entities here as needed
             ->orderBy('o.dateHeureDebut', 'DESC');
 
+        // Exclude outings that happened more than a month ago, unless the user is an admin
+        $oneMonthAgo = (new \DateTime())->modify('-1 month');
+        if (!in_array('ROLE_ADMIN', $data->getUser()->getRoles()) || !$data->pastMonth) {
+            $query = $query->andWhere('o.dateHeureDebut >= :one_month_ago')
+                ->setParameter('one_month_ago', $oneMonthAgo);
+        }
+
         if (!empty($data->campus)) {
             $query->andWhere('o.campus IN (:campus)')
                 ->setParameter('campus', $data->campus);

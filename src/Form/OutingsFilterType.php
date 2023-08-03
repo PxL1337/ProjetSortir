@@ -62,6 +62,10 @@ class OutingsFilterType extends AbstractType
                 'required' => false,
                 'label' => "Sorties passées",
             ])
+            ->add('pastMonth', CheckboxType::class, [
+                'label'    => 'Sorties du mois dernier',
+                'required' => false,
+            ])
         ;
     }
 

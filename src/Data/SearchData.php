@@ -30,6 +30,11 @@ class SearchData
      */
     public ?DateTimeInterface $dateMax = null;
 
+    /**
+     * @var bool
+     */
+    public bool $pastMonth = false;
+
     public bool $organizer = false;
     public bool $planned = false;
     public bool $notRegistered = false;
