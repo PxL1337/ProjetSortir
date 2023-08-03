@@ -406,7 +406,10 @@ input:not([type="submit"]):not([value=""]) {
 
 #mapId {
     height: 400px;
-    width: 50%;
+    width: 100%;
+    margin-top: 20px;
+    border-radius: 5px;
+    margin-bottom: 20px;
 }
 
 /* Outing form */

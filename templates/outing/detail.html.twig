@@ -4,50 +4,84 @@
 
 {% block body %}
     <div class="outing-detail">
-        <h2>{{ outing.nom }}</h2>
-        <p>Infos sur la sortie : {{ outing.infosSortie }}</p>
-        <p>Du {{ outing.dateHeureDebut | date('d/m/y H:i') }} au {{ outing.heureFin | date('d/m/y H:i') }}</p>
-        <p>Campus : {{ outing.campus.nom }}</p>
-        <p>Ville : {{ outing.place.city.nom }}</p>
+        <div class="container">
+            <h2><i class="fas fa-mountain"></i> {{ outing.nom }}</h2>
 
-        {% if outing.status.libelle == 'Annulée' %}
-            <p>Motif d'annulation : {{ outing.cancellationReason }}</p>
-        {% endif %}
+            <div class="info-block">
+                <div class="info-left">
+                    <i class="fas fa-calendar-alt"></i>
+                    <p>Du {{ outing.dateHeureDebut | date('d/m/y H:i') }} au {{ outing.heureFin | date('d/m/y H:i') }}</p>
 
-        {% if app.user not in outing.attendees %}
-            <p>Date limite d'inscription : {{ outing.dateLimiteInscription | date('d/m/y H:i') }}</p>
-        {% else %}
-            <p>Vous êtes déjà inscrit à cette sortie.</p>
-        {% endif %}
+                    {% if app.user not in outing.attendees %}
+                        <i class="fas fa-stopwatch"></i>
+                        <p>Date limite d'inscription : {{ outing.dateLimiteInscription | date('d/m/y H:i') }}</p>
+                    {% else %}
+                        <i class="fas fa-check-circle"></i>
+                        <p>Vous êtes déjà inscrit à cette sortie.</p>
+                    {% endif %}
 
-        <p>Organisateur : {{ outing.Organizer.firstname }} {{ outing.Organizer.lastname }}</p>
+                    <i class="fas fa-user-tie"></i>
+                    <p>Organisateur : {{ outing.Organizer.firstname }} {{ outing.Organizer.lastname }}</p>
 
-        <h3>Participants : {{ outing.attendees.count }}/{{ outing.nbInscriptionMax }}</h3>
-        <ul>
-            {% for attendee in outing.attendees %}
-                <li>
-                    <a href="{{ path('user_profile', {username: attendee.pseudo}) }}">
-                        {{ attendee.firstname }} {{ attendee.lastname }}
-                    </a>
-                </li>
-            {% endfor %}
-        </ul>
+                    <i class="fas fa-chair"></i>
+                    <p>Places restantes : {{ outing.getRemainingPlaces }}</p>
+                </div>
 
-        <p>Places restantes : {{ outing.getRemainingPlaces }}</p>
+                <div class="info-right">
+                    <i class="fas fa-info-circle"></i>
+                    <p>Infos sur la sortie : {{ outing.infosSortie }}</p>
+
+                    {% if outing.status.libelle == 'Annulée' %}
+                        <i class="fas fa-exclamation-triangle"></i>
+                        <p>Motif d'annulation : {{ outing.cancellationReason }}</p>
+                    {% endif %}
+
+                    <i class="fas fa-university"></i>
+                    <p>Campus : {{ outing.campus.nom }}</p>
+
+                    <i class="fas fa-city"></i>
+                    <p>Ville : {{ outing.place.city.nom }}</p>
+                </div>
+            </div>
+        </div>
+
+        <div id="mapId"></div>
+
+        <div class="container">
+            <h3><i class="fas fa-users"></i> Participants : {{ outing.attendees.count }}/{{ outing.nbInscriptionMax }}</h3>
+            <div class="attendees">
+                {% for attendee in outing.attendees %}
+                    <div class="attendee">
+                        <a href="{{ path('user_profile', {username: attendee.pseudo}) }}">
+                            <i class="fas fa-user"></i>
+                            {{ attendee.firstname }} {{ attendee.lastname }}
+                        </a>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
 
         {# Add the buttons here #}
         {% if app.user and outing.status.libelle == 'Ouverte' and outing.dateLimiteInscription > 'now'|date('Y-m-d H:i:s') %}
             {% if app.user in outing.attendees %}
-                <a href="{{ path('outing_confirm_unregister', {id: outing.id}) }}" class="btn btn-warning">Se
-                    désister</a>
+                <a href="{{ path('outing_confirm_unregister', {id: outing.id}) }}" class="btn btn-warning"><i class="fas fa-sign-out-alt"></i> Se désister</a>
             {% else %}
-                <a href="{{ path('outing_register', {id: outing.id}) }}" class="btn btn-primary">S'inscrire</a>
+                <a href="{{ path('outing_register', {id: outing.id}) }}" class="btn btn-primary"><i class="fas fa-sign-in-alt"></i> S'inscrire</a>
             {% endif %}
         {% endif %}
 
         {% if app.user == outing.organizer and outing.status.libelle == 'Créée' %}
-            <a href="{{ path('outing_edit', {id: outing.id}) }}" class="btn btn-secondary">Modifier</a>
-            <a href="{{ path('outing_confirm_publish', {id: outing.id}) }}" class="btn btn-primary">Publier</a>
+            <a href="{{ path('outing_edit', {id: outing.id}) }}" class="btn btn-secondary"><i class="fas fa-edit"></i> Modifier</a>
+            <a href="{{ path('outing_confirm_publish', {id: outing.id}) }}" class="btn btn-primary"><i class="fas fa-upload"></i> Publier</a>
         {% endif %}
     </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('JS/map/placeDetailsMap.js') }}"></script>
+    <script type="text/javascript">
+        // Use the Twig variable in JavaScript
+        showPlaceDetailMap({{ outing.place.latitude }}, {{ outing.place.longitude }}, "{{ outing.place.nom }}", "{{ outing.place.rue }}");
+    </script>
 {% endblock %}

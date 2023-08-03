@@ -73,7 +73,54 @@
     color: var(--white);
     padding: 20px;
     margin-bottom: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
 }
+
+.outing-detail .info-block {
+    flex: 1 1 50%;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    box-shadow: rgba(0, 0, 0, 0.35) 0 5px 15px;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+
+.outing-detail .info-block i {
+    font-size: 1.5em;
+}
+
+.attendees {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1em;
+}
+
+.attendee {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    padding: 0.5em;
+    background-color: rgba(0, 0, 0, 0.35);
+    margin-bottom: 0.5em;
+    border-radius: 5px;
+}
+
+.attendee a {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    color: var(--white);
+}
+
+.attendee a i {
+    margin-right: 0.5em;
+}
+
 
 .outing-detail h2 {
     /* Styles for the heading */

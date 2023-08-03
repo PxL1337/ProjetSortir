@@ -80,7 +80,7 @@ class OutingController extends AbstractController
             $entityManager->flush();
 
             // Redirect to the outing list page
-            return $this->redirectToRoute('outing_list');
+            return $this->redirectToRoute('outing_detail', ['id' => $outing->getId()]);
         }
 
         $places = $placeRepository->findAll();
@@ -108,8 +108,7 @@ class OutingController extends AbstractController
 
             $this->addFlash('success', 'La sortie a été modifiée avec succès !');
 
-            $referer = $request->get('referer');
-            return $this->redirect($referer);
+            return $this->redirectToRoute('outing_detail', ['id' => $outing->getId()]);
         }
 
         $referer = $this->requestStack->getCurrentRequest()->headers->get('referer');
@@ -143,13 +142,11 @@ class OutingController extends AbstractController
 
             $this->addFlash('success', 'Vous êtes maintenant inscrit à cette sortie !');
 
-            $referer = $request->get('referer', $this->generateUrl('outing_list'));
-            return $this->redirect($referer);
+            return $this->redirectToRoute('outing_detail', ['id' => $outing->getId()]);
         } else {
             $this->addFlash('warning', 'Vous ne pouvez pas vous inscrire à cette sortie.');
 
-            $referer = $request->get('referer', $this->generateUrl('outing_list'));
-            return $this->redirect($referer);
+            return $this->redirectToRoute('outing_detail', ['id' => $outing->getId()]);
         }
     }
 
@@ -252,9 +249,7 @@ class OutingController extends AbstractController
         $this->addFlash('success', 'La sortie a été publiée avec succès !');
 
         // Get the referer from the session and redirect to it
-        $referer = $request->getSession()->get('referer');
-        $request->getSession()->remove('referer');
-        return $this->redirect($referer);
+        return $this->redirectToRoute('outing_detail', ['id' => $outing->getId()]);
     }
 
     #[Route('/outing/{id}/confirm_publish', name: 'outing_confirm_publish')]
@@ -300,9 +295,7 @@ class OutingController extends AbstractController
 
             $this->addFlash('success', 'La sortie a été annulée avec succès !');
 
-            $referer = $request->getSession()->get('referer');
-            $request->getSession()->remove('referer');
-            return $this->redirect($referer);
+            return $this->redirectToRoute('outing_detail', ['id' => $outing->getId()]);
         }
 
         return $this->render('outing/cancel.html.twig', [
