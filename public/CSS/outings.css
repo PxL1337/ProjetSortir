@@ -72,25 +72,35 @@
     border-radius: 10px;
     color: var(--white);
     padding: 20px;
-    margin-bottom: 20px;
+    margin: 20px;
     display: flex;
-    flex-wrap: wrap;
+    flex-direction: column;
+    align-items: center;
     gap: 20px;
 }
 
+.outing-detail-container {
+    width: 100%;
+}
+
 .outing-detail .info-block {
-    flex: 1 1 50%;
+    flex: 1 1 100%;
     display: flex;
     align-items: center;
+    justify-content: space-evenly;
     gap: 10px;
+    margin: auto;
     box-shadow: rgba(0, 0, 0, 0.35) 0 5px 15px;
     padding: 10px;
     border-radius: 10px;
 }
 
-
 .outing-detail .info-block i {
     font-size: 1.5em;
+}
+
+.outing-detail .info-block p {
+    max-width: 500px;
 }
 
 .attendees {
@@ -126,6 +136,8 @@
     /* Styles for the heading */
     font-size: 2em;
     color: var(--Dusty-Blue);
+    text-align: center;
+    width: 100%;
 }
 
 .outing-detail p {
@@ -140,7 +152,14 @@
     padding-left: 0;
 }
 
-.outing-detail .btn {
+.outing-detail-btn {
+    /* Styles for the buttons */
+    display: flex;
+    justify-content: space-evenly;
+    width: 80%;
+}
+
+.outing-detail-btn .btn {
     /* Styles for the buttons */
     font-size: 1em;
     padding: 10px;
@@ -149,9 +168,10 @@
     color: var(--white);
     background-color: var(--Verdigris);
     transition: background-color 0.3s ease;
+    width: auto;
 }
 
-.outing-detail .btn:hover {
+.outing-detail-btn .btn:hover {
     background-color: var(--Dusty-Blue);
 }
 
