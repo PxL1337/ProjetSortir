@@ -361,6 +361,7 @@
     flex: 1;
 }
 
+.data-view-add-form button[type="submit"],
 .data-view-delete-form form button[type="submit"],
 .button-positive-action,
 .form-actions-button,
@@ -382,6 +383,7 @@
     text-align: center;
 }
 
+.data-view-add-form button[type="submit"]:hover,
 .data-view-delete-form button[type="submit"]:hover,
 .button-positive-action:hover,
 .form-actions-button:hover,
@@ -410,7 +412,8 @@
 .button-edit,
 .button-add,
 .button-back,
-.button-save {
+.button-save,
+.data-view-add-form button[type="submit"] {
     background: var(--Dusty-Blue);
 }
 
@@ -507,18 +510,23 @@
     padding: .5em 1em;
 }
 
-.data-view-delete-form {
+.data-view-delete-form,
+.data-view-add-form {
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: .75em;
+    padding: 0 .75em .75em .75em;
 }
 
+.data-view-add-form form,
 .data-view-delete-form form {
     display: inline-flex;
     flex: .3;
+    flex-direction: column;
+    gap: 0.75em 0;
 }
 
+.data-view-add-form form button[type="submit"],
 .data-view-delete-form form button[type="submit"]{
     width: 100%;
     margin: 0;

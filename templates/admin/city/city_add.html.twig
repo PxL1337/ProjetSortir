@@ -1,12 +1,30 @@
 {% extends 'admin/dashboard.html.twig' %}
 
 {% block body %}
-    <h1>Add a new City</h1>
+    <div class="data-view-wrapper">
+        <div class="data-view-container">
+            <div class="data-view-action-content">
+                <h1 class="data-view-action-title">
+                    Add a new City
+                </h1>
 
-    {{ form_start(form) }}
-    {{ form_widget(form) }}
+                <div class="data-view-add-form">
+                    {{ form_start(form) }}
+                    {{ form_widget(form) }}
 
-    <button type="submit">Save</button>
-    {{ form_end(form) }}
+                    <button type="submit">
+                        Create
+                    </button>
+                    {{ form_end(form) }}
+                </div>
+            </div>
+        </div>
+
+        <div class="data-view-bottom-section">
+            <a href="{{ path('admin_dashboard') }}" class="button-back">
+                Back to list
+            </a>
+        </div>
+    </div>
 {% endblock %}
 

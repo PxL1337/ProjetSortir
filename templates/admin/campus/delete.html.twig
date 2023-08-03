@@ -5,13 +5,32 @@
 {% endblock %}
 
 {% block body %}
-    <h1>Supprimer le campus</h1>
 
-    <p>Êtes-vous sûr de vouloir supprimer le campus "{{ campus.nom }}" ?</p>
+    <div class="data-view-wrapper">
+        <div class="data-view-container">
+            <div class="data-view-action-content">
+                <h1 class="data-view-action-title">
+                    Campus suppression
+                </h1>
 
-    <form method="post" action="{{ path('admin_campus_confirm_delete', {'id': campus.id}) }}">
-        <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ campus.id) }}">
-        <button class="btn btn-danger">Supprimer</button>
-        <a href="{{ path('admin_dashboard') }}" class="btn btn-secondary">Annuler</a>
-    </form>
+                <p class="data-view-action-message">
+                    Are you sure you want to delete the campus "{{ campus.nom }}"?
+                </p>
+
+                <div class="data-view-delete-form">
+                    <form method="post" action="{{ path('admin_campus_confirm_delete', {'id': campus.id}) }}">
+                        <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ campus.id) }}">
+                        <button type="submit" class="data-view-button-delete">
+                            Yes, confirm suppression
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="data-view-bottom-section">
+            <a href="{{ path('admin_dashboard') }}" class="button-back">
+                Back to list
+            </a>
+        </div>
+    </div>
 {% endblock %}
