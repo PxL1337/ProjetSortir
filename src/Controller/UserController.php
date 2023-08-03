@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Repository\UserRepository;
 use Doctrine\ORM\NonUniqueResultException;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\Response;
@@ -18,6 +19,7 @@ use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
  * @method User getUser()
  */
 #[Route('/user')]
+#[isGranted('ROLE_USER')]
 class UserController extends AbstractController
 {
 
@@ -28,7 +30,7 @@ class UserController extends AbstractController
         $user = $userRepository->findByUsernameWithCampus($username);
 
         if ($user !== $this->getUser()) {
-            return $this->redirectToRoute('user_view_profile', ['username' => $username]);
+            return $this->redirectToRoute('user_public_profile', ['username' => $username]);
         }
 
         return $this->render('user/profile.html.twig', [
@@ -36,7 +38,7 @@ class UserController extends AbstractController
         ]);
     }
 
-    #[Route('/profile/view/{username}', name: 'user_view_profile')]
+    #[Route('/profile/view/{username}', name: 'user_public_profile')]
     public function viewProfile(string $username, UserRepository $userRepository): Response
     {
         $user = $userRepository->findByUsernameWithCampus($username);
@@ -45,7 +47,7 @@ class UserController extends AbstractController
             return $this->redirectToRoute('user_profile');
         }
 
-        return $this->render('user/view_profile.html.twig', [
+        return $this->render('user/public_profile.html.twig', [
             'user' => $user,
         ]);
     }
