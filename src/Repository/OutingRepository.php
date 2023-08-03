@@ -109,6 +109,11 @@ class OutingRepository extends ServiceEntityRepository
             $query->andWhere('o.dateHeureDebut < :now')
                 ->setParameter('now', new \DateTime());
         }
+        if ($data->pastMonth){
+            $oneMonthAgo = (new \DateTime())->modify('-1 month');
+            $query->andWhere('o.dateHeureDebut < :oneMounthAgo')
+                ->setParameter('oneMounthAgo', $oneMonthAgo);
+        }
 
         return $query->getQuery()->getResult();
     }
