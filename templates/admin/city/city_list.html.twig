@@ -16,14 +16,16 @@
                         {% set message = value.input %}
                     {% endif %}
 
-                    <a href="{{ path('admin_dashboard') }}">
-                    <button class="form-actions-button-cancel">
+                    {% if message is defined %}
+                        <a href="{{ path('admin_dashboard') }}">
+                        <button class="form-actions-button-cancel">
                          <i class="fa-solid fa-xmark"></i>
                          <span>
                                 Cancel research "{{ message }}"
                          </span>
                     </button>
-                </a>
+                    {% endif %}
+                    </a>
                 {% endif %}
             </span>
         </section>

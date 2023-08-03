@@ -7,6 +7,7 @@ initBeforeDocumentLoaded();
 
 document.addEventListener('DOMContentLoaded', function () {
     handleDashboardNavElements();
+    handleSearchCityButtonBehaviour();
 });
 
 function handleDashboardNavElements() {
@@ -76,6 +77,46 @@ function handleDashboardNavElements() {
 
 function initBeforeDocumentLoaded() {
     hideAllDashboardContents();
+}
+
+function handleSearchCityButtonBehaviour() {
+    const searchCityFormSelector = document.getElementById('form_search_city');
+    const searchCityFormButtonSelector = document.getElementById('search-city-button');
+    const searchCityFormInputSelector = searchCityFormSelector.firstElementChild.firstElementChild;
+    let inputValue = searchCityFormInputSelector.value;
+
+    // On init
+    toggleButtonAvailablity(
+        searchCityFormButtonSelector,
+        hasInputContent(inputValue));
+
+    searchCityFormInputSelector.addEventListener('input', () => {
+
+        console.log(searchCityFormInputSelector.value);
+        let inputValue = searchCityFormInputSelector.value;
+
+        toggleButtonAvailablity(
+            searchCityFormButtonSelector,
+            hasInputContent(inputValue));
+    });
+
+    function hasInputContent(inputValue) {
+        if (inputValue == "") {
+            return false;
+        }
+
+        console.log("value is not empty");
+        return true;
+    }
+
+    function toggleButtonAvailablity(button, shouldBeAvailable) {
+        if (shouldBeAvailable) {
+            button.disabled = false;
+            return;
+        }
+
+        button.disabled = true;
+    }
 }
 
 function displayDashboardContent(indexToDisplay) {

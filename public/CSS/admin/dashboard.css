@@ -404,7 +404,7 @@
 .data-view-add-form button[type="submit"]:hover,
 .data-view-delete-form button[type="submit"]:hover,
 .button-positive-action:hover,
-.form-actions-button:hover,
+.form-actions-button:hover:not(:disabled),
 .form-actions-button-cancel:hover,
 .button-edit:hover,
 .button-add:hover,
@@ -433,6 +433,16 @@
 .button-save,
 .data-view-add-form button[type="submit"] {
     background: var(--Dusty-Blue);
+}
+
+.form-actions-button:not(:disabled) {
+    transition: .35s linear;
+}
+
+.form-actions-button:disabled {
+    color: rgba(255, 255, 255, 0.2);
+    background: rgba(100, 100, 100, 0.4);
+    transition: .35s linear;
 }
 
 .button-add {
