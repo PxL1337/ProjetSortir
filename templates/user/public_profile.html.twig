@@ -17,5 +17,9 @@
             <li><strong>Email :</strong> {{ user.email }}</li>
             <li><strong>Campus :</strong> {% if user.campus %}{{ user.campus.nom }}{% else %}Aucun{% endif %}</li>
         </ul>
+
+        {% if is_granted('ROLE_ADMIN') %}
+            <a href="{{ path('admin_modify_user', {id: user.id}) }}" class="btn btn-primary">Modifier</a>
+        {% endif %}
     </section>
 {% endblock %}
