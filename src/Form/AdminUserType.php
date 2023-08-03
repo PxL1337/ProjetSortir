@@ -19,7 +19,6 @@ class AdminUserType extends AbstractType
             ->add('firstname')
             ->add('lastname')
             ->add('telephone')
-            ->add('photo')
             ->add('role', EntityType::class, [
                 'class' => Role::class,
                 'choice_label' => 'name',

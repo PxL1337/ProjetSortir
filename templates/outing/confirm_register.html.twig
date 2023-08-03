@@ -1,0 +1,10 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Confirmer l'inscription{% endblock %}
+
+{% block body %}
+    <h1>Confirmer l'inscription</h1>
+    <p>Êtes-vous sûr de vouloir vous inscrire à la sortie "{{ outing.nom }}" ?</p>
+    <a href="{{ path('outing_register', {id: outing.id}) }}" class="btn btn-success">Oui, je veux m'inscrire</a>
+    <a href="{{ path('outing_detail', {id: outing.id}) }}" class="btn btn-danger">Non, je ne veux pas m'inscrire</a>
+{% endblock %}

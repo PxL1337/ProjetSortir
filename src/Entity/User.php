@@ -43,7 +43,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(length: 30)]
     private ?string $lastname = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(type: "string", length: 10)]
+    #[Assert\Regex(pattern: "/^[0-9]*$/", message: "Veuillez entrer un numéro de téléphone valide.")]
+    #[Assert\Length(min: 10, max: 10, exactMessage: "Le numéro de téléphone doit avoir exactement {{ limit }} chiffres.")]
     private ?string $telephone = null;
 
     #[ORM\Column(length: 255, nullable: true)]

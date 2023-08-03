@@ -40,6 +40,21 @@ class OutingRepository extends ServiceEntityRepository
         return $query->getResult();
     }
 
+    public function findAllWithDetails(): array
+    {
+        $qb = $this->createQueryBuilder('o')
+            ->innerJoin('o.Organizer', 'u')
+            ->addSelect('u')
+            ->innerJoin('o.status', 's')
+            ->addSelect('s')
+            ->innerJoin('o.campus', 'c')
+            ->addSelect('c')
+            ->innerJoin('o.place', 'p')
+            ->addSelect('p');
+
+        return $qb->getQuery()->getResult();
+    }
+
     public function findWithFilters(SearchData $data) {
         $query = $this
             ->createQueryBuilder('o')

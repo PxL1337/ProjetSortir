@@ -3,16 +3,15 @@
 namespace App\Form;
 
 use App\Entity\Campus;
+use App\Entity\Role;
 use App\Entity\User;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
-use Symfony\Component\Validator\Constraints as Assert;
 
 class RegistrationFormType extends AbstractType
 {
@@ -45,21 +44,9 @@ class RegistrationFormType extends AbstractType
                     ]),
                 ],
             ])
-            ->add('photoFile', FileType::class, [
-
-                'label_attr'=>['class'=>'input-file'],
-                'mapped' => false,
-                'required' => false,
-                'constraints' => [
-                    new Assert\Image([
-                        'maxSize' => '1024k',
-                        'mimeTypes' => [
-                            'image/jpeg',
-                            'image/png',
-                        ],
-                        'mimeTypesMessage' => 'Please upload a valid image (jpg or png)',
-                    ])
-                ],
+            ->add('role', EntityType::class, [
+                'class' => Role::class,
+                'choice_label' => 'name',
             ])
         ;
     }

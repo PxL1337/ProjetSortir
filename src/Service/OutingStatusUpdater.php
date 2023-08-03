@@ -51,7 +51,7 @@ class OutingStatusUpdater
 
     public function updateAllOutingsStatuses(): void
     {
-        $outings = $this->outingRepository->findAll();
+        $outings = $this->outingRepository->findAllWithDetails();
         foreach ($outings as $outing) {
             $this->updateStatus($outing);
         }

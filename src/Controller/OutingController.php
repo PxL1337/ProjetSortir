@@ -124,6 +124,11 @@ class OutingController extends AbstractController
     #[Route('/outing/{id}/register', name: 'outing_register')]
     public function register(Outing $outing, EntityManagerInterface $entityManager, Request $request): Response
     {
+        if (!$request->getSession()->has('confirm_register')) {
+            return $this->redirectToRoute('outing_confirm_register', ['id' => $outing->getId()]);
+        }
+        $request->getSession()->remove('confirm_register');
+
         $user = $this->getUser();
 
         if ($outing->getStatus()->getLibelle() === 'Ouverte' &&
@@ -138,12 +143,12 @@ class OutingController extends AbstractController
 
             $this->addFlash('success', 'Vous êtes maintenant inscrit à cette sortie !');
 
-            $referer = $request->getSession()->get('referer', $this->generateUrl('outing_list'));
+            $referer = $request->get('referer', $this->generateUrl('outing_list'));
             return $this->redirect($referer);
         } else {
             $this->addFlash('warning', 'Vous ne pouvez pas vous inscrire à cette sortie.');
 
-            $referer = $request->get('referer');
+            $referer = $request->get('referer', $this->generateUrl('outing_list'));
             return $this->redirect($referer);
         }
     }
@@ -154,6 +159,28 @@ class OutingController extends AbstractController
         return $this->render('outing/detail.html.twig', [
             'outing' => $outing,
         ]);
+    }
+
+    #[Route('/outing/{id}/confirm_register', name: 'outing_confirm_register')]
+    public function confirmRegister(Outing $outing, Request $request): Response
+    {
+        $user = $this->getUser();
+
+        if ($outing->getStatus()->getLibelle() === 'Ouverte' &&
+            count($outing->getAttendees()) < $outing->getNbInscriptionMax() &&
+            $outing->getDateLimiteInscription() > new \DateTime() &&
+            !$outing->getAttendees()->contains($user)) {
+
+            $request->getSession()->set('confirm_register', true);
+            $request->getSession()->set('referer', $request->headers->get('referer'));
+
+            return $this->render('outing/confirm_register.html.twig', [
+                'outing' => $outing,
+            ]);
+        } else {
+            $this->addFlash('warning', 'Vous n\'êtes pas autorisé à vous inscrire à cette sortie.');
+            return $this->redirectToRoute('outing_detail', ['id' => $outing->getId()]);
+        }
     }
 
     #[Route('/outing/{id}/unregister', name: 'outing_unregister')]
@@ -175,13 +202,13 @@ class OutingController extends AbstractController
 
             $this->addFlash('success', 'Vous êtes maintenant désinscrit de cette sortie !');
 
-            $referer = $request->getSession()->get('referer');
+            $referer = $request->getSession()->get('referer', $this->generateUrl('outing_list'));
             $request->getSession()->remove('referer');
             return $this->redirect($referer);
         } else {
             $this->addFlash('warning', 'Vous ne pouvez pas vous désinscrire de cette sortie.');
 
-            $referer = $request->getSession()->get('referer');
+            $referer = $request->getSession()->get('referer', $this->generateUrl('outing_list'));
             $request->getSession()->remove('referer');
             return $this->redirect($referer);
         }

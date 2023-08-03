@@ -148,6 +148,17 @@ class AdminController extends AbstractController
         $this->ensureUserIsNoAdmin($user);
 
         if ($this->isCsrfTokenValid('delete' . $user->getId(), $request->request->get('_token'))) {
+            // Check if user's photo is not the default photo
+            if ($user->getPhoto() !== 'default-photo.jpg') {
+                // Get photo file path
+                $photoFilePath = $this->getParameter('photos_directory').'/'.$user->getPhoto();
+
+                // Check if file exists and delete
+                if (file_exists($photoFilePath)) {
+                    unlink($photoFilePath);
+                }
+            }
+
             $this->entityManager->remove($user);
             $this->entityManager->flush();
             $this->addFlash('success', 'User deleted successfully.');
@@ -155,6 +166,7 @@ class AdminController extends AbstractController
 
         return $this->redirectToRoute('admin_dashboard');
     }
+
 
     #[Route('/campus/add', name: 'campus_new', methods: ['GET', 'POST'])]
     public function addCampus(Request $request, EntityManagerInterface $entityManager): Response
