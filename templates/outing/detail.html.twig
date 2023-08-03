@@ -26,7 +26,7 @@
         <ul>
             {% for attendee in outing.attendees %}
                 <li>
-                    <a href="{{ path('user_view_profile', {username: attendee.pseudo}) }}">
+                    <a href="{{ path('user_profile', {username: attendee.pseudo}) }}">
                         {{ attendee.firstname }} {{ attendee.lastname }}
                     </a>
                 </li>
