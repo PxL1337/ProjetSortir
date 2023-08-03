@@ -1,12 +1,16 @@
+{% extends 'base.html.twig' %}
+
 {% block body %}
     <h1>Liste des lieux</h1>
+
+    <a href="{{ path('place_add') }}">Ajouter un lieu</a>
 
     <table>
         <thead>
         <tr>
             <th>Nom</th>
             <th>Rue</th>
-            <!-- Ajoutez d'autres colonnes si nécessaire -->
+            <th>Actions</th> <!-- Colonne pour les boutons d'action -->
         </tr>
         </thead>
         <tbody>
@@ -14,7 +18,11 @@
             <tr>
                 <td>{{ place.nom }}</td>
                 <td>{{ place.rue }}</td>
-                <!-- Ajoutez d'autres cellules si nécessaire -->
+                <td>
+                    <a href="{{ path('place_detail', { 'id': place.id }) }}">Details</a>
+                    <a href="{{ path('place_edit', { 'id': place.id }) }}">Modifier</a>
+                    <a href="{{ path('place_delete', { 'id': place.id }) }}">Supprimer</a>
+                </td>
             </tr>
         {% endfor %}
         </tbody>

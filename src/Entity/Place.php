@@ -29,7 +29,7 @@ class Place
     #[ORM\Column(nullable: false)]
     private ?float $longitude = null;
 
-    #[ORM\OneToMany(mappedBy: 'place', targetEntity: outing::class)]
+    #[ORM\OneToMany(mappedBy: 'place', targetEntity: Outing::class)]
     private Collection $outings;
 
     #[ORM\ManyToOne(inversedBy: 'places')]
