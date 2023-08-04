@@ -1,13 +1,13 @@
 {% extends 'admin/dashboard.html.twig' %}
 
 {% block title %}
-    {{ parent() }} | Editing {{ city.nom }}
+    {{ parent() }} | Editing City "{{ city.nom }}"
 {% endblock %}
 
 {% block body %}
     <div class="data-view-wrapper">
         <div class="data-view-container">
-            <h1>Editing {{ city.nom }}</h1>
+            <h1>Editing City "{{ city.nom }}"</h1>
 
             <div class="data-view-content">
                 {{ form_start(form) }}

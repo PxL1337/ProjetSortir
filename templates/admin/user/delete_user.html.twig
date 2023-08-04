@@ -1,6 +1,6 @@
 {% extends 'admin/dashboard.html.twig' %}
 
-{% block title %}Suppression d'utilisateur  | {{ parent() }}{% endblock %}
+{% block title %}{{ parent() }} | Suppressing user "{{ user.pseudo }}"{% endblock %}
 
 {% block body %}
     <div class="data-view-wrapper">
@@ -8,11 +8,11 @@
 
             <div class="data-view-action-content">
                 <h1 class="data-view-action-title">
-                    User suppression
+                    Suppressing user "{{ user.pseudo }}"
                 </h1>
 
                 <p class="data-view-action-message">
-                    Are you sure you want to delete the user "{{ user.email }}" ?
+                    Are you sure you want to delete {{ user.pseudo }} with email "{{ user.email }}" ?
                 </p>
 
                 <div class="data-view-delete-form">

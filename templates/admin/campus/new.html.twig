@@ -1,13 +1,15 @@
 {% extends 'admin/dashboard.html.twig' %}
 
-{% block title %}New Campus{% endblock %}
+{% block title %}
+    {{ parent() }} | Creating new campus
+{% endblock %}
 
 {% block body %}
     <div class="data-view-wrapper">
         <div class="data-view-container">
             <div class="data-view-action-content">
                 <h1 class="data-view-action-title">
-                    New Campus
+                    Create new campus
                 </h1>
 
                 <div class="data-view-add-form">

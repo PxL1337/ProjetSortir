@@ -7,6 +7,7 @@ initBeforeDocumentLoaded();
 
 document.addEventListener('DOMContentLoaded', function () {
     handleDashboardNavElements();
+    handleSearchCityButtonBehaviour();
 });
 
 function handleDashboardNavElements() {
@@ -45,8 +46,6 @@ function handleDashboardNavElements() {
                 deselectAllDashboardButtons();
                 selectDashboardButton(index, 'dbc-selected');
 
-                changeDashboardContentTitle(li.textContent);
-
                 setDashboardIndexInLocalStorage(index);
 
                 hideAllDashboardContents();
@@ -74,33 +73,50 @@ function handleDashboardNavElements() {
             })
         }
     }
-
-    function displayElementById(id) {
-        let element = document.getElementById(id);
-
-        if (element.style.display === 'inline') {
-            return;
-        }
-        element.style.display = 'inline';
-    }
-
-    function hideElementById(id) {
-        let element = document.getElementById(id);
-
-        if (element.style.display === 'none') {
-            return;
-        }
-
-        element.style.display = 'none';
-    }
 }
 
 function initBeforeDocumentLoaded() {
-    let title = allDashboardContentSections[getDashboardIndexFromLocalStorage()].id
-        .replace("-section", "");
-    changeDashboardContentTitle(title.toUpperCase());
-
     hideAllDashboardContents();
+}
+
+function handleSearchCityButtonBehaviour() {
+    const searchCityFormSelector = document.getElementById('form_search_city');
+    const searchCityFormButtonSelector = document.getElementById('search-city-button');
+    const searchCityFormInputSelector = searchCityFormSelector.firstElementChild.firstElementChild;
+    let inputValue = searchCityFormInputSelector.value;
+
+    // On init
+    toggleButtonAvailablity(
+        searchCityFormButtonSelector,
+        hasInputContent(inputValue));
+
+    searchCityFormInputSelector.addEventListener('input', () => {
+
+        console.log(searchCityFormInputSelector.value);
+        let inputValue = searchCityFormInputSelector.value;
+
+        toggleButtonAvailablity(
+            searchCityFormButtonSelector,
+            hasInputContent(inputValue));
+    });
+
+    function hasInputContent(inputValue) {
+        if (inputValue == "") {
+            return false;
+        }
+
+        console.log("value is not empty");
+        return true;
+    }
+
+    function toggleButtonAvailablity(button, shouldBeAvailable) {
+        if (shouldBeAvailable) {
+            button.disabled = false;
+            return;
+        }
+
+        button.disabled = true;
+    }
 }
 
 function displayDashboardContent(indexToDisplay) {
@@ -127,11 +143,6 @@ function addOrSetClassNameToElement(element, className) {
 
     element.classList.replace(element.className, className);
     // console.log("Setting class name");
-}
-
-function changeDashboardContentTitle(newTitle) {
-    dashboardContentTitle.innerHTML = "";
-    dashboardContentTitle.innerHTML = newTitle;
 }
 
 function setDashboardIndexInLocalStorage(index) {

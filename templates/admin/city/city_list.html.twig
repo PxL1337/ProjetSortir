@@ -5,6 +5,29 @@
             {% include "components/_search_data.html.twig" with{
                 form: search_city_form
             } %}
+
+            {# Applied research cancellation button #}
+            <span>
+                {% if search_city_form.vars.submitted %}
+
+                    {% set value = search_city_form.vars.value %}
+
+                    {% if value.input is not null %}
+                        {% set message = value.input %}
+                    {% endif %}
+
+                    {% if message is defined %}
+                        <a href="{{ path('admin_dashboard') }}">
+                        <button class="form-actions-button-cancel">
+                         <i class="fa-solid fa-xmark"></i>
+                         <span>
+                                Cancel research "{{ message }}"
+                         </span>
+                    </button>
+                    {% endif %}
+                    </a>
+                {% endif %}
+            </span>
         </section>
     </div>
 
@@ -16,7 +39,7 @@
     <section class="current-datatype-add">
         <a href="{{ path('admin_city_add') }}" class="button-add">
             <i class="fa-solid fa-plus"></i>
-            Add a new City
+            Create new City
         </a>
     </section>
 
