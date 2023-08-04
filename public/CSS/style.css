@@ -490,4 +490,17 @@ input:not([type="submit"]):not([value=""]) {
     margin-right: 10px;
 }
 
-
+.alert-success{
+    color: var(--Green-Flash);
+    animation: fadeInSlideUp 0.5s ease;
+}
+@keyframes fadeInSlideUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
