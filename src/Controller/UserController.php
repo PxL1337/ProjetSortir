@@ -81,7 +81,6 @@ class UserController extends AbstractController
             // Check if new password and confirm password match
             if ($newPassword !== $confirmPassword) {
                 $this->addFlash('error', 'Les nouveaux mots de passe ne correspondent pas.');
-
                 // Render the form again
                 return $this->render('user/edit.html.twig', [
                     'form' => $form->createView(),
@@ -108,8 +107,11 @@ class UserController extends AbstractController
                 $user->setPhoto($newFilename);
             }
 
-            // If all checks pass, update the password
-            $user->setPassword($passwordHasher->hashPassword($user, $newPassword));
+            if ($newPassword !== null) {
+                // If all checks pass, update the password
+                $user->setPassword($passwordHasher->hashPassword($user, $newPassword));
+            }
+
 
             $manager->persist($user);
             $manager->flush();

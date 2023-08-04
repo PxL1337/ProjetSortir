@@ -20,12 +20,14 @@ class PlaceType extends AbstractType
                 'class' => City::class,
                 'choice_label' => 'nom',
                 'placeholder' => '',
+                'required' => true,
             ])
             ->add('nom')
             ->add('rue', TextType::class, [
                 'attr' => [
                     'readonly' => true,  // This will not actually make the field read-only
-                ]
+                ],
+                'required' => true,
             ])
             ->add('latitude', HiddenType::class)
             ->add('longitude', HiddenType::class)
