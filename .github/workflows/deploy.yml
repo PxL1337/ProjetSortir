@@ -1,0 +1,39 @@
+name: Deploy to production server
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Copy files to server
+        uses: appleboy/scp-action@master
+        with:
+          host: ${{ secrets.SERVER_IP }}
+          username: ${{ secrets.SERVER_USERNAME }}
+          password: ${{ secrets.SERVER_PASSWORD }}
+          port: ${{ secrets.SERVER_PORT }}
+          source: "."
+          target: "/www"
+
+      - name: Execute deployment script
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.SERVER_IP }}
+          username: ${{ secrets.SERVER_USERNAME }}
+          password: ${{ secrets.SERVER_PASSWORD }}
+          port: ${{ secrets.SERVER_PORT }}
+          script: |
+            cd www
+            echo "DATABASE_URL="mysql://root:PLANB@137.74.92.44:42221/sortir?serverVersion=8&charset=utf8mb4"" > .env.local
+            git pull
+            composer install --no-dev --optimize-autoloader
+            php bin/console doctrine:migrations:migrate --no-interaction
+            php bin/console cache:clear --env=prod

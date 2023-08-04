@@ -87,6 +87,11 @@ class UserController extends AbstractController
                 ]);
             }
 
+            if ($newPassword !== null) {
+                // If all checks pass, update the password
+                $user->setPassword($passwordHasher->hashPassword($user, $newPassword));
+            }
+
             // Photo upload
             $photoFile = $form->get('photoFile')->getData();
             if ($photoFile) {
@@ -106,12 +111,6 @@ class UserController extends AbstractController
                 }
                 $user->setPhoto($newFilename);
             }
-
-            if ($newPassword !== null) {
-                // If all checks pass, update the password
-                $user->setPassword($passwordHasher->hashPassword($user, $newPassword));
-            }
-
 
             $manager->persist($user);
             $manager->flush();
