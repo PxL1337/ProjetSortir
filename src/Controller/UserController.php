@@ -44,7 +44,7 @@ class UserController extends AbstractController
         $user = $userRepository->findByUsernameWithCampus($username);
 
         if ($user === $this->getUser()) {
-            return $this->redirectToRoute('user_profile');
+            return $this->redirectToRoute('user_profile', ['username' => $username]);
         }
 
         return $this->render('user/public_profile.html.twig', [
