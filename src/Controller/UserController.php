@@ -26,8 +26,7 @@ class UserController extends AbstractController
     #[Route('/profile/{username}', name: 'user_profile')]
     public function profile(string $username, UserRepository $userRepository): Response
     {
-
-        $user = $userRepository->findByUsernameWithCampus($username);
+        $user = $this->getUser();
 
         if ($user !== $this->getUser()) {
             return $this->redirectToRoute('user_public_profile', ['username' => $username]);
