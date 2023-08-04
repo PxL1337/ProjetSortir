@@ -79,7 +79,7 @@ class OutingType extends AbstractType
                 array('attr' => array(
                     'class' => 'form-text-area',
                     'rows' => '4',
-                    'maxlength' => '150',
+                    'maxlength' => '255',
                     'overflow' => 'hidden'))
             )
             ->add('city', EntityType::class, [
@@ -90,26 +90,6 @@ class OutingType extends AbstractType
                 'required' => false
             ])
 
-            /*
-             ->add('Organizer')
-             ->add('attendees')*/
-            /*->add('campus', EntityType::class, [
-                'class' => Campus::class,
-                'choices' => $campusList,
-                'choice_label' => 'nom',
-                'placeholder' => 'Choisir un campus',
-
-
-            ])*/
-            /*
-            ->add('place')
-            ->add('rue')
-            ->add('longitude', NumberType::class, [
-                'scale' => 8,
-            ])
-            ->add('lattitude', NumberType::class, [
-                'scale' => 8,
-            ])*/
             ->add('place', EntityType::class, [
                 'class' => Place::class,
                 'choices' => $placeList,
