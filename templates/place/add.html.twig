@@ -5,7 +5,7 @@
 {% endblock %}
 
 {% block title %}
-{{ parent() }} | Create new place
+    {{ parent() }} | Create new place
 {% endblock %}
 
 {% block body %}
@@ -30,7 +30,7 @@
             </div>
         </div>
         <div class="data-view-bottom-section">
-            <a href="{{ path('place_list') }}" class="button-back">
+            <a href="{{ path('outing_create') }}" class="button-back">
                 Cancel
             </a>
         </div>
@@ -41,4 +41,32 @@
     {% block javascripts %}
         <script src="{{ asset('js/placeDatasOSMNominatimAPI.js') }}"></script>
         <script src="{{ asset('js/test.js') }}"></script>
+
+        <script>
+            $(document).ready(function() {
+                $('#outing_city').change(function() {
+                    var cityId = $(this).val();
+                    $.ajax({
+                        url: '/places/' + cityId,
+                        type: 'GET',
+                        dataType: 'json',
+                        success: function(data) {
+                            var $placeSelect = $('#outing_place');
+                            $placeSelect.html('<option value="">Choisir un lieu</option>');
+                            for (var i = 0; i < data.length; i++) {
+                                $placeSelect.append('<option value="' + data[i].id + '">' + data[i].name + '</option>');
+                            }
+                        }
+                    });
+                });
+            });
+        </script>
+        <script>
+            $(document).ready(function () {
+                $('#outing_place optgroup').each(function () {
+                    var cityId = $(this).find('option:first').attr('class').split('-')[1];
+                    $(this).addClass('city-' + cityId);
+                });
+            });
+        </script>
     {% endblock %}

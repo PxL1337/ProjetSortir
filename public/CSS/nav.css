@@ -14,7 +14,7 @@
 
 .animated-text {
     animation-name: textAnimation;
-    animation-duration: 2s;
+    animation-duration: 4s;
     animation-iteration-count: infinite;
     font-family: 'Tektur', cursive;
 }

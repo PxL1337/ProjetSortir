@@ -7,6 +7,7 @@ use App\Form\CancelOutingType;
 use App\Form\OutingsFilterType;
 use App\Form\OutingType;
 use App\Data\SearchData;
+use App\Repository\CityRepository;
 use App\Repository\OutingRepository;
 use App\Repository\PlaceRepository;
 use App\Repository\StatusRepository;
@@ -14,6 +15,7 @@ use App\Service\OutingStatusUpdater;
 use Doctrine\ORM\EntityManagerInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Response;
@@ -23,10 +25,12 @@ use Symfony\Component\Routing\Annotation\Route;
 class OutingController extends AbstractController
 {
     private $requestStack;
+    private $cityRepository;
 
-    public function __construct(RequestStack $requestStack)
+    public function __construct(RequestStack $requestStack, CityRepository $cityRepository)
     {
         $this->requestStack = $requestStack;
+        $this->cityRepository = $cityRepository;
     }
 
     #[Route('/', name: 'outing_list')]
@@ -302,5 +306,22 @@ class OutingController extends AbstractController
             'outing' => $outing,
             'form' => $form->createView(),
         ]);
+    }
+
+    #[Route('/places/{cityId}', name: 'places_by_city', methods: ['GET'])]
+    public function getPlacesByCity($cityId, CityRepository $cityRepository): JsonResponse
+    {
+        $city = $cityRepository->find($cityId);
+        $places = $city->getPlaces();
+
+        $placesArray = [];
+        foreach ($places as $place) {
+            $placesArray[] = [
+                'id' => $place->getId(),
+                'name' => $place->getName(),
+            ];
+        }
+
+        return new JsonResponse($placesArray);
     }
 }

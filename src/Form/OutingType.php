@@ -95,6 +95,17 @@ class OutingType extends AbstractType
                 'choices' => $placeList,
                 'choice_label' => 'nom',
                 'placeholder' => 'Choisir un lieu',
+                'query_builder' => function (PlaceRepository $placeRepository) {
+                    return $placeRepository->createQueryBuilder('p')
+                        ->join('p.city', 'c')
+                        ->orderBy('c.nom', 'ASC');
+                },
+                'group_by' => function(Place $place) {
+                    return $place->getCity()->getNom();
+                },
+                'choice_attr' => function(Place $place) {
+                    return ['class' => 'city-' . $place->getCity()->getId()];
+                },
             ])
         ;
 

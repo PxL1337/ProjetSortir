@@ -7,6 +7,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: OutingRepository::class)]
 #[ORM\Index(columns: ["date_heure_debut"], name: "outing_date_heure_debut_idx")]
@@ -35,6 +36,8 @@ class Outing
     private ?\DateTimeInterface $dateLimiteInscription = null;
 
     #[ORM\Column]
+    #[Assert\Length(min: 1)]
+    #[Assert\Positive(message: "Le nombre d'inscriptions maximum doit être positif")]
     private ?int $nbInscriptionMax = null;
 
     #[ORM\Column(type: Types::TEXT)]

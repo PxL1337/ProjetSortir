@@ -46,7 +46,7 @@ class PlaceController extends AbstractController
 
             $this->addFlash('success', 'Le lieu a bien été ajouté');
 
-            return $this->redirectToRoute('place_list');
+            return $this->redirectToRoute('outing_create');
         }
 
         return $this->render('place/add.html.twig', [

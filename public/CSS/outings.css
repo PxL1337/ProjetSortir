@@ -585,3 +585,32 @@ input[type="checkbox"]{
 }
 
 
+#suggestions{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+#suggestions div {
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+optgroup {
+    background-color: #f0f0f0;
+    color: #1f6f78;
+}
+
+optgroup .city-1 {
+    background-color: #e0e0e0;
+
+}
+
+optgroup .city-2 {
+    background-color: #d0d0d0;
+    color: #1f6f78;
+}
+
+
+
