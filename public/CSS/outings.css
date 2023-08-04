@@ -558,14 +558,14 @@ input[type="checkbox"]{
     margin-bottom: 10px;
 }
 
-.btn {
+/*.btn {
     padding: 10px;
     border: none;
     border-radius: 5px;
     color: var(--white);
     background-color: var(--Verdigris);
     transition: background-color 0.3s ease;
-}
+}*/
 
 .btn:hover {
     background-color: var(--Dusty-Blue);
