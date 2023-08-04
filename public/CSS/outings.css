@@ -389,8 +389,7 @@
     line-height: 1.5;
 }
 
-.outing-unregister-confirm .btn {
-    /* Styles for the buttons */
+/*.outing-unregister-confirm .btn {
     font-size: 1em;
     padding: 10px;
     border: none;
@@ -402,7 +401,7 @@
 
 .outing-unregister-confirm .btn:hover {
     background-color: var(--Dusty-Blue);
-}
+}*/
 
 /* Styles for the outing publish confirmation page */
 
