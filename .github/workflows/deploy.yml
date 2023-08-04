@@ -21,7 +21,7 @@ jobs:
           password: ${{ secrets.SERVER_PASSWORD }}
           port: ${{ secrets.SERVER_PORT }}
           source: "."
-          target: "/www"
+          target: "/var/www/my_webapp__4/www"
 
       - name: Execute deployment script
         uses: appleboy/ssh-action@master
@@ -31,7 +31,7 @@ jobs:
           password: ${{ secrets.SERVER_PASSWORD }}
           port: ${{ secrets.SERVER_PORT }}
           script: |
-            cd www
+            cd /var/www/my_webapp__4/www
             echo "DATABASE_URL="mysql://root:PLANB@137.74.92.44:42221/sortir?serverVersion=8&charset=utf8mb4"" > .env.local
             git pull
             composer install --no-dev --optimize-autoloader
