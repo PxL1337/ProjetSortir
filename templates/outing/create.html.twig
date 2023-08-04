@@ -1,10 +1,21 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Créer une sortie{% endblock %}
+{% block extrastyles %}
+    <link rel="stylesheet" href="{{ asset('css/admin/dashboard.css') }}">
+{% endblock %}
+
+{% block title %}
+   {{ parent() }} | Create an Outing
+{% endblock %}
 
 {% block body %}
-    <h1>Créer une sortie</h1>
-    <div class="form-block">
+    <div class="data-view-wrapper">
+        <div class="data-view-container">
+            <div class="data-view-action-content">
+                <h1 class="data-view-action-title">
+                Créer une sortie
+                </h1>
+    <div class="data-view-add-form">
         {{ form_start(outingForm, {'attr': {'class': 'form-container'}}) }}
         <div>
             <div class="form-group">

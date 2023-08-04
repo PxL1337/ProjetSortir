@@ -1,17 +1,33 @@
 {% extends 'base.html.twig' %}
 
+{% block extrastyles %}
+    <link rel="stylesheet" href="{{ asset('css/admin/dashboard.css') }}">
+{% endblock %}
+
 {% block title %}Modifier la sortie{% endblock %}
 
 {% block body %}
-    <div class="outing-edit">
-        <h2>Modifier la sortie "{{ outing.nom }}"</h2>
 
-        {{ form_start(form) }}
-        {{ form_widget(form) }}
-        <input type="hidden" name="referer" value="{{ referer }}">
-        <button type="submit" class="btn btn-primary">Enregistrer</button>
-        {{ form_end(form) }}
+        <div class="data-view-wrapper">
+            <div class="data-view-container">
+                <div class="data-view-action-content">
+                    <h1 class="data-view-action-title">
+                        Modifier la sortie "{{ outing.nom }}"
+                    </h1>
+                    <div class="data-view-add-form">
+                        {{ form_start(form) }}
+                        {{ form_widget(form) }}
+                        <input type="hidden" name="referer" value="{{ referer }}">
+                        <button type="submit">
+                            Enregistrer
+                        </button>
+                        {{ form_end(form) }}
+                    </div>
+                </div>
+            </div>
+            <div class="data-view-bottom-section">
+                <a href="{{ path('outing_detail', {id: outing.id}) }}" class="button-back">Retour</a>
+            </div>
+        </div>
 
-        <a href="{{ path('outing_detail', {id: outing.id}) }}" class="btn btn-secondary">Retour</a>
-    </div>
 {% endblock %}

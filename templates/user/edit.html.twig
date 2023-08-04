@@ -1,19 +1,28 @@
 {% extends '/base.html.twig' %}
 
+{% block extrastyles %}
+    <link rel="stylesheet" href="{{ asset('css/admin/dashboard.css') }}">
+{% endblock %}
+
 {% block title %}Register | {{ parent() }}{% endblock %}
 
 {% block body %}
-    <div class="container">
-       <div class="form-block">
-           <h1>Formulaire de modif</h1>
+    <div class="data-view-wrapper">
+        <div class="data-view-container">
+            <div class="data-view-action-content">
+                <h1 class="data-view-action-title">
+                    Formulaire de modif
+                </h1>
+                <div class="data-view-add-form">
+                    {{ form_errors(form) }}
 
-           {{ form_errors(form) }}
-
-           {{ form_start(form) }}
-           {{ form_widget(form) }}
-           <input type="submit" class="btn" value="Register">
-           {{ form_end(form) }}
-       </div>
+                    {{ form_start(form) }}
+                    {{ form_widget(form) }}
+                    <input type="submit" class="btn" value="Register">
+                    {{ form_end(form) }}
+                </div>
+            </div>
+        </div>
     </div>
 
 {% endblock %}

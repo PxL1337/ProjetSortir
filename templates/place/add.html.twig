@@ -1,27 +1,44 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}New Place{% endblock %}
+{% block extrastyles %}
+    <link rel="stylesheet" href="{{ asset('css/admin/dashboard.css') }}">
+{% endblock %}
+
+{% block title %}
+{{ parent() }} | Create new place
+{% endblock %}
 
 {% block body %}
-    <h1>Create new Place</h1>
+    <div class="data-view-wrapper">
+        <div class="data-view-container">
+            <div class="data-view-action-content">
+                <h1 class="data-view-action-title">
+                    Create new Place
+                </h1>
 
-    {{ form_start(form) }}
-    {{ form_widget(form) }}
+                <div class="data-view-add-form">
+                    {{ form_start(form) }}
+                    {{ form_widget(form) }}
 
-    <div id="suggestions"></div>
+                    <div id="suggestions"></div>
 
-    <button type="submit" class="btn btn-success">
-        Save
-    </button>
-    {{ form_end(form) }}
+                    <button type="submit">
+                        Save
+                    </button>
+                    {{ form_end(form) }}
+                </div>
+            </div>
+        </div>
+        <div class="data-view-bottom-section">
+            <a href="{{ path('place_list') }}" class="button-back">
+                Cancel
+            </a>
+        </div>
+    </div>
 
-    <a href="{{ path('place_list') }}" class="btn btn-danger">
-        Cancel
-    </a>
 {% endblock %}
 
-{% block javascripts %}
-    {{ parent() }}
-    <script src="{{ asset('js/placeDatasOSMNominatimAPI.js') }}"></script>
-    <script src="{{ asset('js/test.js') }}"></script>
-{% endblock %}
+    {% block javascripts %}
+        <script src="{{ asset('js/placeDatasOSMNominatimAPI.js') }}"></script>
+        <script src="{{ asset('js/test.js') }}"></script>
+    {% endblock %}
