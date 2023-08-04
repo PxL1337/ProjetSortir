@@ -18,12 +18,12 @@ jobs:
         with:
           host: ${{ secrets.SERVER_IP }}
           username: ${{ secrets.SERVER_USERNAME }}
-          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          key: ${{ secrets.PRIVATE_KEY }}
           port: ${{ secrets.SERVER_PORT }}
           script: |
             cd www
             git pull
-            echo "DATABASE_URL=mysql://${{ secrets.DB_USER }}:${{ secrets.DB_PASSWORD }}@localhost:3306/${{ secrets.DB_NAME }}" > .env.local
+            echo 'DATABASE_URL="mysql://root:PLANB@137.74.92.44:42221/sortir?serverVersion=8&charset=utf8mb4"' > .env.local
             composer install --no-dev --optimize-autoloader
             php bin/console doctrine:migrations:migrate --no-interaction
             php bin/console cache:clear --env=prod
