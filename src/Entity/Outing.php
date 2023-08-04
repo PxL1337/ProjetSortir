@@ -27,6 +27,7 @@ class Outing
     private ?string $nom = null;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
+    #[Assert\GreaterThan(propertyPath: "dateLimiteInscription", message: "La date limite d'inscription doit être postérieure à la date de début de la sortie")]
     private ?\DateTimeInterface $dateHeureDebut = null;
 
     #[ORM\Column]
@@ -38,6 +39,7 @@ class Outing
     #[ORM\Column]
     #[Assert\Length(min: 1)]
     #[Assert\Positive(message: "Le nombre d'inscriptions maximum doit être positif")]
+    #[Assert\GreaterThan(0, message: "Le nombre d'inscriptions maximum doit être positif")]
     private ?int $nbInscriptionMax = null;
 
     #[ORM\Column(type: Types::TEXT)]

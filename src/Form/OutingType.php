@@ -87,7 +87,7 @@ class OutingType extends AbstractType
                 'choice_label' => 'nom',
                 'placeholder' => 'Choisir une ville',
                 'mapped' => false,
-                'required' => false
+                'required' => true
             ])
 
             ->add('place', EntityType::class, [
@@ -106,6 +106,7 @@ class OutingType extends AbstractType
                 'choice_attr' => function(Place $place) {
                     return ['class' => 'city-' . $place->getCity()->getId()];
                 },
+                'required' => true
             ])
         ;
 
